@@ -240,12 +240,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="display-spotify-playlists" class="level2">
 <h2 class="anchored" data-anchor-id="display-spotify-playlists">Display Spotify Playlists</h2>
 <p>Let’s take a look at the popular Spotify playlists. Below, the code retrieves a range of Spotify playlists and generates a dataframe that contains various details about each playlist, such as its name, ID, description, thumbnail image, and total number of tracks. The resulting dataframe is displayed as an HTML table, which features thumbnail images for every playlist.</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>username <span class="op">=</span> <span class="st">"spotify"</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>my_playlists <span class="op">=</span> sp.user_playlists(username)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-tags="[&quot;hide_code&quot;,&quot;hide-code&quot;]" data-execution_count="8">
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell" data-tags="[&quot;hide_code&quot;,&quot;hide-code&quot;]" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
@@ -307,7 +307,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="get-tracks-from-playlist" class="level2">
 <h2 class="anchored" data-anchor-id="get-tracks-from-playlist">Get Tracks from Playlist</h2>
 <p>This code uses Spotify’s API to extract various details about songs from a given playlist. It obtains metadata such as track name, album name, and release date, as well as track features like danceability and tempo. Additionally, it collects data on the artist’s genre and popularity. Once the data has been extracted, it is organized and presented in a Pandas DataFrame for easy viewing.</p>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get playlist song features and artist info</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> playlist_features(<span class="bu">id</span>, artist_id, playlist_id):</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -353,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>            energy, instrumentalness, liveness, loudness, speechiness, </span>
 <span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>            tempo, valence, key, mode, time_signature, playlist_name]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_playlist_tracks(playlist_URI):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    tracks <span class="op">=</span> []</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> sp.playlist_tracks(playlist_URI)</span>
@@ -364,7 +364,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tracks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To analyze a particular playlist, simply copy the URL from the Spotify Player interface and input it into the following code. The <code>get_playlist_tracks</code> method retrieves a comprehensive list of track IDs and their corresponding artists from the selected playlist.</p>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spotify playlist url</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>playlist_ids <span class="op">=</span> []</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>track_ids <span class="op">=</span> []</span>
@@ -379,15 +379,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>With the above code, it is possible to seamlessly gather essential information regarding songs and artists from any Spotify playlist identified by its URI. This process enables the extraction of data such as track IDs, artist URIs, and playlist IDs.</p>
 <p>To extract further information about the songs, the code below iterates through each track ID in the playlist and utilizes the function we previously created. From there, we create a Pandas dataframe by passing in the extracted information and providing the desired column header names.</p>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop over track ids</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>all_tracks <span class="op">=</span> [</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    playlist_features(track_ids[i], artist_uris[i], playlist_ids[i])</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(track_ids))</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="13">
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
 
@@ -419,12 +419,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>MELTDOWN (feat. Drake)</td>
 <td>Travis Scott</td>
 <td>2023-07-28</td>
-<td>92</td>
 <td>93</td>
+<td>94</td>
 <td>[hip hop, rap, slap house]</td>
 <td>0.0120</td>
 <td>0.557</td>
-<td>0.774</td>
+<td>0.7740</td>
 <td>0.000000</td>
 <td>0.396</td>
 <td>-5.275</td>
@@ -438,12 +438,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Barbie World (with Aqua) [From Barbie The Album]</td>
 <td>Nicki Minaj</td>
 <td>2023-06-23</td>
-<td>94</td>
+<td>95</td>
 <td>86</td>
 <td>[hip pop, pop, queens hip hop, rap]</td>
 <td>0.5190</td>
 <td>0.770</td>
-<td>0.580</td>
+<td>0.5800</td>
 <td>0.000127</td>
 <td>0.233</td>
 <td>-8.393</td>
@@ -462,7 +462,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>[pop]</td>
 <td>0.1170</td>
 <td>0.552</td>
-<td>0.702</td>
+<td>0.7020</td>
 <td>0.000021</td>
 <td>0.105</td>
 <td>-5.707</td>
@@ -473,21 +473,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
-<td>vampire</td>
-<td>Olivia Rodrigo</td>
-<td>2023-06-30</td>
-<td>98</td>
-<td>84</td>
-<td>[pop]</td>
-<td>0.1690</td>
-<td>0.511</td>
-<td>0.532</td>
-<td>0.000000</td>
-<td>0.311</td>
-<td>-5.745</td>
-<td>0.0560</td>
-<td>137.827</td>
-<td>0.322</td>
+<td>What Was I Made For? [From The Motion Picture ...</td>
+<td>Billie Eilish</td>
+<td>2023-07-13</td>
+<td>97</td>
+<td>87</td>
+<td>[art pop, electropop, pop]</td>
+<td>0.9590</td>
+<td>0.444</td>
+<td>0.0911</td>
+<td>0.000001</td>
+<td>0.098</td>
+<td>-17.665</td>
+<td>0.0307</td>
+<td>78.403</td>
+<td>0.142</td>
 <td>Today's Top Hits</td>
 </tr>
 <tr class="odd">
@@ -495,12 +495,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Dance The Night (From Barbie The Album)</td>
 <td>Dua Lipa</td>
 <td>2023-05-25</td>
-<td>96</td>
+<td>97</td>
 <td>86</td>
 <td>[dance pop, pop, uk pop]</td>
 <td>0.0207</td>
 <td>0.671</td>
-<td>0.845</td>
+<td>0.8450</td>
 <td>0.000000</td>
 <td>0.329</td>
 <td>-4.930</td>
@@ -511,21 +511,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
-<td>Enough Is Enough</td>
-<td>Post Malone</td>
-<td>2023-07-28</td>
-<td>83</td>
-<td>89</td>
-<td>[dfw rap, melodic rap, pop, rap]</td>
-<td>0.0140</td>
-<td>0.483</td>
-<td>0.768</td>
+<td>vampire</td>
+<td>Olivia Rodrigo</td>
+<td>2023-06-30</td>
+<td>98</td>
+<td>84</td>
+<td>[pop]</td>
+<td>0.1690</td>
+<td>0.511</td>
+<td>0.5320</td>
 <td>0.000000</td>
-<td>0.109</td>
-<td>-4.911</td>
-<td>0.0344</td>
-<td>166.061</td>
-<td>0.332</td>
+<td>0.311</td>
+<td>-5.745</td>
+<td>0.0560</td>
+<td>137.827</td>
+<td>0.322</td>
 <td>Today's Top Hits</td>
 </tr>
 </tbody>
@@ -537,7 +537,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="top-artist-genres" class="level3">
 <h3 class="anchored" data-anchor-id="top-artist-genres">Top Artist Genres</h3>
 <p>The following code segment generates a dictionary that contains the frequency of artist genres, which is then converted into a dataframe sorted by frequency. The code accomplishes this by tallying the number of occurrences of each genre in a list called <code>artist_genres</code>. The count is performed using a dictionary named <code>genres_dict</code>, and the resulting tallies are stored in a dataframe named <code>df_genres</code>, which exhibits the genres and the number of times they occur.</p>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>genres_dict <span class="op">=</span> {}</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> df.artist_genres:</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ii <span class="kw">in</span> x:</span>
@@ -551,10 +551,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>df_genres <span class="op">=</span> pd.DataFrame(genres_dict.items(), columns<span class="op">=</span>[<span class="st">'Genre'</span>, <span class="st">'Freq'</span>]).sort_values(<span class="st">'Freq'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>df_genres <span class="op">=</span> df_genres.reset_index(drop <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'hip hop': 5, 'rap': 11, 'slap house': 2, 'hip pop': 1, 'pop': 24, 'queens hip hop': 1, 'dance pop': 5, 'uk pop': 2, 'dfw rap': 2, 'melodic rap': 3, 'art pop': 2, 'electropop': 1, 'canadian contemporary r&amp;b': 2, 'canadian pop': 2, 'k-pop': 2, 'k-pop girl group': 2, 'electra': 1, 'float house': 1, 'afrobeats': 2, 'nigerian pop': 1, 'reggaeton': 2, 'trap latino': 3, 'urbano latino': 3, 'atl hip hop': 1, 'trap': 2, 'rap canario': 1, 'r&amp;b': 3, 'bedroom pop': 2, 'gen z singer-songwriter': 3, 'singer-songwriter pop': 2, 'chicago drill': 1, 'chicago rap': 1, 'drill': 1, 'pop rap': 1, 'big room': 2, 'edm': 3, 'pop dance': 2, 'contemporary country': 2, 'country': 1, 'colombian pop': 1, 'alternative r&amp;b': 1, 'piano rock': 1, 'australian pop': 1, 'viral pop': 1, 'uk hip hop': 1, 'electro house': 1, 'house': 1, 'progressive house': 1, 'uk dance': 1, 'bedroom r&amp;b': 1, 'pov: indie': 1}</code></pre>
+<pre><code>{'hip hop': 5, 'rap': 11, 'slap house': 2, 'hip pop': 1, 'pop': 24, 'queens hip hop': 1, 'art pop': 2, 'electropop': 1, 'dance pop': 5, 'uk pop': 2, 'dfw rap': 2, 'melodic rap': 3, 'k-pop': 2, 'k-pop girl group': 2, 'canadian contemporary r&amp;b': 2, 'canadian pop': 2, 'electra': 1, 'float house': 1, 'afrobeats': 2, 'nigerian pop': 1, 'reggaeton': 2, 'trap latino': 3, 'urbano latino': 3, 'atl hip hop': 1, 'trap': 2, 'rap canario': 1, 'r&amp;b': 3, 'bedroom pop': 2, 'gen z singer-songwriter': 3, 'singer-songwriter pop': 2, 'chicago drill': 1, 'chicago rap': 1, 'drill': 1, 'pop rap': 1, 'big room': 2, 'edm': 3, 'pop dance': 2, 'contemporary country': 2, 'country': 1, 'colombian pop': 1, 'alternative r&amp;b': 1, 'piano rock': 1, 'australian pop': 1, 'viral pop': 1, 'uk hip hop': 1, 'electro house': 1, 'house': 1, 'progressive house': 1, 'uk dance': 1, 'bedroom r&amp;b': 1, 'pov: indie': 1}</code></pre>
 </div>
 </div>
-<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="16">
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <p><img src="index_files/figure-html/cell-14-output-1.png" class="img-fluid"></p>
 </div>
@@ -566,7 +566,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="genius-api" class="level1">
 <h1>Genius API</h1>
 <p>The following Python script contains various functions optimized for efficiently cleaning song lyrics and determining their sentiment. To get started, the script below imports two fundamental libraries, <code>lyricsgenius</code> and <code>BeautifulSoup</code>. Next, through the initialization of the <code>genius</code> variable, one can access the Genius API and retrieve the lyrics of any given song, such as “Too Many Nights” by Metro Boomin.</p>
-<div class="cell" data-execution_count="20">
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> lyricsgenius</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -581,12 +581,12 @@ Done.</code></pre>
 <section id="regex-and-profanity-filter" class="level3">
 <h3 class="anchored" data-anchor-id="regex-and-profanity-filter">1. Regex and Profanity Filter</h3>
 <p>The function provided below is designed to efficiently fetch the lyrics of a song using the given track name and artist. Once the lyrics are retrieved, the function undergoes a comprehensive cleansing process to eliminate profanity, specific characters, and patterns that may hinder the overall readability. The resulting output is a list of cleaned lyrics with all non-ASCII characters removed.</p>
-<div class="cell" data-execution_count="21">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> profanity <span class="im">import</span> profanity</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> better_profanity <span class="im">import</span> profanity <span class="im">as</span> profanity2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="22">
+<div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_song_lyrics(song_name, song_artist):</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    song_genius <span class="op">=</span> genius.search_song(song_name, song_artist)</span>
@@ -614,11 +614,11 @@ Done.</code></pre>
 <section id="removing-stop-words" class="level3">
 <h3 class="anchored" data-anchor-id="removing-stop-words">2. Removing Stop Words</h3>
 <p>The code below aims to eliminate stopwords from lyrics utilizing the <code>NLTK</code> library and its <code>WordNetLemmatizer</code> tool. This process allows for efficient lemmatization of words. The stopword list consists of frequently used English words and some contractions. Upon execution, the function returns a list of lemmatized words with the stopwords removed.</p>
-<div class="cell" data-execution_count="23">
+<div class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> stopwords</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem <span class="im">import</span> WordNetLemmatizer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="24">
+<div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> remove_stopwords_lyrics(clean_lyrics_decode):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    stopword <span class="op">=</span> stopwords.words(<span class="st">'english'</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    stopword.extend([<span class="st">"i'm"</span>, <span class="st">"i'll"</span>, <span class="st">"'ll"</span>, <span class="st">"i'ma"</span>])</span>
@@ -632,7 +632,7 @@ Done.</code></pre>
 <section id="nlp" class="level2">
 <h2 class="anchored" data-anchor-id="nlp">NLP</h2>
 <p>Subsequently, the process involves the implementation of pipeline classes to carry out predictions using models accessible in the Hub. The code imports and employs multiple transformer models specifically designed for text classification and sentiment analysis. Specifically, the following procedure creates three distinct pipelines, each equipped with different models that facilitate the assessment of emotions and sentiment in textual content.</p>
-<div class="cell" data-tags="[&quot;hide-output&quot;,&quot;hide-warning&quot;,&quot;hide-message&quot;]" data-execution_count="26">
+<div class="cell" data-tags="[&quot;hide-output&quot;,&quot;hide-warning&quot;,&quot;hide-message&quot;]" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> transformers</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> pipeline</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#import tensorflow as tf</span></span>
@@ -644,7 +644,7 @@ Done.</code></pre>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>classifier3 <span class="op">=</span> pipeline(<span class="st">"sentiment-analysis"</span>, return_all_scores<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>get_lyric_sentiment</code> function takes in pre-processed lyrics as input and produces a dictionary of sentiment scores. It leverages three distinct classifiers to calculate the scores and aggregates them into a final result. For instance, one of these classifiers is the <em>distilbert-base-uncased-emotion</em> model, specifically trained to detect “emotions in texts such as sadness, joy, love, anger, fear, and surprise”.</p>
-<div class="cell" data-execution_count="28">
+<div class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_lyric_sentiment(cleaned_lyrics):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="st">' '</span>.join(cleaned_lyrics)</span>
@@ -669,7 +669,7 @@ Done.</code></pre>
 <h1>Putting it All Together</h1>
 <p>To summarize, the code efficiently collects data and performs text analysis on every song in a playlist. Specifically, it systematically processes a list of tracks and corresponding artists while simultaneously conducting a thorough cleaning procedure on the lyrics. The cleaning process involves removing all nonessential characters, resulting in a more precise depiction of the song’s content. The outcome is a comprehensive frequency analysis of each word in a song’s lyrics, providing deeper insights into the overall conveyed message.</p>
 <p>Additionally, the program computes a sentiment score for each song based on the lyrics, indicating whether the lyrics are positive, negative, or neutral. It also collects information about the song and artist, such as the release date, length, popularity, and genre. Finally, the program compiles all this information into a dataframe for further analysis.</p>
-<div class="cell" data-execution_count="30">
+<div class="cell" data-tags="[&quot;collapse-code&quot;,&quot;hide-output&quot;]" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>lyrics_dict <span class="op">=</span> {}</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>dict_ls <span class="op">=</span> []</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -704,121 +704,9 @@ Done.</code></pre>
 <span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>    sent_score[<span class="st">'valence'</span>] <span class="op">=</span> df[<span class="st">'valence'</span>][i]</span>
 <span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>    dict_ls.append(sent_score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Searching for "MELTDOWN" by Travis Scott...
-Done.
-Searching for "Barbie World" by Nicki Minaj...
-Done.
-Searching for "Cruel Summer" by Taylor Swift...
-Done.
-Searching for "vampire" by Olivia Rodrigo...
-Done.
-Searching for "Dance The Night" by Dua Lipa...
-Done.
-Searching for "Enough Is Enough" by Post Malone...
-Done.
-Searching for "What Was I Made For? [From The Motion Picture "Barbie"]" by Billie Eilish...
-Done.
-Searching for "Popular" by The Weeknd...
-Done.
-Searching for "Super Shy" by NewJeans...
-Done.
-Searching for "Paint The Town Red" by Doja Cat...
-Done.
-Searching for "K-POP" by Travis Scott...
-Done.
-Searching for "Seven" by Jung Kook...
-Done.
-Searching for "(It Goes Like) Nanana - Edit" by Peggy Gou...
-Done.
-Searching for "Calm Down" by Rema...
-Done.
-Searching for "LALA" by Myke Towers...
-Done.
-Searching for "Flowers" by Miley Cyrus...
-Done.
-Searching for "Chemical" by Post Malone...
-Done.
-Searching for "fukumean" by Gunna...
-Done.
-Searching for "Columbia" by Quevedo...
-Done.
-Searching for "As It Was" by Harry Styles...
-Done.
-Searching for "Kill Bill" by SZA...
-Done.
-Searching for "Creepin'" by Metro Boomin...
-Done.
-Searching for "Boy's a Liar Pt. 2" by PinkPantheress...
-Done.
-Searching for "Daylight" by David Kushner...
-Done.
-Searching for "WHERE SHE GOES" by Bad Bunny...
-Done.
-Searching for "All My Life" by Lil Durk...
-Done.
-Searching for "Baby Don't Hurt Me" by David Guetta...
-Done.
-Searching for "Cupid - Twin Ver." by FIFTY FIFTY...
-Done.
-Searching for "People" by Libianca...
-Done.
-Searching for "Fast Car" by Luke Combs...
-Done.
-Searching for "Moonlight" by Kali Uchis...
-Done.
-Searching for "What It Is" by Doechii...
-Done.
-Searching for "Die For You - Remix" by The Weeknd...
-Done.
-Searching for "I Ain't Worried" by OneRepublic...
-Done.
-Searching for "Calling" by Metro Boomin...
-Done.
-Searching for "From The Start" by Laufey...
-Done.
-Searching for "Snooze" by SZA...
-Done.
-Searching for "Karma" by Taylor Swift...
-Done.
-Searching for "I'm Good" by David Guetta...
-Done.
-Searching for "Rush" by Troye Sivan...
-Done.
-Searching for "Until I Found You" by Stephen Sanchez...
-Done.
-Searching for "Sprinter" by Dave...
-Done.
-Searching for "CUFF IT" by Beyoncé...
-Done.
-Searching for "Miracle" by Calvin Harris...
-Done.
-Searching for "Nonsense" by Sabrina Carpenter...
-Done.
-Searching for "Here With Me" by d4vd...
-Done.
-Searching for "Dial Drunk" by Noah Kahan...
-Done.
-Searching for "Say Yes To Heaven" by Lana Del Rey...
-Done.
-Searching for "Last Night" by Morgan Wallen...
-Done.
-Searching for "Unholy" by Sam Smith...
-Done.</code></pre>
 </div>
-</div>
-<div class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_final <span class="op">=</span> pd.DataFrame(dict_ls)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>df_final <span class="op">=</span> df_final[[<span class="st">'track_name'</span>, <span class="st">'artist_name'</span>, <span class="st">'release_date'</span>, <span class="st">'length'</span>, <span class="st">'popularity'</span>, </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">'artist_pop'</span>, <span class="st">'artist_genres'</span>, <span class="st">'acousticness'</span>, <span class="st">'danceability'</span>, <span class="st">'energy'</span>,</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">'instrumentalness'</span>, <span class="st">'liveness'</span>, <span class="st">'loudness'</span>, <span class="st">'speechiness'</span>, <span class="st">'tempo'</span>, <span class="st">'valence'</span>,</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">'sadness'</span>, <span class="st">'joy'</span>, <span class="st">'love'</span>, <span class="st">'anger'</span>, <span class="st">'fear'</span>, <span class="st">'surprise'</span>, <span class="st">'LABEL_0'</span>,</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">'LABEL_1'</span>, <span class="st">'LABEL_2'</span>, <span class="st">'NEGATIVE'</span>, <span class="st">'POSITIVE'</span>]]</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># df_final.to_csv('top_songs_us.csv', index=False)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="32">
-<div class="cell-output cell-output-display" data-execution_count="32">
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="25">
+<div class="cell-output cell-output-display" data-execution_count="25">
 <div>
 
 
@@ -856,23 +744,23 @@ Done.</code></pre>
 <td>Travis Scott</td>
 <td>2023-07-28</td>
 <td>246133</td>
-<td>92</td>
 <td>93</td>
+<td>94</td>
 <td>[hip hop, rap, slap house]</td>
 <td>0.012</td>
 <td>0.557</td>
 <td>0.774</td>
 <td>...</td>
-<td>0.099706</td>
-<td>0.003778</td>
-<td>0.318775</td>
-<td>0.510471</td>
-<td>0.005726</td>
-<td>0.304234</td>
-<td>0.609486</td>
-<td>0.086280</td>
-<td>0.988320</td>
-<td>0.011679</td>
+<td>0.099130</td>
+<td>0.003761</td>
+<td>0.317456</td>
+<td>0.511858</td>
+<td>0.005745</td>
+<td>0.300423</td>
+<td>0.611931</td>
+<td>0.087646</td>
+<td>0.988340</td>
+<td>0.011660</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
@@ -880,7 +768,7 @@ Done.</code></pre>
 <td>Nicki Minaj</td>
 <td>2023-06-23</td>
 <td>109750</td>
-<td>94</td>
+<td>95</td>
 <td>86</td>
 <td>[hip pop, pop, queens hip hop, rap]</td>
 <td>0.519</td>
@@ -911,16 +799,16 @@ Done.</code></pre>
 <td>0.552</td>
 <td>0.702</td>
 <td>...</td>
-<td>0.237114</td>
-<td>0.017189</td>
-<td>0.406948</td>
-<td>0.024178</td>
-<td>0.003635</td>
-<td>0.285380</td>
-<td>0.609290</td>
-<td>0.105329</td>
-<td>0.994155</td>
-<td>0.005845</td>
+<td>0.242494</td>
+<td>0.017212</td>
+<td>0.406428</td>
+<td>0.024779</td>
+<td>0.003659</td>
+<td>0.286751</td>
+<td>0.607994</td>
+<td>0.105255</td>
+<td>0.994165</td>
+<td>0.005836</td>
 </tr>
 </tbody>
 </table>
@@ -944,7 +832,7 @@ Done.</code></pre>
 <ul>
 <li><em>Labels: 0 -&gt; Negative; 1 -&gt; Neutral; 2 -&gt; Positive</em></li>
 </ul>
-<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="111">
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="27">
 <div class="cell-output cell-output-display">
 <p><img src="index_files/figure-html/cell-30-output-1.png" class="img-fluid"></p>
 </div>
@@ -955,15 +843,15 @@ Done.</code></pre>
 <section id="correlations-matrix" class="level3">
 <h3 class="anchored" data-anchor-id="correlations-matrix">Correlations Matrix</h3>
 <p>After completing the initial data analysis, we proceed with generating the Pearson correlations matrix using the Pandas command <code>df.corr()</code>. Subsequently, we visualize the matrix using the seaborn heatmap, providing a detailed understanding of the relationships between the various variables in our dataset.</p>
-<div class="cell" data-execution_count="124">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>track_sentiment_df <span class="op">=</span> df_final[[<span class="st">'track_name'</span>, <span class="st">'artist_name'</span>,</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>           <span class="st">'acousticness'</span>, <span class="st">'danceability'</span>, <span class="st">'energy'</span>, <span class="st">'instrumentalness'</span>, </span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>           <span class="st">'loudness'</span>, <span class="st">'speechiness'</span>, <span class="st">'tempo'</span>, <span class="st">'valence'</span>, </span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">'sadness'</span>, <span class="st">'joy'</span>, <span class="st">'love'</span>, <span class="st">'anger'</span>, <span class="st">'fear'</span>, <span class="st">'surprise'</span>,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>           <span class="st">'LABEL_0'</span>, <span class="st">'LABEL_1'</span>, <span class="st">'LABEL_2'</span>, <span class="st">'NEGATIVE'</span>, <span class="st">'POSITIVE'</span>]]</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the pearson correlations matrix</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>corr <span class="op">=</span> track_sentiment_df.corr(method <span class="op">=</span> <span class="st">'pearson'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>track_sentiment_df <span class="op">=</span> df_final[[<span class="st">'track_name'</span>, <span class="st">'artist_name'</span>,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>           <span class="st">'acousticness'</span>, <span class="st">'danceability'</span>, <span class="st">'energy'</span>, <span class="st">'instrumentalness'</span>, </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>           <span class="st">'loudness'</span>, <span class="st">'speechiness'</span>, <span class="st">'tempo'</span>, <span class="st">'valence'</span>, </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">'sadness'</span>, <span class="st">'joy'</span>, <span class="st">'love'</span>, <span class="st">'anger'</span>, <span class="st">'fear'</span>, <span class="st">'surprise'</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>           <span class="st">'LABEL_0'</span>, <span class="st">'LABEL_1'</span>, <span class="st">'LABEL_2'</span>, <span class="st">'NEGATIVE'</span>, <span class="st">'POSITIVE'</span>]]</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the pearson correlations matrix</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>corr <span class="op">=</span> track_sentiment_df.corr(method <span class="op">=</span> <span class="st">'pearson'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="139">
 <div class="cell-output cell-output-display">
@@ -971,8 +859,8 @@ Done.</code></pre>
 </div>
 </div>
 <p>The code below produces a scatterplot that showcases the correlation between energy and fear. The x-axis represents the energy value, while the y-axis represents the fear sentiment. The size of each data point corresponds to the label indicating the neutral sentiment level, and its color represents the valence value. Moreover, each bubble contains its energy value within, allowing for a straightforward interpretation of the data.</p>
-<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="147">
-<div class="cell-output cell-output-display" data-execution_count="147">
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="30">
+<div class="cell-output cell-output-display" data-execution_count="30">
 <pre><code>Text(0.5, 1.0, 'Fear vs. Energy')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -987,57 +875,57 @@ Done.</code></pre>
 <p>Next, we implement principal component analysis (PCA) on a comprehensive dataset comprising a range of musical features.</p>
 <p>First, we create a table from the <code>df_final</code> dataframe by extracting specific columns that facilitate our analysis. These columns consist of acousticness, danceability, energy, speechiness, tempo, and valence of each track, as well as emotional features such as sadness, joy, love, anger, fear, and surprise. In addition, the table includes the track name and flags for both negative and positive sentiments.</p>
 <p>We then perform PCA on the data in the table and apply it to generate a biplot depicting the relationship between the features and tracks. This biplot quickly reveals any discernible patterns and clusters within the dataset.</p>
-<div class="cell" data-execution_count="163">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>X_SMALL <span class="op">=</span> df_final[[<span class="st">'acousticness'</span>, <span class="st">'danceability'</span>, <span class="st">'energy'</span>, <span class="st">'speechiness'</span>, </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'tempo'</span>, <span class="st">'valence'</span>, <span class="st">'sadness'</span>, <span class="st">'joy'</span>, <span class="st">'love'</span>, <span class="st">'anger'</span>, </span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'fear'</span>, <span class="st">'surprise'</span>, <span class="st">'track_name'</span>, <span class="st">'NEGATIVE'</span>, <span class="st">'POSITIVE'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>X_SMALL <span class="op">=</span> df_final[[<span class="st">'acousticness'</span>, <span class="st">'danceability'</span>, <span class="st">'energy'</span>, <span class="st">'speechiness'</span>, </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'tempo'</span>, <span class="st">'valence'</span>, <span class="st">'sadness'</span>, <span class="st">'joy'</span>, <span class="st">'love'</span>, <span class="st">'anger'</span>, </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'fear'</span>, <span class="st">'surprise'</span>, <span class="st">'track_name'</span>, <span class="st">'NEGATIVE'</span>, <span class="st">'POSITIVE'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To process the data, the code employs the <strong>PCA</strong> and <strong>StandardScaler</strong> modules from the <code>sklearn</code> <em>decomposition</em> and <em>preprocessing</em> libraries. Specifically, the <span class="math inline">\(X_i\)</span> variable is used to choose the first 12 columns from the subset of data mentioned above, while the track_name column is chosen as the target variable. Next, the StandardScaler standardizes the <span class="math inline">\(X_i\)</span> data.</p>
 <p>PCA is applied to the standardized data, <span class="math inline">\(X_{st}\)</span>, using the PCA module, and the resulting loadings and eigenvalues are saved.</p>
-<div class="cell" data-execution_count="164">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bioinfokit.visuz <span class="im">import</span> cluster</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>X_i <span class="op">=</span> X_SMALL.iloc[:,<span class="dv">0</span>:<span class="dv">12</span>]</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> X_SMALL[<span class="st">'track_name'</span>].to_numpy()</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>X_st <span class="op">=</span>  StandardScaler().fit_transform(X_i)</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>pca_out <span class="op">=</span> PCA().fit(X_st)</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># component loadings</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>loadings <span class="op">=</span> pca_out.components_</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co"># get eigenvalues (variance explained by each PC)  </span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>pca_out.explained_variance_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="164">
-<pre><code>array([2.42892453e+00, 1.97821004e+00, 1.55977717e+00, 1.45952571e+00,
-       1.17443158e+00, 1.01165619e+00, 8.35334613e-01, 7.33934785e-01,
-       5.23903936e-01, 3.61072998e-01, 1.78126406e-01, 7.48526015e-15])</code></pre>
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bioinfokit.visuz <span class="im">import</span> cluster</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>X_i <span class="op">=</span> X_SMALL.iloc[:,<span class="dv">0</span>:<span class="dv">12</span>]</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> X_SMALL[<span class="st">'track_name'</span>].to_numpy()</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>X_st <span class="op">=</span>  StandardScaler().fit_transform(X_i)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>pca_out <span class="op">=</span> PCA().fit(X_st)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># component loadings</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>loadings <span class="op">=</span> pca_out.components_</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co"># get eigenvalues (variance explained by each PC)  </span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>pca_out.explained_variance_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
+<pre><code>array([2.42868315e+00, 1.97781219e+00, 1.55851904e+00, 1.45953196e+00,
+       1.17526979e+00, 1.01150294e+00, 8.34197530e-01, 7.34088578e-01,
+       5.25035147e-01, 3.61992940e-01, 1.78264687e-01, 7.53325973e-15])</code></pre>
 </div>
 </div>
 <p>Next, the following code uses the <code>PCA()</code> function to calculate the PCA scores of the standardized data set, <span class="math inline">\(X_{st}\)</span>.</p>
 <p>A biplot is generated using the cluster module from the bioinfokit library. The biplot is based on the PCA scores and loadings, and the column names of the <span class="math inline">\(X_i\)</span> data frame are used as labels for the plot. The variance explained by the first two principal components are also displayed on the plot.</p>
-<div class="cell" data-execution_count="165">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get biplot</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>pca_scores <span class="op">=</span> PCA().fit_transform(X_st)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>cluster.biplot(cscore<span class="op">=</span>pca_scores, loadings<span class="op">=</span>loadings, labels<span class="op">=</span>X_i.columns.values, </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>               var1<span class="op">=</span><span class="bu">round</span>(pca_out.explained_variance_ratio_[<span class="dv">0</span>]<span class="op">*</span><span class="dv">100</span>, <span class="dv">2</span>),</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>               var2<span class="op">=</span><span class="bu">round</span>(pca_out.explained_variance_ratio_[<span class="dv">1</span>]<span class="op">*</span><span class="dv">100</span>, <span class="dv">2</span>), <span class="co">#colorlist=target,</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>               show<span class="op">=</span><span class="va">True</span>,dim<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>),dotsize<span class="op">=</span><span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get biplot</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>pca_scores <span class="op">=</span> PCA().fit_transform(X_st)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>cluster.biplot(cscore<span class="op">=</span>pca_scores, loadings<span class="op">=</span>loadings, labels<span class="op">=</span>X_i.columns.values, </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>               var1<span class="op">=</span><span class="bu">round</span>(pca_out.explained_variance_ratio_[<span class="dv">0</span>]<span class="op">*</span><span class="dv">100</span>, <span class="dv">2</span>),</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>               var2<span class="op">=</span><span class="bu">round</span>(pca_out.explained_variance_ratio_[<span class="dv">1</span>]<span class="op">*</span><span class="dv">100</span>, <span class="dv">2</span>), <span class="co">#colorlist=target,</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>               show<span class="op">=</span><span class="va">True</span>,dim<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>),dotsize<span class="op">=</span><span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="index_files/figure-html/cell-38-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>Then, I assigned the resulting column names to the variable <code>cols_pca</code> using a list comprehension. Using the PCA scores, column names, and the original index from <span class="math inline">\(X_i\)</span>, I created a new pandas DataFrame called <code>df_pca</code>. The first three rows of this new DataFrame is shown below.</p>
-<div class="cell" data-execution_count="166">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pca = PCA()</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>pca_scores <span class="op">=</span> PCA().fit_transform(X_st)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>cols_pca <span class="op">=</span> [<span class="ss">f'PC</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">'</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, pca_out.n_components_<span class="op">+</span><span class="dv">1</span>)]</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>df_pca <span class="op">=</span> pd.DataFrame(pca_scores, columns<span class="op">=</span>cols_pca, index<span class="op">=</span>X_i.index)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pca = PCA()</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>pca_scores <span class="op">=</span> PCA().fit_transform(X_st)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>cols_pca <span class="op">=</span> [<span class="ss">f'PC</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">'</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, pca_out.n_components_<span class="op">+</span><span class="dv">1</span>)]</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>df_pca <span class="op">=</span> pd.DataFrame(pca_scores, columns<span class="op">=</span>cols_pca, index<span class="op">=</span>X_i.index)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="167">
-<div class="cell-output cell-output-display" data-execution_count="167">
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="35">
+<div class="cell-output cell-output-display" data-execution_count="35">
 <div>
 
 
@@ -1062,48 +950,48 @@ Done.</code></pre>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>-0.529881</td>
-<td>-0.405733</td>
-<td>3.163332</td>
-<td>1.729479</td>
-<td>0.211702</td>
-<td>-0.201977</td>
-<td>-0.268700</td>
-<td>-0.178874</td>
-<td>-1.132783</td>
-<td>2.410575</td>
-<td>0.463887</td>
-<td>-1.919207e-08</td>
+<td>-0.535483</td>
+<td>-0.410142</td>
+<td>3.122397</td>
+<td>1.787659</td>
+<td>0.218412</td>
+<td>-0.198432</td>
+<td>-0.248253</td>
+<td>-0.182789</td>
+<td>-1.157658</td>
+<td>2.407361</td>
+<td>0.461934</td>
+<td>3.073141e-08</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>-0.546332</td>
-<td>-2.065750</td>
-<td>0.690890</td>
-<td>0.511964</td>
-<td>-0.253262</td>
-<td>0.406501</td>
-<td>1.478151</td>
-<td>0.712882</td>
-<td>-0.789191</td>
-<td>0.166014</td>
-<td>0.629793</td>
-<td>3.851750e-08</td>
+<td>-0.546982</td>
+<td>-2.070879</td>
+<td>0.668063</td>
+<td>0.518742</td>
+<td>-0.248908</td>
+<td>0.401758</td>
+<td>1.479914</td>
+<td>0.718626</td>
+<td>-0.787753</td>
+<td>0.160845</td>
+<td>0.629406</td>
+<td>8.978113e-08</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>-0.208698</td>
-<td>0.449729</td>
-<td>1.019382</td>
-<td>1.602302</td>
-<td>-0.691681</td>
-<td>0.559411</td>
-<td>1.445747</td>
-<td>-0.580528</td>
-<td>0.497472</td>
-<td>0.397263</td>
-<td>-0.218190</td>
-<td>1.989878e-07</td>
+<td>-0.219304</td>
+<td>0.431473</td>
+<td>0.967675</td>
+<td>1.625633</td>
+<td>-0.681383</td>
+<td>0.550575</td>
+<td>1.451084</td>
+<td>-0.577216</td>
+<td>0.498632</td>
+<td>0.402718</td>
+<td>-0.215591</td>
+<td>-1.777431e-07</td>
 </tr>
 </tbody>
 </table>
@@ -1112,24 +1000,24 @@ Done.</code></pre>
 </div>
 </div>
 <p>The variance ratios for the PCA output and the cumulative sum of the explained variance ratios are printed below. Specifically, the array displayed represents the amount of variability explained by each component.</p>
-<div class="cell" data-execution_count="168">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pca_out.explained_variance_ratio_)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'----'</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pca_out.explained_variance_ratio_.cumsum())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pca_out.explained_variance_ratio_)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'----'</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pca_out.explained_variance_ratio_.cumsum())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1.98362170e-01 1.61553820e-01 1.27381802e-01 1.19194600e-01
- 9.59119124e-02 8.26185890e-02 6.82189934e-02 5.99380074e-02
- 4.27854881e-02 2.94876281e-02 1.45469899e-02 6.11296246e-16]
+<pre><code>[1.98342458e-01 1.61521329e-01 1.27279055e-01 1.19195110e-01
+ 9.59803663e-02 8.26060732e-02 6.81261316e-02 5.99505672e-02
+ 4.28778703e-02 2.95627568e-02 1.45582828e-02 6.15216211e-16]
 ----
-[0.19836217 0.35991599 0.48729779 0.60649239 0.7024043  0.78502289
- 0.85324189 0.91317989 0.95596538 0.98545301 1.         1.        ]</code></pre>
+[0.19834246 0.35986379 0.48714284 0.60633795 0.70231832 0.78492439
+ 0.85305052 0.91300109 0.95587896 0.98544172 1.         1.        ]</code></pre>
 </div>
 </div>
 <p>The loading vectors help visualize the relationship between the original variables and their respective components. These vectors represent the weights of the variables within a mathematical equation used to generate the principal components.</p>
-<div class="cell" data-execution_count="169">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df_weights <span class="op">=</span> pd.DataFrame(pca_out.components_.T, columns<span class="op">=</span>df_pca.columns, index<span class="op">=</span>X_i.columns)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>df_weights</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="169">
+<div class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_weights <span class="op">=</span> pd.DataFrame(pca_out.components_.T, columns<span class="op">=</span>df_pca.columns, index<span class="op">=</span>X_i.columns)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df_weights</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
 <div>
 
 
@@ -1154,183 +1042,183 @@ Done.</code></pre>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">acousticness</td>
-<td>0.472656</td>
-<td>-0.163735</td>
-<td>-0.154089</td>
-<td>-0.139990</td>
-<td>0.158485</td>
-<td>-0.194553</td>
-<td>0.439747</td>
-<td>0.280886</td>
-<td>-0.091090</td>
-<td>-0.125600</td>
-<td>0.589179</td>
-<td>-4.943714e-09</td>
+<td>0.472636</td>
+<td>-0.163118</td>
+<td>-0.152968</td>
+<td>-0.143424</td>
+<td>0.159508</td>
+<td>-0.196200</td>
+<td>0.437121</td>
+<td>0.282755</td>
+<td>-0.089136</td>
+<td>-0.126330</td>
+<td>0.589212</td>
+<td>-1.749893e-08</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">danceability</td>
-<td>-0.355574</td>
-<td>-0.328415</td>
-<td>0.225089</td>
-<td>-0.331764</td>
-<td>-0.051070</td>
-<td>0.160021</td>
-<td>-0.167495</td>
-<td>0.124112</td>
-<td>-0.207131</td>
-<td>-0.688556</td>
-<td>0.127638</td>
-<td>-7.809908e-09</td>
+<td>-0.354810</td>
+<td>-0.328431</td>
+<td>0.232253</td>
+<td>-0.327776</td>
+<td>-0.051578</td>
+<td>0.160395</td>
+<td>-0.167581</td>
+<td>0.123379</td>
+<td>-0.202803</td>
+<td>-0.689654</td>
+<td>0.128141</td>
+<td>-1.303748e-08</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">energy</td>
-<td>-0.483531</td>
-<td>0.379662</td>
-<td>0.071901</td>
-<td>-0.059144</td>
-<td>-0.000970</td>
-<td>-0.006760</td>
-<td>-0.076220</td>
-<td>-0.152039</td>
-<td>0.260448</td>
-<td>0.161720</td>
-<td>0.700306</td>
-<td>-3.745673e-08</td>
+<td>-0.484107</td>
+<td>0.378877</td>
+<td>0.072734</td>
+<td>-0.057181</td>
+<td>-0.001449</td>
+<td>-0.006525</td>
+<td>-0.076117</td>
+<td>-0.152562</td>
+<td>0.258640</td>
+<td>0.164176</td>
+<td>0.700407</td>
+<td>-4.406446e-08</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">speechiness</td>
-<td>-0.142772</td>
-<td>-0.381637</td>
-<td>0.424084</td>
-<td>0.255572</td>
-<td>-0.142908</td>
-<td>0.231525</td>
-<td>0.156661</td>
-<td>0.056942</td>
-<td>-0.470160</td>
-<td>0.482825</td>
-<td>0.181172</td>
-<td>-1.361384e-08</td>
+<td>-0.143071</td>
+<td>-0.382968</td>
+<td>0.417134</td>
+<td>0.262851</td>
+<td>-0.141551</td>
+<td>0.231333</td>
+<td>0.161255</td>
+<td>0.056990</td>
+<td>-0.473502</td>
+<td>0.479736</td>
+<td>0.180616</td>
+<td>4.251967e-09</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">tempo</td>
-<td>-0.265554</td>
-<td>0.188921</td>
-<td>-0.110072</td>
-<td>0.379782</td>
-<td>0.120769</td>
-<td>0.170145</td>
-<td>0.679307</td>
-<td>-0.297284</td>
-<td>-0.121784</td>
-<td>-0.343322</td>
-<td>-0.106622</td>
-<td>2.094270e-08</td>
+<td>-0.266491</td>
+<td>0.187246</td>
+<td>-0.120239</td>
+<td>0.377051</td>
+<td>0.121832</td>
+<td>0.168428</td>
+<td>0.680987</td>
+<td>-0.293634</td>
+<td>-0.115783</td>
+<td>-0.345470</td>
+<td>-0.106610</td>
+<td>3.143578e-08</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">valence</td>
-<td>-0.362767</td>
-<td>-0.254400</td>
-<td>-0.012113</td>
-<td>-0.293288</td>
-<td>0.108810</td>
-<td>0.073154</td>
-<td>0.409577</td>
-<td>0.421362</td>
-<td>0.491322</td>
-<td>0.239508</td>
-<td>-0.237202</td>
-<td>6.650702e-09</td>
+<td>-0.362598</td>
+<td>-0.254921</td>
+<td>-0.008339</td>
+<td>-0.294838</td>
+<td>0.109331</td>
+<td>0.071099</td>
+<td>0.404934</td>
+<td>0.423593</td>
+<td>0.491052</td>
+<td>0.242583</td>
+<td>-0.236960</td>
+<td>3.997250e-09</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">sadness</td>
-<td>0.116296</td>
-<td>0.461910</td>
-<td>0.134566</td>
-<td>-0.367065</td>
-<td>-0.447636</td>
-<td>0.172327</td>
-<td>0.213354</td>
-<td>0.153210</td>
-<td>-0.185808</td>
-<td>0.027784</td>
-<td>-0.094723</td>
-<td>5.262447e-01</td>
+<td>0.115465</td>
+<td>0.462237</td>
+<td>0.141550</td>
+<td>-0.364070</td>
+<td>-0.446972</td>
+<td>0.171583</td>
+<td>0.215687</td>
+<td>0.153930</td>
+<td>-0.185796</td>
+<td>0.026680</td>
+<td>-0.094658</td>
+<td>5.261080e-01</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">joy</td>
-<td>-0.246167</td>
-<td>-0.370909</td>
-<td>-0.562805</td>
-<td>0.120775</td>
-<td>-0.138803</td>
-<td>-0.200699</td>
-<td>-0.095438</td>
-<td>-0.113271</td>
-<td>-0.073615</td>
-<td>0.064269</td>
-<td>0.074527</td>
-<td>6.114759e-01</td>
+<td>-0.245283</td>
+<td>-0.370700</td>
+<td>-0.565805</td>
+<td>0.108762</td>
+<td>-0.139314</td>
+<td>-0.200528</td>
+<td>-0.097651</td>
+<td>-0.113649</td>
+<td>-0.074931</td>
+<td>0.063437</td>
+<td>0.073903</td>
+<td>6.109670e-01</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">love</td>
-<td>0.244360</td>
-<td>-0.151565</td>
-<td>0.029492</td>
-<td>-0.228710</td>
-<td>0.455959</td>
-<td>0.608229</td>
-<td>-0.057160</td>
-<td>-0.396488</td>
-<td>0.154501</td>
-<td>0.081748</td>
-<td>0.066410</td>
-<td>3.014358e-01</td>
+<td>0.244474</td>
+<td>-0.150957</td>
+<td>0.033339</td>
+<td>-0.228419</td>
+<td>0.455799</td>
+<td>0.608435</td>
+<td>-0.054860</td>
+<td>-0.396462</td>
+<td>0.154453</td>
+<td>0.082643</td>
+<td>0.066409</td>
+<td>3.015355e-01</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">anger</td>
-<td>0.211241</td>
-<td>-0.172776</td>
-<td>0.447945</td>
-<td>0.433599</td>
-<td>-0.260744</td>
-<td>-0.063045</td>
-<td>0.011700</td>
-<td>-0.003942</td>
-<td>0.552239</td>
-<td>-0.239420</td>
-<td>0.079505</td>
-<td>3.100606e-01</td>
+<td>0.211134</td>
+<td>-0.174040</td>
+<td>0.438946</td>
+<td>0.442155</td>
+<td>-0.261781</td>
+<td>-0.062522</td>
+<td>0.011816</td>
+<td>-0.003443</td>
+<td>0.553672</td>
+<td>-0.234375</td>
+<td>0.080485</td>
+<td>3.104937e-01</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">fear</td>
-<td>-0.119738</td>
-<td>0.137196</td>
-<td>0.396863</td>
-<td>-0.009660</td>
-<td>0.609067</td>
-<td>-0.491055</td>
-<td>-0.018711</td>
-<td>0.058817</td>
-<td>-0.180386</td>
-<td>0.017061</td>
-<td>-0.128632</td>
-<td>3.794241e-01</td>
+<td>-0.120323</td>
+<td>0.136840</td>
+<td>0.397039</td>
+<td>-0.000709</td>
+<td>0.609238</td>
+<td>-0.490618</td>
+<td>-0.019589</td>
+<td>0.058372</td>
+<td>-0.179835</td>
+<td>0.015345</td>
+<td>-0.128389</td>
+<td>3.800377e-01</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">surprise</td>
-<td>-0.032613</td>
-<td>0.229246</td>
-<td>-0.185551</td>
-<td>0.426070</td>
-<td>0.242759</td>
-<td>0.404430</td>
-<td>-0.246216</td>
-<td>0.645318</td>
-<td>-0.048646</td>
-<td>-0.080059</td>
-<td>0.062357</td>
-<td>1.349076e-01</td>
+<td>-0.032890</td>
+<td>0.228873</td>
+<td>-0.192990</td>
+<td>0.422472</td>
+<td>0.241694</td>
+<td>0.405386</td>
+<td>-0.248477</td>
+<td>0.644547</td>
+<td>-0.049047</td>
+<td>-0.079927</td>
+<td>0.062508</td>
+<td>1.348000e-01</td>
 </tr>
 </tbody>
 </table>
@@ -1345,77 +1233,79 @@ Done.</code></pre>
 <p>Below, we create a query to retrieve similar elements based on Euclidean distance. In mathematics, the Euclidean distance between two points is the length of the line segment between the two points. In this sense, the closer the distance is to 0, the more similar the songs are.</p>
 <section id="knn-algorithm" class="level4">
 <h4 class="anchored" data-anchor-id="knn-algorithm"><a href="https://www.kaggle.com/code/leomauro/spotify-songs-similarity-search/notebook">KNN Algorithm</a></h4>
-<p>The k-Nearest Neighbors (KNN) algorithm searches for k similar elements based on a query point at the center within a predefined radius.</p>
-<div class="cell" data-execution_count="156">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a song string search</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> getMusicName(elem):</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>elem[<span class="st">'artist'</span>]<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span>elem[<span class="st">'name'</span>]<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> knnQuery(queryPoint, arrCharactPoints, k):</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    queryVals <span class="op">=</span> queryPoint.tolist()</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    distVals <span class="op">=</span> []</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Copy of dataframe indices and data</span></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    tmp <span class="op">=</span> arrCharactPoints.copy(deep <span class="op">=</span> <span class="va">True</span>)  </span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> index, row <span class="kw">in</span> tmp.iterrows():</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>        feat <span class="op">=</span> row.values.tolist()</span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate sum of squared differences</span></span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>        ssd <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">abs</span>(feat[i] <span class="op">-</span> queryVals[i]) <span class="op">**</span> <span class="dv">2</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(queryVals)))</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get euclidean distance</span></span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>        distVals.append(ssd <span class="op">**</span> <span class="fl">0.5</span>)</span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>    tmp[<span class="st">'distance'</span>] <span class="op">=</span> distVals</span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>    tmp <span class="op">=</span> tmp.sort_values(<span class="st">'distance'</span>)</span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># K closest and furthest points</span></span>
-<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tmp.head(k).index, tmp.tail(k).index</span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Execute KNN removing the query point</span></span>
-<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> querySimilars(df, columns, idx, func, param):</span>
-<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> df[columns].copy(deep <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>    queryPoint <span class="op">=</span> arr.loc[idx]</span>
-<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> arr.drop([idx])</span>
-<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> func(queryPoint, arr, param)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To obtain a string search for a song, utilize the <code>getMusicName</code> function shown below, which returns the artist and song name.</p>
+<p>The k-Nearest Neighbors (KNN) algorithm searches for k similar elements based on a query point at the center within a predefined radius. We execute the KNN algorithm using the <code>knnQuery</code> function defined below, which takes a query point, a set of characteristic points, and a value for k. It computes the sum of squared differences between each data and query point, followed by the calculation of the Euclidean distance between them. The function then arranges the points by distance and returns the k closest and farthest points.</p>
+<p>The <code>querySimilars</code> function then removes the query point and executes the KNN algorithm on the remaining points, returning the k most similar points to the query point based on the specified columns, function, and parameter.</p>
+<div class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a song string search</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> getMusicName(elem):</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>elem[<span class="st">'artist'</span>]<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span>elem[<span class="st">'name'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> knnQuery(queryPoint, arrCharactPoints, k):</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    queryVals <span class="op">=</span> queryPoint.tolist()</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    distVals <span class="op">=</span> []</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Copy of dataframe indices and data</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    tmp <span class="op">=</span> arrCharactPoints.copy(deep <span class="op">=</span> <span class="va">True</span>)  </span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> index, row <span class="kw">in</span> tmp.iterrows():</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>        feat <span class="op">=</span> row.values.tolist()</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate sum of squared differences</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>        ssd <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">abs</span>(feat[i] <span class="op">-</span> queryVals[i]) <span class="op">**</span> <span class="dv">2</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(queryVals)))</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get euclidean distance</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>        distVals.append(ssd <span class="op">**</span> <span class="fl">0.5</span>)</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>    tmp[<span class="st">'distance'</span>] <span class="op">=</span> distVals</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>    tmp <span class="op">=</span> tmp.sort_values(<span class="st">'distance'</span>)</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># K closest and furthest points</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tmp.head(k).index, tmp.tail(k).index</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Execute KNN removing the query point</span></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> querySimilars(df, columns, idx, func, param):</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> df[columns].copy(deep <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>    queryPoint <span class="op">=</span> arr.loc[idx]</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> arr.drop([idx])</span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> func(queryPoint, arr, param)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>KNN Query Example.</strong></p>
-<p>Our function allows us to create personalized query points and modify the columns to explore other options. For example, the following code selects a specific set of song attributes and then searches for the <span class="math inline">\(k\)</span> highest values of these attributes set equal to one.</p>
-<p>Let’s search for <span class="math inline">\(k=3\)</span> similar songs to a query point <span class="math inline">\(\textrm{songIndex} = 6\)</span>.</p>
-<div class="cell" data-execution_count="157">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing </span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>scaler<span class="op">=</span>preprocessing.MinMaxScaler() <span class="co">#instantiate a scaler</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># all the feature values are in the range [0,1] ,except of loudnes</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># so let's scale it to fit the exact same range</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>loudness2 <span class="op">=</span> df[<span class="st">"loudness"</span>].values</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>loudness_scaled<span class="op">=</span>scaler.fit_transform(loudness2.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'loudness_scaled'</span>] <span class="op">=</span> loudness_scaled</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We now establish a function that creates customized query points and alters the data columns, allowing for further exploration of various options. To illustrate, the code snippet below chooses a particular group of song features and then seeks out the top k values within that feature set that are equal to one.</p>
+<p>To begin, we create a scaler utilizing the preprocessing library from <em>sklearn</em>. It’s worth noting that all the feature values fall within the range of 0 and 1, except for loudness. As a result, we need to scale loudness to conform to the same range.</p>
+<div class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> preprocessing.MinMaxScaler()</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># scale loudness to fit the same range [0, 1]</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>loudness2 <span class="op">=</span> df[<span class="st">"loudness"</span>].values</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>loudness_scaled<span class="op">=</span>scaler.fit_transform(loudness2.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'loudness_scaled'</span>] <span class="op">=</span> loudness_scaled</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="158">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select song and column attributes</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>songIndex <span class="op">=</span> <span class="dv">4</span> <span class="co"># query point</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [<span class="st">'acousticness'</span>, <span class="st">'danceability'</span>, <span class="st">'energy'</span>, <span class="st">'instrumentalness'</span>, <span class="st">'liveness'</span>, </span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">'loudness_scaled'</span>, <span class="st">'tempo'</span>, </span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>           <span class="st">'speechiness'</span>, <span class="st">'valence'</span>]</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Set query parameters</span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>func, param <span class="op">=</span> knnQuery,<span class="dv">3</span></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Implement query</span></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> querySimilars(df, columns, songIndex, func, param)</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"---- Query Point ----"</span>)</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(getMusicName(df.loc[songIndex]))</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'---- k = 3 similar songs ----'</span>)</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> track_id <span class="kw">in</span> response[<span class="dv">0</span>]:</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    track_name <span class="op">=</span> getMusicName(df.loc[track_id])</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(track_name)</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'---- k = 3 nonsimilar songs ----'</span>)</span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> track_id <span class="kw">in</span> response[<span class="dv">1</span>]:</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    track_name <span class="op">=</span> getMusicName(df.loc[track_id])</span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(track_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s search for <span class="math inline">\(k=3\)</span> similar songs to a query point <span class="math inline">\(\textrm{songIndex} = 6\)</span>.</p>
+<div class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select song and column attributes</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>songIndex <span class="op">=</span> <span class="dv">4</span> <span class="co"># query point</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [<span class="st">'acousticness'</span>, <span class="st">'danceability'</span>, <span class="st">'energy'</span>, <span class="st">'instrumentalness'</span>, <span class="st">'liveness'</span>, </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">'loudness_scaled'</span>, <span class="st">'tempo'</span>, </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>           <span class="st">'speechiness'</span>, <span class="st">'valence'</span>]</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Set query parameters</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>func, param <span class="op">=</span> knnQuery,<span class="dv">3</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Implement query</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> querySimilars(df, columns, songIndex, func, param)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"---- Query Point ----"</span>)</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(getMusicName(df.loc[songIndex]))</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'---- k = 3 similar songs ----'</span>)</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> track_id <span class="kw">in</span> response[<span class="dv">0</span>]:</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    track_name <span class="op">=</span> getMusicName(df.loc[track_id])</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(track_name)</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'---- k = 3 nonsimilar songs ----'</span>)</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> track_id <span class="kw">in</span> response[<span class="dv">1</span>]:</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>    track_name <span class="op">=</span> getMusicName(df.loc[track_id])</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(track_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>---- Query Point ----
 Dua Lipa - Dance The Night (From Barbie The Album)
@@ -1430,42 +1320,45 @@ Morgan Wallen - Last Night</code></pre>
 </div>
 </div>
 <p>The code below implements the same idea as above, but queries each track in a given playlist instead of a single defined query point.</p>
-<div class="cell" data-execution_count="159">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>similar_count <span class="op">=</span> {} <span class="co"># Similar songs count</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>nonsimilar_count <span class="op">=</span> {} <span class="co"># Non-similar songs count</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> track_index <span class="kw">in</span> df.index:</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Implement query</span></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> querySimilars(df, columns, track_index, func, param)</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get similar songs</span></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> similar_index <span class="kw">in</span> response[<span class="dv">0</span>]:</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>        track <span class="op">=</span> getMusicName(df.loc[similar_index])</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> track <span class="kw">in</span> similar_count:</span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>            similar_count[track] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>            similar_count[track] <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get non-similar songs</span></span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> nonsimilar_index <span class="kw">in</span> response[<span class="dv">1</span>]:</span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>        track <span class="op">=</span> getMusicName(df.loc[nonsimilar_index])</span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> track <span class="kw">in</span> nonsimilar_count:</span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>            nonsimilar_count[track] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>            nonsimilar_count[track] <span class="op">=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To keep track of the number of songs that are similar and those that are not, we use two dictionaries: similar_count” and “nonsimilar_count”. To do this, we create a loop that goes through the data, running the <code>querySimilars</code> function on each track. A loop then processes “similar” and “non-similar” songs from the results of the query, stored in the “response” variable. If a “similar” song is found, its name is retrieved using the <code>getMusicName</code> function. The song’s name is then added to the “similar_count” dictionary with a count of 1, or incremented if it already exists.</p>
+<p>The same process is repeated for the “non-similar” songs, except the count is added to the “nonsimilar_count” dictionary instead.</p>
+<div class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>similar_count <span class="op">=</span> {} <span class="co"># Similar songs count</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>nonsimilar_count <span class="op">=</span> {} <span class="co"># Non-similar songs count</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> track_index <span class="kw">in</span> df.index:</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Implement query</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> querySimilars(df, columns, track_index, func, param)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get similar songs</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> similar_index <span class="kw">in</span> response[<span class="dv">0</span>]:</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>        track <span class="op">=</span> getMusicName(df.loc[similar_index])</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> track <span class="kw">in</span> similar_count:</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>            similar_count[track] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>            similar_count[track] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get non-similar songs</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> nonsimilar_index <span class="kw">in</span> response[<span class="dv">1</span>]:</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>        track <span class="op">=</span> getMusicName(df.loc[nonsimilar_index])</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> track <span class="kw">in</span> nonsimilar_count:</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>            nonsimilar_count[track] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>            nonsimilar_count[track] <span class="op">=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="160">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>nonsimilar <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">sorted</span>(nonsimilar_count.items(), key<span class="op">=</span><span class="kw">lambda</span> item: item[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>))</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'---- NON SIMILAR SONG COUNTS ----'</span>)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> track_name, track_count <span class="kw">in</span> nonsimilar.items():</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> track_count <span class="op">&gt;=</span> <span class="dv">8</span>:</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(track_name, <span class="st">':'</span>, track_count)</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>similar <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">sorted</span>(similar_count.items(), key<span class="op">=</span><span class="kw">lambda</span> item: item[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>))</span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">---- SIMILAR SONG COUNTS ----'</span>)</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> track_name, track_count <span class="kw">in</span> similar.items():</span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> track_count <span class="op">&gt;=</span> <span class="dv">5</span>:</span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(track_name, <span class="st">':'</span>, track_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Next, we display both the non-similar and similar songs with their respective track name and count.</p>
+<div class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>nonsimilar <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">sorted</span>(nonsimilar_count.items(), key<span class="op">=</span><span class="kw">lambda</span> item: item[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'---- NON SIMILAR SONG COUNTS ----'</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> track_name, track_count <span class="kw">in</span> nonsimilar.items():</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> track_count <span class="op">&gt;=</span> <span class="dv">8</span>:</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(track_name, <span class="st">':'</span>, track_count)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>similar <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">sorted</span>(similar_count.items(), key<span class="op">=</span><span class="kw">lambda</span> item: item[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">---- SIMILAR SONG COUNTS ----'</span>)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> track_name, track_count <span class="kw">in</span> similar.items():</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> track_count <span class="op">&gt;=</span> <span class="dv">5</span>:</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(track_name, <span class="st">':'</span>, track_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>---- NON SIMILAR SONG COUNTS ----
 Morgan Wallen - Last Night : 38
@@ -1478,33 +1371,32 @@ Laufey - From The Start : 12
 ---- SIMILAR SONG COUNTS ----
 Lil Durk - All My Life (feat. J. Cole) : 5
 Doechii - What It Is (Solo Version) : 5
+SZA - Kill Bill : 5
 OneRepublic - I Ain't Worried : 5
 Taylor Swift - Cruel Summer : 5
-SZA - Kill Bill : 5
 Doja Cat - Paint The Town Red : 5
 Quevedo - Columbia : 5
 Gunna - fukumean : 5
 Sam Smith - Unholy (feat. Kim Petras) : 5</code></pre>
 </div>
 </div>
+<p>As shown above, the code snippet arranges the “nonsimilar_count” dictionary in a descending sequence, followed by presenting the tracks with the highest non-similar query counts. We repeat the same process for songs that are similar from the “similar_count” dictionary.</p>
 <hr>
 </section>
 </section>
 <section id="organized-songs-in-a-playlist" class="level2">
 <h2 class="anchored" data-anchor-id="organized-songs-in-a-playlist">Organized Songs in a Playlist</h2>
-<div class="cell" data-execution_count="161">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> cluster, decomposition</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="162">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>songs <span class="op">=</span> df[[<span class="st">'name'</span>,<span class="st">'acousticness'</span>, <span class="st">'danceability'</span>, <span class="st">'energy'</span>, <span class="st">'instrumentalness'</span>, </span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>            <span class="st">'liveness'</span>, <span class="st">'speechiness'</span>, <span class="st">'tempo'</span>, <span class="st">'valence'</span>,  <span class="st">'loudness_scaled'</span>]]</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>songs.describe()</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="162">
+<p>Below, we import the Python pandas, matplotlib.pyplot, and sklearn libraries to our project. These tools help us perform various operations such as clustering, decomposition, and data visualization.</p>
+<p>We then obtain a list of songs including their name and various attributes such as acousticness, danceability, energy, instrumentalness, liveness, speechiness, tempo, valence, and loudness. Next, we gather helpful insights about these songs using the’ describe’ function.</p>
+<div class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> cluster, decomposition</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>songs <span class="op">=</span> df[[<span class="st">'name'</span>,<span class="st">'acousticness'</span>, <span class="st">'danceability'</span>, <span class="st">'energy'</span>, <span class="st">'instrumentalness'</span>, </span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">'liveness'</span>, <span class="st">'speechiness'</span>, <span class="st">'tempo'</span>, <span class="st">'valence'</span>,  <span class="st">'loudness_scaled'</span>]]</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>songs.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="45">
 <div>
 
 
@@ -1626,195 +1518,180 @@ Sam Smith - Unholy (feat. Kim Petras) : 5</code></pre>
 </div>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> songs.values[:,<span class="dv">0</span>]</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> songs.values[:,<span class="dv">1</span>:<span class="dv">10</span>]</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> cluster.AffinityPropagation(preference<span class="op">=-</span><span class="dv">200</span>)</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>kmeans.fit(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="96">
+<p>Extracting the song labels from the dataset is the first crucial step. Then, we must select the appropriate features that will serve as inputs for the Affinity Propagation clustering algorithm from the <em>scikit-learn</em> library. During the clustering process, a preference value of -200 is used to ensure optimal performance. Once the data is inputted, the algorithm is trained to achieve the desired outcome.</p>
+<div class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> songs.values[:,<span class="dv">0</span>]</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> songs.values[:,<span class="dv">1</span>:<span class="dv">10</span>]</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> cluster.AffinityPropagation(preference<span class="op">=-</span><span class="dv">200</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>kmeans.fit(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="46">
 <pre><code>AffinityPropagation(preference=-200)</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> {}</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p,n <span class="kw">in</span> <span class="bu">zip</span>(kmeans.predict(X),labels):</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> predictions.get(p):</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>        predictions[p] <span class="op">=</span> []</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    predictions[p] <span class="op">+=</span> [n]</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> predictions:</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Category"</span>,p)</span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"-----"</span>)</span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> predictions[p]:</span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(n)</span>
-<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The script below utilizes a dictionary called “predictions” to keep track of the outcomes of a comparison process between two lists: “kmeans.predict(X)” and “labels”. For each new value, a unique key is generated in the dictionary with the corresponding value from the “labels” list appended to the key’s list of values.</p>
+<p>After sorting all values into their designated keys, we proceed to display each key alongside its relevant values. The output displays each category and the corresponding songs it contains.</p>
+<div class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> {}</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p,n <span class="kw">in</span> <span class="bu">zip</span>(kmeans.predict(X),labels):</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> predictions.get(p):</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>        predictions[p] <span class="op">=</span> []</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    predictions[p] <span class="op">+=</span> [n]</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> predictions:</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Category"</span>,p)</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"-----"</span>)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> predictions[p]:</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(n)</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Category 0
+<pre><code>Category 5
 -----
-What Was I Made For? [From The Motion Picture "Barbie"]
-Kill Bill
-Attention
-LALA
-Karma
+MELTDOWN (feat. Drake)
+Dance The Night (From Barbie The Album)
+K-POP
+Calm Down (with Selena Gomez)
+Flowers
+Cupid - Twin Ver.
+CUFF IT
+Dial Drunk (with Post Malone)
 
 Category 4
 -----
-vampire
-WHERE SHE GOES
 Barbie World (with Aqua) [From Barbie The Album]
+vampire
 Super Shy
-Calling (Spider-Man: Across the Spider-Verse) (Metro Boomin &amp; Swae Lee, NAV, feat. A Boogie Wit da Hoodie)
+WHERE SHE GOES
 All My Life (feat. J. Cole)
 Moonlight
-Snooze
 I Ain't Worried
-Ella Baila Sola
-Nonsense
-Miracle (with Ellie Goulding)
+Calling (Spider-Man: Across the Spider-Verse) (Metro Boomin &amp; Swae Lee, NAV, feat. A Boogie Wit da Hoodie)
+Snooze
 Sprinter
+Miracle (with Ellie Goulding)
+Nonsense
 
-Category 5
+Category 0
 -----
 Cruel Summer
-As It Was
+Enough Is Enough
 Chemical
+As It Was
 What It Is (Solo Version)
-
-Category 3
------
-Popular (with Playboi Carti &amp; Madonna) - Music from the HBO Original Series
-Columbia
-Creepin' (with The Weeknd &amp; 21 Savage)
-Fast Car
-Until I Found You (with Em Beihold) - Em Beihold Version
-golden hour
-Say Yes To Heaven
-
-Category 6
------
-Dance The Night (From Barbie The Album)
-Flowers
-Calm Down (with Selena Gomez)
-Eyes Closed
-CUFF IT
-Mona Lisa (Spider-Man: Across the Spider-Verse)
-
-Category 2
------
-fukumean
-Seven (feat. Latto) (Explicit Ver.)
-Cupid - Twin Ver.
-People
-Baby Don't Hurt Me
-Boy's a Liar Pt. 2
-Daylight
-MOJABI GHOST
-Rush
-I'm Good (Blue)
-Here With Me
-(It Goes Like) Nanana - Edit
-Unholy (feat. Kim Petras)
 
 Category 1
 -----
+What Was I Made For? [From The Motion Picture "Barbie"]
 Die For You - Remix
+From The Start
 
-Category 7
+Category 2
+-----
+Popular (with Playboi Carti &amp; Madonna) - Music from the HBO Original Series
+Paint The Town Red
+LALA
+Columbia
+Kill Bill
+Creepin' (with The Weeknd &amp; 21 Savage)
+Fast Car
+Karma
+Until I Found You (with Em Beihold) - Em Beihold Version
+Say Yes To Heaven
+
+Category 3
+-----
+Seven (feat. Latto) (Explicit Ver.)
+(It Goes Like) Nanana - Edit
+fukumean
+Boy's a Liar Pt. 2
+Daylight
+Baby Don't Hurt Me
+People
+I'm Good (Blue)
+Rush
+Here With Me
+Unholy (feat. Kim Petras)
+
+Category 6
 -----
 Last Night
 </code></pre>
 </div>
 </div>
+<p>The script successfully categorized the playlist into 6 distinct groups based on shared features, resulting in a diverse selection of songs within each category.</p>
 <hr>
 <section id="k-means-clustering" class="level4">
 <h4 class="anchored" data-anchor-id="k-means-clustering">K Means Clustering</h4>
-<p>Using K Means clustering, I will be choosing to <a href="https://github.com/ankushbharadwaj/reorganize-my-spotify-playlist/blob/master/reorder%20my%20spotify%20playlist.ipynb">break my playlist into 3 smaller playlists</a>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>playlist_tracks <span class="op">=</span> df[[<span class="st">'artist'</span>,<span class="st">'name'</span>,<span class="st">'acousticness'</span>,<span class="st">'danceability'</span>,<span class="st">'energy'</span>,</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>                      <span class="st">'liveness'</span>, <span class="st">'instrumentalness'</span>,<span class="st">'speechiness'</span>,<span class="st">'valence'</span>]]</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(n_clusters <span class="op">=</span> <span class="dv">3</span>)</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>kmeans.fit(playlist_tracks.drop([<span class="st">'artist'</span>, <span class="st">'name'</span>], axis <span class="op">=</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="98">
+<p>Using K Means clustering, we choose to <a href="https://github.com/ankushbharadwaj/reorganize-my-spotify-playlist/blob/master/reorder%20my%20spotify%20playlist.ipynb">break the playlist into 3 smaller playlists</a>.</p>
+<p>As shown below, we employ the KMeans algorithm, obtained from the <em>sklearn.cluster</em> library, to cluster a collection of songs into distinct categories based on track features, such as their energy levels and sound qualities. Using three clusters, we apply this algorithm on the track features from the “playlist_tracks” subset of data, dropping the “artist” and “name” columns.</p>
+<div class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>playlist_tracks <span class="op">=</span> df[[<span class="st">'artist'</span>,<span class="st">'name'</span>,<span class="st">'acousticness'</span>,<span class="st">'danceability'</span>,<span class="st">'energy'</span>,</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>                      <span class="st">'liveness'</span>, <span class="st">'instrumentalness'</span>,<span class="st">'speechiness'</span>,<span class="st">'valence'</span>]]</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(n_clusters <span class="op">=</span> <span class="dv">3</span>)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>kmeans.fit(playlist_tracks.drop([<span class="st">'artist'</span>, <span class="st">'name'</span>], axis <span class="op">=</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="50">
 <pre><code>KMeans(n_clusters=3)</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span>[<span class="bu">str</span>(group) <span class="cf">for</span> group <span class="kw">in</span> kmeans.labels_], color <span class="op">=</span> <span class="st">'lightblue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="99">
+<p>Additionally, we import the “seaborn” library and use the “%matplotlib inline” command to generate useful plots displayed inline. Below, we generate a count plot with x-axis values set to a list of groups, displayed as string representations, produced by the k-means clustering algorithm.</p>
+<div class="cell" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span>[<span class="bu">str</span>(group) <span class="cf">for</span> group <span class="kw">in</span> kmeans.labels_], color <span class="op">=</span> <span class="st">'lightblue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="56">
 <pre><code>&lt;AxesSubplot:ylabel='count'&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="index_files/figure-html/cell-53-output-2.png" class="img-fluid"></p>
+<p><img src="index_files/figure-html/cell-52-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="visualizing-the-clusters" class="level4">
 <h4 class="anchored" data-anchor-id="visualizing-the-clusters">Visualizing the Clusters</h4>
 <p>Moving forward, let’s look at differences in the audio features of each group.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>scaler.fit(playlist_tracks.drop([<span class="st">'artist'</span>, <span class="st">'name'</span>], axis <span class="op">=</span> <span class="dv">1</span>))</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>scaled_data <span class="op">=</span> scaler.transform(playlist_tracks.drop([<span class="st">'artist'</span>, <span class="st">'name'</span>], axis <span class="op">=</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>scaler.fit(playlist_tracks.drop([<span class="st">'artist'</span>, <span class="st">'name'</span>], axis <span class="op">=</span> <span class="dv">1</span>))</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>scaled_data <span class="op">=</span> scaler.transform(playlist_tracks.drop([<span class="st">'artist'</span>, <span class="st">'name'</span>], axis <span class="op">=</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components <span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>pca.fit(scaled_data)</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>data_pca <span class="op">=</span> pca.transform(scaled_data)</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(data_pca[:,<span class="dv">0</span>], data_pca[:,<span class="dv">1</span>], c <span class="op">=</span> <span class="bu">list</span>(kmeans.labels_), cmap <span class="op">=</span> <span class="st">'Paired'</span>)</span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'PC1: </span><span class="sc">{:.3f}</span><span class="st">'</span>.<span class="bu">format</span>(pca.explained_variance_ratio_[<span class="dv">0</span>]), size <span class="op">=</span> <span class="dv">15</span>)</span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'PC2: </span><span class="sc">{:.3f}</span><span class="st">'</span>.<span class="bu">format</span>(pca.explained_variance_ratio_[<span class="dv">1</span>]), size <span class="op">=</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="101">
-<pre><code>Text(0, 0.5, 'PC2: 0.206')</code></pre>
+<div class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components <span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>pca.fit(scaled_data)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>data_pca <span class="op">=</span> pca.transform(scaled_data)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(data_pca[:,<span class="dv">0</span>], data_pca[:,<span class="dv">1</span>], c <span class="op">=</span> <span class="bu">list</span>(kmeans.labels_), cmap <span class="op">=</span> <span class="st">'Paired'</span>)</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'PC1: </span><span class="sc">{:.3f}</span><span class="st">'</span>.<span class="bu">format</span>(pca.explained_variance_ratio_[<span class="dv">0</span>]), size <span class="op">=</span> <span class="dv">15</span>)</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'PC2: </span><span class="sc">{:.3f}</span><span class="st">'</span>.<span class="bu">format</span>(pca.explained_variance_ratio_[<span class="dv">1</span>]), size <span class="op">=</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="53">
+<pre><code>Text(0, 0.5, 'PC2: 0.210')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-54-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="54">
+<div class="cell-output cell-output-display" data-execution_count="54">
+<pre><code>Text(0, 0.5, 'PC2: 0.210')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="index_files/figure-html/cell-55-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> sns.scatterplot(x<span class="op">=</span>data_pca[:,<span class="dv">0</span>], y<span class="op">=</span>data_pca[:,<span class="dv">1</span>], hue <span class="op">=</span> <span class="bu">list</span>(kmeans.labels_),</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>                       alpha <span class="op">=</span> <span class="fl">0.66</span>, </span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>                       <span class="co">#size = data_pca[:,1], sizes = (50,200),</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>                       palette <span class="op">=</span> <span class="st">'viridis'</span>, edgecolor <span class="op">=</span> <span class="st">'black'</span>, cmap<span class="op">=</span><span class="st">'Paired'</span>)</span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>plot.set_title(<span class="st">'PCA ANALYSIS'</span>, size <span class="op">=</span> <span class="dv">16</span>, weight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'PC1: </span><span class="sc">{:.3f}</span><span class="st">'</span>.<span class="bu">format</span>(pca.explained_variance_ratio_[<span class="dv">0</span>]), size <span class="op">=</span> <span class="dv">15</span>)</span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'PC2: </span><span class="sc">{:.3f}</span><span class="st">'</span>.<span class="bu">format</span>(pca.explained_variance_ratio_[<span class="dv">1</span>]), size <span class="op">=</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="102">
-<pre><code>Text(0, 0.5, 'PC2: 0.206')</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="index_files/figure-html/cell-56-output-2.png" class="img-fluid"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>playlist_tracks[<span class="st">'group'</span>] <span class="op">=</span> <span class="bu">list</span>(kmeans.labels_)</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>playlist_tracks <span class="op">=</span> playlist_tracks.astype({<span class="st">'group'</span>: <span class="bu">str</span>})</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> pd.DataFrame(index <span class="op">=</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">3</span>), </span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>                    columns <span class="op">=</span> <span class="bu">list</span>(playlist_tracks[playlist_tracks[<span class="st">'group'</span>] <span class="op">==</span> <span class="st">'0'</span>].describe().loc[<span class="st">'mean'</span>].index))</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>means.iloc[<span class="dv">0</span>] <span class="op">=</span> playlist_tracks[playlist_tracks[<span class="st">'group'</span>] <span class="op">==</span> <span class="st">'0'</span>].describe().loc[<span class="st">'mean'</span>]</span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>means.iloc[<span class="dv">1</span>] <span class="op">=</span> playlist_tracks[playlist_tracks[<span class="st">'group'</span>] <span class="op">==</span> <span class="st">'1'</span>].describe().loc[<span class="st">'mean'</span>]</span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>means.iloc[<span class="dv">2</span>] <span class="op">=</span> playlist_tracks[playlist_tracks[<span class="st">'group'</span>] <span class="op">==</span> <span class="st">'2'</span>].describe().loc[<span class="st">'mean'</span>]</span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>c:\Users\Hannah Luebbering\.conda\envs\cse160\lib\site-packages\ipykernel_launcher.py:1: SettingWithCopyWarning:
-
-
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="103">
+<div class="cell" data-execution_count="55">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>playlist_tracks[<span class="st">'group'</span>] <span class="op">=</span> <span class="bu">list</span>(kmeans.labels_)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>playlist_tracks <span class="op">=</span> playlist_tracks.astype({<span class="st">'group'</span>: <span class="bu">str</span>})</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>means <span class="op">=</span> pd.DataFrame(index <span class="op">=</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">3</span>), </span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>                    columns <span class="op">=</span> <span class="bu">list</span>(playlist_tracks[playlist_tracks[<span class="st">'group'</span>] <span class="op">==</span> <span class="st">'0'</span>].describe().loc[<span class="st">'mean'</span>].index))</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>means.iloc[<span class="dv">0</span>] <span class="op">=</span> playlist_tracks[playlist_tracks[<span class="st">'group'</span>] <span class="op">==</span> <span class="st">'0'</span>].describe().loc[<span class="st">'mean'</span>]</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>means.iloc[<span class="dv">1</span>] <span class="op">=</span> playlist_tracks[playlist_tracks[<span class="st">'group'</span>] <span class="op">==</span> <span class="st">'1'</span>].describe().loc[<span class="st">'mean'</span>]</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>means.iloc[<span class="dv">2</span>] <span class="op">=</span> playlist_tracks[playlist_tracks[<span class="st">'group'</span>] <span class="op">==</span> <span class="st">'2'</span>].describe().loc[<span class="st">'mean'</span>]</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="55">
 <div>
 
 
@@ -1834,33 +1711,33 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>0.211471</td>
-<td>0.738905</td>
-<td>0.710381</td>
-<td>0.182595</td>
-<td>0.009162</td>
-<td>0.089543</td>
-<td>0.760476</td>
+<td>0.08373</td>
+<td>0.627118</td>
+<td>0.718176</td>
+<td>0.249929</td>
+<td>0.048109</td>
+<td>0.076318</td>
+<td>0.323994</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>0.121411</td>
-<td>0.654211</td>
-<td>0.700368</td>
-<td>0.194463</td>
-<td>0.044511</td>
-<td>0.079705</td>
-<td>0.346205</td>
+<td>0.195778</td>
+<td>0.735087</td>
+<td>0.701</td>
+<td>0.158343</td>
+<td>0.008366</td>
+<td>0.097783</td>
+<td>0.734087</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>0.6363</td>
-<td>0.5515</td>
-<td>0.47261</td>
-<td>0.13302</td>
-<td>0.024815</td>
-<td>0.04123</td>
-<td>0.3029</td>
+<td>0.6587</td>
+<td>0.5664</td>
+<td>0.45381</td>
+<td>0.11902</td>
+<td>0.008691</td>
+<td>0.04601</td>
+<td>0.3619</td>
 </tr>
 </tbody>
 </table>
