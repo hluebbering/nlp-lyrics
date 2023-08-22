@@ -1,23 +1,46 @@
 project:
-  type: book
+  # type: book
+  type: website
   output-dir: docs
+
+toc: true
+toc-location: right
+# number-sections: true
+bibliography: static/references.bib
+
+execute: 
+  enabled: true
 
 book:
   title: "NLP Song Lyrics"
   author: "Hannah Luebbering"
-  date: "6/14/2023"
+  date: "8/10/2023"
   chapters:
     - index.ipynb
     - references.qmd
 
-bibliography: references.bib
+website:
+  navbar:
+    logo: static/images/brand_dist.png
+    title: "NLP Song Lyrics"
+    background: primary
+    pinned: true
+    right:
+      - href: index.ipynb
+        text: Home
+      - references.qmd
 
 format:
   html:
+    # code-fold: show
+    highlight-style: static/syntax/custom.theme
+    syntax-definitions: 
+    - static/syntax/python.xml
     theme: cosmo
-    css: styles.css
-  pdf:
-    documentclass: scrreprt
+    css: static/css/styles.css
+    
+  #pdf:
+  #  documentclass: scrreprt
 
 editor: visual
 
