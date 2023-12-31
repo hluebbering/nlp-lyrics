@@ -13,3 +13,8 @@ client_id = "XXX"
 client_secret  = "XXX"
 sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id, client_secret))
 ```
+
+### To Do
+- [ ] Regression Models
+- [ ] LeetCode
+- [ ] 
