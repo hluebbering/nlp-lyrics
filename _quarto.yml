@@ -1,14 +1,14 @@
 project:
-  # type: book
-  type: website
+  type: book
+  #type: website
   output-dir: docs
 
 toc: true
 toc-location: right
-# number-sections: true
-bibliography: static/references.bib
+number-sections: false
+bibliography: assets/references.bib
 
-execute: 
+execute:
   enabled: true
 
 book:
@@ -17,30 +17,31 @@ book:
   date: "8/10/2023"
   chapters:
     - index.ipynb
-    - references.qmd
+    - 01_sentiment_analysis/01_data.ipynb
+    - 01_sentiment_analysis/02_lyrics.ipynb
 
 website:
   navbar:
-    logo: static/images/brand_dist.png
+    logo: assets/images/brand_dist.png
     title: "NLP Song Lyrics"
     background: primary
     pinned: true
     right:
       - href: index.ipynb
         text: Home
-      - references.qmd
+      - 01_sentiment_analysis/01_data.ipynb
 
 format:
   html:
     # code-fold: show
-    highlight-style: static/syntax/custom.theme
-    syntax-definitions: 
-    - static/syntax/python.xml
+    highlight-style: assets/syntax/custom.theme
+    syntax-definitions:
+      - assets/syntax/python.xml
     theme: cosmo
-    css: static/css/styles.css
-    
-  #pdf:
-  #  documentclass: scrreprt
+    css: assets/css/styles.css
 
 editor: visual
+# https://www.tensorflow.org/install
+# https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment?text=I+like+you.+I+love+you
+# https://aeturrell.github.io/coding-for-economists/vis-common-plots.html
 

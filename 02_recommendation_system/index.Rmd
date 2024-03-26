@@ -1,0 +1,776 @@
+---
+title: "Spotify Playlist Analysis with Python"
+author: "Hannah Luebbering"
+date: "July 04, 2022"
+output: 
+  html_document: 
+    css: "assets/main2.css"
+    toc: yes
+    toc_float: yes
+knit: (function(inputFile, encoding) {rmarkdown::render(inputFile, encoding = encoding, output_dir = "docs") })
+bibliography: assets/references.bib
+nocite: '@*'
+csl: assets/advanced-optical-materials.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, out.width = "98%")
+library(kableExtra)
+library(knitr)
+library(ggplot2)
+library(hrbrthemes)
+library(lubridate)
+library(GGally)
+library(ggrepel)
+library(spotifyr)
+library(tidyverse)
+library(shiny)
+library(shinydashboard)
+library(magick)
+library(genius)
+library(tidytext)
+library(geniusr)
+library(dplyr)
+
+# source('scripts/data.R')
+```
+
+
+
+<script src="assets/min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="assets/pymin.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+<span class = "myhighlight">Objective.</span> Using Python, the goal of this project is to implement the k-means clustering algorithm, a technique often used in machine learning, and use it for data analysis. We write various functions using lists, sets, dictionaries, sorting, and graph data structures for computational problem-solving and analysis.
+
+
+
+
+
+
+```{r echo=FALSE}
+htmltools::includeHTML(path = 'assets/covers.html')
+```
+
+
+
+
+
+
+
+
+
+
+-------------------------
+
+
+
+## Part 1. Spotify API Data
+
+
+Spotify is a popular audio streaming platform with an extensive music database. The Spotify API allows developers to access the platform's data providing global insights into music listening habits [@WebAPIReference2022]. Using the API requires an initial setup: we must register as a Spotify developer, create an app, modify the dashboard redirect URI, and store the client ID and secret. After completing these steps, we have access to the Spotify API and all its features. 
+
+
+
+### Get Playlist Data from API
+
+
+First, we create a Client Credentials Flow Manager used in server-to-server authentication by passing the necessary parameters to the [Spotify OAuth](https://github.com/spotipy-dev/spotipy/blob/master/spotipy/oauth2.py#L261) class [@WelcomeSpotipySpotipy2022]. We provide a client id and client secret to the constructor of this authorization flow, which does not require user interaction.
+
+
+
+
+```python
+# Set client id and client secret
+client_id = 'xxx'
+client_secret = 'xxx'
+
+# Spotify authentication
+cc_manager = SpotifyClientCredentials(client_id, client_secret)
+sp = spotipy.Spotify(client_credentials_manager = cc_manager)
+```
+
+
+Now we can get the full details of the tracks of a playlist based on a playlist ID, URI, or URL. Choose a specific playlist to analyze by copying the URL from the Spotify Player interface. Using that link, the following code uses the playlist_tracks method to retrieve a list of IDs and corresponding artists for each track from the playlist. 
+
+
+```python
+playlist_URI = playlist_link.split("/")[-1].split("?")[0]
+# Iterate over list of playlist tracks
+for i in sp.playlist_tracks(playlist_URI)["items"]:
+    track_ids.append(i["track"]["id"])  # Extract song id
+    artist_ids.append(i["track"]["artists"][0]["uri"])  # Extract artist id
+```
+
+
+
+
+
+
+Then, we [write a function](https://github.com/hluebbering/playlist_report/blob/main/scripts/spotify_data.py) that takes the playlist data from the API and gets the metadata and audio characteristics of each track. Specifically, the function reads the query results for a playlist and returns the track name, track ID, artist, album, duration, popularity, artist popularity, artist genre, and audio characteristics for each track.
+
+
+
+
+
+
+
+
+
+
+
+#### Spotify Audio Features {.tabset .tabset-fade .tabset-pills}
+***
+Spotify’s audio features are precalculated measures of both low-level and high-level perceptual music qualities that help classify a track. A quick explanation of each feature is shown below. More information on how to interpret these audio features is located at [Spotify’s API documentation](https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-audio-features).
+
+
+
+##### Track Metadata
+
+
+
+```{r echo=FALSE}
+htmltools::includeHTML(path = 'assets/lists1.html')
+```
+
+
+##### Audio Features
+
+
+- `acousticness`: A confidence measure of whether the track is acoustic.
+- `danceability`: Suitability for dancing based on tempo, rhythm, beat, and regularity.
+- `energy`: A perceptual measure of intensity and activity.
+- `instrumentalness`: Predicts whether a track contains no vocals.
+- `liveness`: Probability that the track was performed live.
+- `loudness`: Overall loudness of a track in decibels (dB).
+- `speechiness`: Detects the presence of spoken words in a track.
+- `tempo`: Estimated pace of a track in beats per minute (BPM).
+- `valence`: A measure describing the musical positiveness.
+
+
+
+
+
+----
+
+
+### Playlist Data Preview
+
+
+The following code loops through each track ID in the playlist and extracts the song information by calling the function we created. From there, we can create a dataframe by passing in the returned data using the pandas package. 
+
+
+```python
+# Loop over track ids
+tracks = [playlist_features(track_ids[i], artist_ids[i], playlist_ids[i])
+    for i in range(len(track_ids))]
+```
+
+
+
+```{r}
+df <- read.csv('scripts/data/my_playlist.csv')
+my_cols <- c('name','album','artist','release_date','length','popularity','artist_pop','artist_genres','acousticness','danceability','energy','instrumentalness','liveness','loudness','speechiness','tempo','valence')
+df <- dplyr::select(df, my_cols)
+
+library(DT)
+datatable(head(df, 10), rownames = FALSE, options = list(scrollX=T, pageLength=2))
+```
+
+
+
+
+
+
+
+
+
+
+```{r}
+library(reticulate)
+
+```
+
+
+
+```{python}
+import csv
+import time
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+from operator import index
+
+# Set client id and client secret
+client_id = '4cf3afdca2d74dc48af9999b1b7c9c61'
+client_secret = 'f6ca08ad37bb41a0afab5ca1dc74b208'
+# Spotify authentication token
+client_credentials_manager = SpotifyClientCredentials(client_id, client_secret)
+sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
+
+# Read csv file into pandas dataframe
+df = pd.read_csv("scripts/data/my_playlist.csv", encoding_errors="ignore", index_col=0, header=0)
+
+
+# Get a song string search
+def getMusicName(elem):
+    return f"{elem['artist']} - {elem['name']}"
+
+
+# K-nearest neighbors algorithm
+def knnQuery(queryPoint, arrCharactPoints, k):
+    queryVals = queryPoint.tolist()
+    distVals = []
+
+    # Copy of dataframe indices and data
+    tmp = arrCharactPoints.copy(deep=True)
+    for index, row in tmp.iterrows():
+        feat = row.values.tolist()
+
+        # Calculate sum of squared differences
+        ssd = sum(abs(feat[i] - queryVals[i]) ** 2 for i in range(len(queryVals)))
+
+        # Get euclidean distance
+        distVals.append(ssd**0.5)
+
+    tmp["distance"] = distVals
+    tmp = tmp.sort_values("distance")
+
+    # K closest and furthest points
+    return tmp.head(k).index, tmp.tail(k).index
+
+
+# Execute KNN removing the query point
+def querySimilars(df, columns, idx, func, param):
+    arr = df[columns].copy(deep=True)
+    queryPoint = arr.loc[idx]
+    arr = arr.drop([idx])
+    return func(queryPoint, arr, param)
+
+```
+
+
+
+
+
+
+
+
+
+-------------------------
+
+
+## Part 2. Similar Artists
+
+
+First, we want to find the most frequently occurring artist in a given playlist. We use the value_counts function to get a sequence containing counts of unique values sorted in descending order. 
+
+
+```{python, echo=TRUE}
+# Count distinct values in column
+tallyArtists = df.value_counts(["artist", "artist_id"]).reset_index(name='counts')
+topArtist = tallyArtists['artist_id'][1]
+```
+
+
+
+```{python}
+df['year'] = pd.DatetimeIndex(df['release_date']).year
+tallyYears = df.value_counts(["year"]).reset_index(name='counts')
+tallyPop = df.value_counts(["popularity"]).reset_index(name='counts')
+```
+
+
+
+      
+```{r}
+
+my_pop <- py$tallyPop
+my_pop_plot <- ggplot(data = my_pop, mapping = aes(x = popularity, y = counts)) + 
+  geom_smooth(alpha=0.95, fill="#eeeeee", color="#ff99b1") +
+  geom_col(fill="#eeeeee", alpha=0.75, color = "#a9a9a9", stroke=0.1) + theme_ipsum_rc(axis_text_size = 11, plot_margin = ggplot2::margin(t = 0,l = 0,b = 2,r = 40),plot_title_size = 13) + ylab("popularity") + xlab("# of songs") + ggtitle('Plot 1. Popularity Distribution')
+
+my_years <- py$tallyYears
+years_plot <- ggplot(data = my_years, mapping = aes(x = year, y = counts)) +
+  geom_col(alpha=0.95,fill="#eeeeee",color="#a9a9a9", stroke=0.25) +
+  geom_smooth(alpha=0.5, color="#030404", fill="#f59b23") + 
+  theme_ipsum_rc(axis_text_size = 11, plot_margin = ggplot2::margin(t = 0,r = 0,b = 2,l = 40),plot_title_size = 13) + ylab("# of songs") + xlab("year") + ggtitle('Plot 2. Track Release Date Distribution')
+
+my_artists <- py$tallyArtists %>% head(8)
+artists_plot <- ggplot(data = my_artists, mapping = aes(y = artist, x = counts)) +
+  geom_col(fill="#fc65a2", alpha = 0.9, color = "#030404", stroke = 0.5) + theme_ipsum_rc(axis_text_size = 11,plot_margin = ggplot2::margin(t=20,0,0,0),plot_title_size = 13) + ylab(NULL) + xlab("# of songs") + ggtitle('Plot 3. Artist Distribution (Top 8)')
+```
+
+
+
+```{r}
+library(patchwork)
+
+ragg::agg_png(filename = "assets/static/mypatchwork1.png", width = 9285, height = 5695, units = "px", res = 900)
+(my_pop_plot | years_plot) / artists_plot
+invisible(dev.off())
+knitr::include_graphics("assets/static/mypatchwork1.png")
+```
+
+
+
+
+
+
+
+
+I can retrieve artist and artist-related data using the following code, passing the artist ID to the artist and artist-related artist functions under the spotipy package. The returned list of similar artists is sorted by similarity score based on the listener data [@webbVisualizingRapCommunities2020].
+
+
+
+
+```{python, echo=TRUE}
+a = sp.artist(topArtist)
+ra = sp.artist_related_artists(topArtist)
+```
+
+
+
+
+
+```{python}
+# dictionary of lists 
+links_dict = {"source_name":[],"source_id":[],"target_name":[],"target_id":[]};
+for artist in ra['artists']:
+    links_dict["source_name"].append(a['name'])
+    links_dict["source_id"].append(a['id'])
+    links_dict["target_name"].append(artist['name'])
+    links_dict["target_id"].append(artist['id'])
+```
+
+
+
+Below is a sample of the result when we query Spotify for the most similar artists to the playlist's top artist, creating a list that holds all of the artist source ids and target ids. We retrieve similar data for the nodes of the connection graph, creating a list that holds information for each specified artist.
+
+
+
+
+```{r}
+library(DT)
+datatable(py$links_dict%>% data.frame() %>% head(10), rownames = FALSE, options = list(pageLength = 3, scrollX=T, dom = 't') )
+
+
+# py$links_dict %>% data.frame() %>% head(3) %>% kable() %>% kable_styling() %>%
+#   scroll_box(width = "100%")
+```
+
+
+
+\ 
+
+
+Let’s see how things look when we pull in the full dataset, with each of the artist's top most similar artists and each of their most similar artists. The following visualization is based on the [Spotify Similiar Artists API](https://unboxed-analytics.com/data-technology/visualizing-rap-communities-wtih-python-spotifys-api/) article and created with flourish studio.
+
+
+
+
+<iframe src='https://flo.uri.sh/visualisation/12278724/embed' title='Interactive or visual content' class='flourish-embed-iframe' frameborder='0' scrolling='no' style='width:100%;height:400px;' sandbox='allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/12278724/?utm_source=embed&utm_campaign=visualisation/12278724' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
+
+
+
+-------------------------
+
+
+
+## Part 3. Track Similarity Search
+
+
+
+<span class = "myhighlight3">Objective.</span> Design and implement a k-means clustering algorithm in Python.
+
+
+K-means clustering is a popular machine learning and data mining algorithm that discovers possible clusters within a dataset. Finding these clusters often reveals meaningful information from the data distribution. Below, we create a query to retrieve similar elements based on the k-Nearest Neighbors (KNN) using the Euclidean distance.
+
+
+
+
+
+### Definitions {.tabset .tabset-fade .tabset-pills}
+***
+As with many machine learning techniques, this algorithm consists of a vast list of terminology which we define in a bit more detail below.
+
+#### Definition 1.
+
+<div class = "deff">
+<span class = "myhighlight4">Definition 1. Distance</span> The Euclidean distance is a way to calculate how close a data point is to a centroid using the Pythagorean theorem. For two points $a = \left[a_1, a_2, \ldots, a_n\right]$ and $b = \left[b_1, b_2, \ldots, b_n\right]$ with dimension $n$, we define the euclidean distance between both points as 
+
+$$
+\small
+\begin{align}
+\mathbf{\color{darkmagenta} D}(a, b) &= 
+\sqrt{\left(a_1 - b_1\right)^2 + 
+\left(a_2 - b_2\right)^2 + 
+\ldots + \left(a_n - b_n\right)^2}
+\end{align}
+$$
+
+</div>
+
+
+
+
+#### Definition 2.
+
+<div class = "deff">
+<span class = "myhighlight4">Definition 2. Clusters</span> A cluster is a collection of grouped points. For k-means, every point is part of a cluster. As the algorithm progresses and the centroids shift, points might change which cluster they're grouped in, though the point itself does not move. 
+</div>
+
+
+#### Definition 3.
+
+<div class = "deff">
+<span class = "myhighlight4">Definition 3. Centroids</span> A centroid is the center of a cluster calculated by the average location of all the cluster points in each dimension. So if we have three $n$-dimensional points $a$, $b$, and $c$, we define the average as
+
+$$
+\small
+\mathrm{average} = 
+\left[
+\tfrac{a_1 + b_1 + c_1}{3}, \tfrac{a_2 + b_2 + c_2}{3}, \tfrac{a_3 + b_3 + c_3}{3}
+\right]
+$$
+
+</div>
+
+
+
+#### Definition 4.
+
+<div class = "deff">
+<span class = "myhighlight4">Definition 4. Convergence</span> An algorithm converges if the locations of all centroids do not change much between two iterations, e.g. within some threshold of $1 \times 10^{-5}$.
+</div>
+
+
+-------------------
+
+
+
+
+
+
+### KNN Algorithm
+
+
+
+The KNN algorithm [@leonardomauroSpotifySongsSimilarity2020] searches for $k$ similar elements based on a query point at the center within a predefined radius. The Euclidean distance between two points is the length of the line segment between the two points. In this sense, the closer the distance is to 0, the more similar the songs are.
+
+
+
+<div class = "roundedlist">
+K-means clustering works in four steps:
+
+1. Initialize some number $k$ of cluster centers, also called `centroids`.
+2. For each data point in the dataset, assign it to the closest centroid.
+3. Update the locations of the centroids to be the average of all the points assigned to that cluster.
+4. Repeat steps 2 and 3 until convergence.
+
+</div>
+
+
+Note that the actual data points do not change. Only the locations of the centroids change with each iteration. And as the centroids move, the set containing the data points closest to each centroid alters.
+
+
+
+
+### KNN Query Example
+
+
+
+Our function allows us to create personalized query points and modify the columns to explore other options. For example, the following code selects a specific set of song attributes and then searches for the $k$ highest values of these attributes set equal to one. Let's search for  $k=3$  similar songs to a query point $\textrm{songIndex} = 6$. 
+
+
+```{python, echo=TRUE}
+# Select song and column attributes
+query_point = 4
+columns = ['acousticness','danceability','energy','instrumentalness','liveness','speechiness','valence']
+# Set parameters and run query
+func, param = knnQuery, 3
+response = querySimilars(df, columns, query_point, func, param)
+```
+
+
+```{python}
+print('---- Query Point ----')
+print(getMusicName(df.loc[query_point]))
+
+print('---- k = 3 similar songs ----')
+for track_index in response[0]:
+    track_name = getMusicName(df.loc[track_index])
+    print(track_name)
+
+print('---- k = 3 nonsimilar songs ----')
+for track_index in response[1]:
+    track_name = getMusicName(df.loc[track_index])
+    print(track_name)
+```
+
+
+\ 
+
+
+
+#### KNN Query Example (Extended) {.tabset .tabset-fade .tabset-pills}
+***
+The code below implements the same idea as above, but queries each track in a given playlist instead of a single defined query point.
+
+
+
+##### Code 
+
+
+```{python, echo=TRUE}
+similar_count = {} # Similar songs count
+nonsimilar_count = {} # Non-similar songs count
+for track_index in df.index:
+    response = querySimilars(df, columns, track_index, func, param)
+    for similar_index in response[0]: # Get similar songs
+        track = getMusicName(df.loc[similar_index])
+        if track in similar_count:
+            similar_count[track] += 1
+        else:
+            similar_count[track] = 1
+    for nonsimilar_index in response[1]: # Get non-similar songs
+        track = getMusicName(df.loc[nonsimilar_index])
+        if track in nonsimilar_count:
+            nonsimilar_count[track] += 1
+        else:
+            nonsimilar_count[track] = 1
+```
+
+
+
+##### Non-Similar Songs Count
+
+
+
+```{python}
+nonsimilar = dict(sorted(nonsimilar_count.items(), key=lambda item: item[1], reverse=True))
+
+print('---- NON-SIMILAR SONGS COUNT ----')
+for track_name, track_count in nonsimilar.items():
+    if track_count >= 10:
+        print(track_name, ':', track_count)
+```
+
+
+##### Similar Songs Count
+
+
+
+```{python}
+similar = dict(sorted(similar_count.items(), key=lambda item: item[1], reverse=True))
+
+print('---- SIMILAR SONGS COUNT ----')
+for track_name, track_count in similar.items():
+    if track_count >= 2:
+        print(track_name, ':', track_count)
+```
+
+
+
+
+
+
+-------------------------
+
+
+## Part 4. K Means Clustering
+
+
+Next, we implement the K-Means clustering algorithm using the Scikit-Learn library to break down a playlist into several smaller playlists. The unsupervised learning algorithm divides similar data points into k groups by computing the distance to the centroid. 
+
+
+The first step is to define an appropriate predefined number (k) of clusters. We use the Elbow Method to determine the optimal k, as shown below [@chingisoinarSeparateYourSaved2020].
+
+
+```{python,include=FALSE}
+my_df = pd.read_csv('scripts/data/my_playlist.csv', encoding_errors='ignore', index_col=0, header=0)
+X = my_df[['acousticness', 'danceability', 'liveness', 'energy','valence', 'instrumentalness', 'speechiness']]
+features = X.values
+
+from sklearn.cluster import KMeans
+ssd = [] # Sum of squared distances
+for k in range(1,12):
+    model = KMeans(n_clusters = k, init="k-means++")
+    model = model.fit(features)
+    ssd.append(model.inertia_)
+```
+
+
+
+```{python, echo=TRUE, eval=FALSE}
+X = df[['acousticness', 'danceability', 'liveness', 'energy','valence', 'instrumentalness', 'speechiness']]
+features = X.values
+
+from sklearn.cluster import KMeans
+ssd = [] # Sum of squared distances
+for k in range(1,12):
+    model = KMeans(n_clusters = k, init="k-means++")
+    model = model.fit(features)
+    ssd.append(model.inertia_)
+```
+
+
+
+
+
+```{r,out.width="80%"}
+elbowdf <- data.frame("ssd" = py$ssd,"x" = c(1:11))
+elbow_plot <- ggplot(data = elbowdf, mapping = aes(x=x,y=ssd**2)) +
+  geom_point(fill="#f859ca",pch = 21, size = 3.25, alpha = 0.9, color = "#030404", stroke = 0.5) + geom_line() +
+  theme_ipsum_rc(axis_text_size = 10) +
+  xlab("# clusters") + scale_x_continuous(n.breaks = 10) +
+  ylab("sum of squared distances") + scale_y_continuous(n.breaks = 10)
+
+
+
+ragg::agg_png(filename = "assets/static/elbow_plot.png", width = 7085, height = 4295, units = "px", res = 900)
+elbow_plot
+invisible(dev.off())
+knitr::include_graphics("assets/static/elbow_plot.png")
+```
+
+
+Thus, we tune the clustering algorithm by running K-Means for a range of k values, obtaining the above figure. It looks like a value of 3 is optimal for this case. Next, we call the K-Means function and set the k value to 3 clusters.
+
+
+
+
+
+```{python, include=FALSE}
+from sklearn.cluster import KMeans
+model = KMeans(n_clusters = 3, init="k-means++")
+model = model.fit(features)
+my_df['cluster'] = list(model.labels_)
+```
+
+
+
+
+
+
+
+
+
+
+
+Considering that there are seven different audio features for the clustering task, we use principal component analysis (PCA) to reduce the dimensionality of the data into a more easily visualized set of variables. 
+
+
+
+```{python, echo=TRUE}
+from sklearn.decomposition import PCA
+pca = PCA(n_components = 2)
+pca_result = pca.fit_transform(features)
+```
+
+
+
+In the above code, we define a PCA instance to find two principal components determined from the features of the data. From there, we visualize the resulting clusters and explore the variation. The figure below shows our 3 clusters represented in 2-dimensional space.
+
+
+
+
+```{r,echo=FALSE,eval=TRUE}
+cluster_labels = c()
+for (i in py$model$labels_) {
+  cluster_labels = append(x = cluster_labels, values = glue::glue("Group ", i+1))}
+x <- py$pca_result
+pcadf <- data.frame("x1" = x[,1], "x2" = x[,2], "labels"=cluster_labels)
+
+
+data_points_plot <- ggplot(data = pcadf, mapping = aes(x = x1, y = x2, label = cluster_labels)) +
+  geom_point(mapping = aes(fill = cluster_labels), pch = 21, size = 3.85, alpha = 0.85, color = "#030404", stroke = 0.65) +
+  scale_fill_manual(values = c(
+    "black", "#cae278", "#ff99b1",
+    "#F0BE43", "#c757c7", "#f859ca")) +
+  theme_ipsum_rc(axis_text_size = 10) +
+  xlab(glue::glue("PCA ", round(py$pca$explained_variance_ratio_[1],digits = 5))) +
+  ylab(glue::glue("PCA ", round(py$pca$explained_variance_ratio_[2],digits = 5)))
+
+
+ragg::agg_png(filename = "assets/static/data_points_plot.png", width = 7085, height = 4295, units = "px", res = 900)
+data_points_plot
+invisible(dev.off())
+knitr::include_graphics("assets/static/data_points_plot.png")
+```
+
+
+
+
+
+
+
+
+
+
+```{python}
+my_df = my_df[['acousticness', 'danceability', 'energy', 'instrumentalness', 'liveness', 'speechiness', 'valence','cluster']]
+my_df = my_df.astype({'cluster': str})
+
+means = pd.DataFrame(index = range(0,3), columns = list(my_df[my_df['cluster'] == '0'].describe().loc['mean'].index))
+
+means.iloc[0] = my_df[my_df['cluster'] == '0'].describe().loc['mean']
+means.iloc[1] = my_df[my_df['cluster'] == '1'].describe().loc['mean']
+means.iloc[2] = my_df[my_df['cluster'] == '2'].describe().loc['mean']
+
+```
+
+
+
+
+### Results
+
+
+```{r}
+# py$means %>% kable(row.names = 1:nrow(py$means)) %>%
+#   kable_styling(full_width = FALSE) %>%
+#   scroll_box(width = "100%")
+
+
+datatable(py$means, rownames =  c("Cluster 1", "Cluster 2", "Cluster 3"), options = list(pageLength = 3, scrollX=T, dom = 't') ) %>% formatRound(columns=1:7, digits=3) %>% formatRound(columns=4, digits=5)
+
+```
+
+
+
+All the clusters have values below $0.33$, indicating that the songs most likely represent music and other non-speech-like tracks.
+
+<span class="myhighlight3" style="background: #030404 !important; color: white !important; text-shadow: 0.25px 0.25px 0.25px hsl(0deg 0% 45% / 85%), 0.35px 0.35px 0.35px hsl(0deg 0% 75% / 85%), 0 -1.1px 0px hsl(230deg 20% 60% / 8%), 0 1.2px 0 hsl(0deg 0% 31%);">Cluster 1</span> has the highest energy and valence, indicating that these tracks are faster-paced, louder, and more positive (e.g., happy, cheerful, euphoric) than the other clusters. 
+
+<span class="myhighlight3" style="background: #d6e491 !important;">Cluster 2</span> has the highest acousticness, with a mean value of $0.539$ over all the cluster's songs. Cluster 2 is also higher in danceability, indicating tracks with a faster tempo and beat intensity. 
+
+<span class="myhighlight3" style="background: #ff99b1 !important;">Cluster 3</span> appears to be the lowest valence, with a mean of $0.2303$, indicating more negative trajectories (e.g., sadness, frustration, anger). 
+
+
+-------------------------
+
+
+## Conclusion
+
+
+Through the use of machine learning and collaborative filtering techniques, we can analyze a playlist to gain insights into listening preferences and habits, and recommend music that aligns with similar tastes. For example, if a playlist contains several songs from a particular artist, the algorithm might suggest similar artists based on the listening habits of other users with similar music preferences.
+
+
+### Next Steps 
+
+To move forward with this project, we plan to incorporate **Natural Language Processing** (NLP) to track current music trends. NLP can search for mentions of a specific artist or song, then analyze those mentions to identify trends in popular culture. Using cutting-edge technology, NLP can identify popular keywords and phrases related to a particular song and provide recommendations based on similar terms. Ultimately, NLP can organize songs into groups and assign descriptive adjectives for each track, further classifying individual songs.
+
+
+
+-------------------------
+
+
+## References
+
+
