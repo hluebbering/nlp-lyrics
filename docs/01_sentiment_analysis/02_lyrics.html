@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>NLP Song Lyrics - 3&nbsp; Natural Language Processing</title>
+<title>NLP Song Lyrics - Natural Language Processing</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../01_sentiment_analysis/03_eda.html" rel="next">
 <link href="../01_sentiment_analysis/01_data.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -115,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01_sentiment_analysis/02_lyrics.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01_sentiment_analysis/02_lyrics.html"><span class="chapter-title">Natural Language Processing</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -142,20 +143,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Natural Language Processing Song Lyrics</span></span></a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01_sentiment_analysis/01_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Extracting Spotify Data</span></span></a>
+  <a href="../01_sentiment_analysis/01_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extracting Spotify Data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01_sentiment_analysis/02_lyrics.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+  <a href="../01_sentiment_analysis/02_lyrics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01_sentiment_analysis/03_eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">EDA</span></a>
   </div>
 </li>
     </ul>
@@ -168,10 +171,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#scraping-the-web" id="toc-scraping-the-web" class="nav-link active" data-scroll-target="#scraping-the-web"><span class="header-section-number">3.0.1</span> Scraping the Web</a></li>
-  <li><a href="#pre-processing-text-data" id="toc-pre-processing-text-data" class="nav-link" data-scroll-target="#pre-processing-text-data"><span class="header-section-number">3.0.2</span> Pre-Processing Text Data</a></li>
-  <li><a href="#sentiment-analysis" id="toc-sentiment-analysis" class="nav-link" data-scroll-target="#sentiment-analysis"><span class="header-section-number">3.1</span> Sentiment Analysis</a></li>
-  <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together"><span class="header-section-number">3.2</span> Putting it All Together</a></li>
+  <li><a href="#scraping-the-web" id="toc-scraping-the-web" class="nav-link active" data-scroll-target="#scraping-the-web">Scraping the Web</a></li>
+  <li><a href="#pre-processing-text-data" id="toc-pre-processing-text-data" class="nav-link" data-scroll-target="#pre-processing-text-data">Pre-Processing Text Data</a></li>
+  <li><a href="#sentiment-analysis" id="toc-sentiment-analysis" class="nav-link" data-scroll-target="#sentiment-analysis">Sentiment Analysis</a></li>
+  <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together">Putting it All Together</a></li>
   </ul>
 </nav>
     </div>
@@ -180,7 +183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></h1>
+<h1 class="title"><span class="chapter-title">Natural Language Processing</span></h1>
 </div>
 
 
@@ -209,8 +212,8 @@ IProgress not found. Please update jupyter and ipywidgets. See https://ipywidget
 </code></pre>
 </div>
 </div>
-<section id="scraping-the-web" class="level3" data-number="3.0.1">
-<h3 data-number="3.0.1" class="anchored" data-anchor-id="scraping-the-web"><span class="header-section-number">3.0.1</span> Scraping the Web</h3>
+<section id="scraping-the-web" class="level3">
+<h3 class="anchored" data-anchor-id="scraping-the-web">Scraping the Web</h3>
 <p>To get started, the script below imports <code>lyricsgenius</code>, a fundamental package libary allowing for web scraping of the Genius Lyrics website to retrieve the lyrics of any given song. Through the initialization of the <code>genius</code> variable, one can access the Genius API and retrieve the lyrics of any given song, such as “Too Many Nights” by Metro Boomin.</p>
 <div id="cell-3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> lyricsgenius</span>
@@ -235,9 +238,9 @@ Done.</code></pre>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> song_lyrics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="pre-processing-text-data" class="level3" data-number="3.0.2">
-<h3 data-number="3.0.2" class="anchored" data-anchor-id="pre-processing-text-data"><span class="header-section-number">3.0.2</span> Pre-Processing Text Data</h3>
-<p>The following Python script contains various functions optimized for efficiently cleaning song lyrics, which is a crucial step towards building a sentiment classifier. The text pre-processing procedure involves the following main steps.</p>
+<section id="pre-processing-text-data" class="level3">
+<h3 class="anchored" data-anchor-id="pre-processing-text-data">Pre-Processing Text Data</h3>
+<p>Using the genius package, we define a function to fetch the lyrics of a song given the track name and artist. Once retrieved, the next step is to pre-process the textual data. This involves a cleansing process to eliminate profanity and patterns that may hinder the overall readability. The Python script contains the following steps:</p>
 <ol type="1">
 <li>Language Detection</li>
 <li>Expanding Contractions</li>
@@ -296,9 +299,9 @@ Done.</code></pre>
 <span id="annotated-cell-6-14"><a href="#annotated-cell-6-14" aria-hidden="true" tabindex="-1"></a>    strencode <span class="op">=</span> [i.encode(<span class="st">"ascii"</span>, <span class="st">"ignore"</span>) <span class="cf">for</span> i <span class="kw">in</span> tokenized]  <span class="co"># Encode() method</span></span>
 <span id="annotated-cell-6-15"><a href="#annotated-cell-6-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [i.decode() <span class="cf">for</span> i <span class="kw">in</span> strencode]  <span class="co"># Decode() method</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="removing-stop-words" class="level4" data-number="3.0.2.1">
-<h4 data-number="3.0.2.1" class="anchored" data-anchor-id="removing-stop-words"><span class="header-section-number">3.0.2.1</span> Removing Stop Words</h4>
-<p>The code below aims to eliminate stopwords from lyrics utilizing the <strong>Natural Language Toolkit</strong> (NLTK) library and its <code>WordNetLemmatizer</code> tool. By eliminating frequently occurring words like “the,” “and,” or “of,” the resulting text becomes more compact and meaningful. Without the distraction of stopwords, the analysis can more effectively capture the essence of the lyrics and the underlying conveyed message.</p>
+<section id="removing-stop-words" class="level4">
+<h4 class="anchored" data-anchor-id="removing-stop-words">Removing Stop Words</h4>
+<p>We employ the Natural Language Toolkit (<em>NLTK</em>) library and its <code>WordNetLemmatizer</code> tool to filter out stopwords. By removing frequently used words like “the,” “and,” or “of,” the resulting text becomes more concise, enabling a more thorough examination of the lyrics and their underlying message.</p>
 <div id="cell-15" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="do">remove_stopwords_lyrics</span>(clean_lyrics_decode):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    stopword <span class="op">=</span> stopwords.words(<span class="st">"english"</span>)</span>
@@ -306,8 +309,8 @@ Done.</code></pre>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [word <span class="cf">for</span> word <span class="kw">in</span> clean_lyrics_decode <span class="cf">if</span> word <span class="kw">not</span> <span class="kw">in</span> stopword]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="lemmatization" class="level4" data-number="3.0.2.2">
-<h4 data-number="3.0.2.2" class="anchored" data-anchor-id="lemmatization"><span class="header-section-number">3.0.2.2</span> Lemmatization</h4>
+<section id="lemmatization" class="level4">
+<h4 class="anchored" data-anchor-id="lemmatization">Lemmatization</h4>
 <p>Next, we define a function to perform lemmatization on a set of words using the <code>WordNetLemmatizer</code> class from the NLTK library. Lemmatization helps to standardize words and reduce their complexity by reducing words to their root or base form. Our function specifically targets verbs and transforms different variations of the same verb into its most basic form.</p>
 <div id="cell-17" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> stopwords, wordnet</span>
@@ -339,8 +342,8 @@ Done.</code></pre>
 <hr>
 </section>
 </section>
-<section id="sentiment-analysis" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="sentiment-analysis"><span class="header-section-number">3.1</span> Sentiment Analysis</h2>
+<section id="sentiment-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="sentiment-analysis">Sentiment Analysis</h2>
 <p>Subsequently, the process involves the implementation of pipeline classes to carry out predictions using models accessible in the Hub. The code imports and employs multiple transformer models specifically designed for text classification and sentiment analysis. Specifically, the following procedure creates three distinct pipelines, each equipped with different models that facilitate the assessment of emotions and sentiment in textual content.</p>
 <div id="cell-22" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> transformers</span>
@@ -375,8 +378,8 @@ Using a pipeline without specifying a model name and revision in production is n
 <p>If the lyric sequence contains more than 512 tokens, it will trigger an error message indicating an exception encountered in the ‘embeddings’ layer. However, we have implemented measures to properly manage lyric sequences that exceed 512 words in the function mentioned above.</p>
 <hr>
 </section>
-<section id="putting-it-all-together" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="putting-it-all-together"><span class="header-section-number">3.2</span> Putting it All Together</h2>
+<section id="putting-it-all-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-all-together">Putting it All Together</h2>
 <p>To summarize, the code efficiently collects data and performs text analysis on every song in a playlist. Specifically, it systematically processes a list of tracks and corresponding artists while simultaneously conducting a thorough cleaning procedure on the lyrics. The cleaning process involves removing all nonessential characters, resulting in a more precise depiction of the song’s content. The outcome is a comprehensive frequency analysis of each word in a song’s lyrics, providing deeper insights into the overall conveyed message.</p>
 <p>Additionally, the program computes a sentiment score for each song based on the lyrics, indicating whether the lyrics are positive, negative, or neutral. It also collects information about the song and artist, such as the release date, length, popularity, and genre. Finally, the program compiles all this information into a dataframe for further analysis.</p>
 <div id="cell-27" class="cell" data-tags="[&quot;hide-output&quot;]" data-execution_count="14">
@@ -832,10 +835,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../01_sentiment_analysis/01_data.html" class="pagination-link" aria-label="Extracting Spotify Data">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Extracting Spotify Data</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Extracting Spotify Data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../01_sentiment_analysis/03_eda.html" class="pagination-link" aria-label="EDA">
+        <span class="nav-page-text"><span class="chapter-title">EDA</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

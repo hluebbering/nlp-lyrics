@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@200;300;400;600;700;900&display=swap');
+
 /* css styles */
 tr.header {
     padding: 20px 15px;
@@ -7,6 +12,10 @@ tr.header {
     color: #2c2e30;
     color: #fff;
     text-transform: uppercase;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 1.125px;
+    font-family: 'Roboto';
 }
 
 .table>thead {
@@ -25,7 +34,7 @@ tr.header {
 
 p {
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.4;
     color: #333;
 }
@@ -49,6 +58,25 @@ h1.title {
     -webkit-background-clip: text;
     background-clip: text;
     background-size: contain;
+}
+
+
+#overview h1 {
+    display: inline-flex;
+    margin-top: 8px;
+    margin-bottom: 14px;
+}
+
+#overview h1::before {
+    content: "";
+    background-image: radial-gradient(circle, #ccc 0, #ccc 10%, rgba(10, 10, 10, 0.2) 0, rgba(10, 10, 10, 0.2) 11.5%, rgba(255, 255, 255, 0.25) 0, rgba(255, 255, 255, 0.25) 17%, rgba(10, 10, 10, 0.05) 0, rgba(10, 10, 10, 0.05) 17.5%, rgba(255, 255, 255, 0.25) 0, rgba(255, 255, 255, 0.25) 20%, rgba(10, 10, 10, 0.05) 0, rgba(10, 10, 10, 0.05) 20.5%, rgba(255, 255, 255, 0.25) 0, rgba(255, 255, 255, 0.25) 25%, rgba(10, 10, 10, 0.2) 0, rgba(10, 10, 10, 0.2) 30%, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0) 69.5%, rgba(10, 10, 10, 0.15) 0, rgba(10, 10, 10, 0.2) 100%), conic-gradient(#ffffff, #f5e1f6, #ffefd1, #fefec5, #c8c8c8, #8a8a8a, #605859, #704864, #3b49ac, #31c8de, #6cd399, #d0d0d0, #fcfcfc, #ffffff, #ffffff, #eafae9, #a3ffef, #98bcea, #9997a4, #868686, #767676, #f0ed5b, #e2a3a7, #d4d4d4, #ffffff, #ffffff);
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin: auto;
+    position: relative;
+    margin-right: 3px;
 }
 
 
@@ -84,4 +112,229 @@ h4.anchored {
     opacity: 0.6;
     color: #5a5f72;
     text-shadow: 0.15px 0.15px 0.001px hsl(0deg 0% 7% / 99%), -0.25px -0.25px 0.2px hsl(220deg 20% 85% / 75%), 0.25px 0.25px 0.25px hsl(0deg 0% 0%), -0.2px -0.2px 0.1px hsl(0deg 0% 10% / 65%), -0.5px -0.5px 0.2px hsl(0deg 0% 90% / 95%), 0.5px 0.5px 0.5px hsl(0deg 0% 70% / 95%);
+}
+
+
+.myhighlight {
+    border-radius: 5px;
+    text-shadow: 0 1px 1.25px hsl(0deg 0% 0%), 0.04em 0.04em 0px hsl(0deg 0% 45%), -0.25px -0.25px 0.00025px hsl(217deg 1% 85% / 85%), 0.725px 0.725px 0.325px hsl(0deg 0% 10% / 95%), -0.525px -0.595px 0.325px hsl(0deg 0% 10% / 85%), 0 -1px 0px hsl(0deg 0% 95% / 35%), 0px 1px 1.5px hsl(0deg 0% 0%);
+    color: #f5f5f5;
+    font-size: 9pt;
+    letter-spacing: 0.5px;
+    background-image: linear-gradient(-128deg, #FBE1B8 4%, #F3AE48 8%, #E17162 14%, #2D6E5D 16%, #1A7464 20%, #82A452 30%, #C6DA82 36%, #6BC3C9 56%, #176782 60%, #4E414B 72%, hsl(314deg 50% 35%) 78%, #C14D7F 82%, #DB605E 88%, #F3AE4A 94%, #F0A256 96%);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 1px 2px rgb(0 0 0 / 20%), inset 1px 1px 1px hsl(0deg 0% 80% / 40%), inset -1px -1px 1px rgb(12 13 18 / 6%), -1px -1px 1px 0px rgb(255 255 255 / 60%), -1px -1px 4px 0px rgb(255 255 255 / 60%), -2px -2px 8px 0px rgb(255 255 255 / 60%), 1px 1px 1px 0px rgb(12 13 18 / 6%), 1px 1px 4px 0px rgb(12 13 18 / 6%), 2px 2px 8px 0px rgb(12 13 18 / 6%), inset -1px -1px 1px hsl(0deg 0% 0% / 20%), inset 0.5px 0.5px 1px 0 hsl(0deg 0% 100% / 25%);
+    background: linear-gradient(to bottom right, #D745C0, #AA00FF, #6366f1) !important;
+    padding: 2.5pt 3.85pt;
+    font-weight: 700;
+    font-family: 'Roboto';
+    background-image: url("https://assets.codepen.io/4927073/hero10.jpg") !important;
+    background-size: 200% !important;
+    background-position: 0% 50% !important;
+    border: 0.25px solid hsl(0deg 0% 71% / 75%);
+}
+
+.myhighlight2 {
+    border-radius: 5px;
+    font-size: 9pt;
+    letter-spacing: 0.5px;
+    background: #333;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 1px 2px rgb(0 0 0 / 20%), inset 1px 1px 1px rgb(255 255 255 / 60%), inset -1px -1px 1px rgb(12 13 18 / 6%), -1px -1px 1px 0px rgb(255 255 255 / 60%), -1px -1px 4px 0px rgb(255 255 255 / 60%), -2px -2px 8px 0px rgb(255 255 255 / 60%), 1px 1px 1px 0px rgb(12 13 18 / 6%), 1px 1px 4px 0px rgb(12 13 18 / 6%), 2px 2px 8px 0px rgb(12 13 18 / 6%);
+    background-color: hsl(228deg 14% 93%);
+    text-shadow: 0.25px 0.25px 0.25px hsl(233deg 5% 26% / 85%), 0.35px 0.35px 0.35px hsl(233deg 5% 26% / 85%), 0 -1.1px 0px rgb(12 13 18 / 8%), 0 1.2px 0 rgb(255 255 255);
+    color: hsl(233deg 5% 26%);
+    padding: 3px 6px;
+    font-weight: 300;
+    font-family: 'Roboto';
+    line-height: 1;
+}
+
+
+.myhighlight3 {
+    border-radius: 5px;
+    font-size: 70%;
+    letter-spacing: 0.25px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 1px 2px rgb(0 0 0 / 20%), inset 1px 1px 1px hsl(0deg 0% 80% / 40%), inset -1px -1px 1px rgb(12 13 18 / 6%), -1px -1px 1px 0px rgb(255 255 255 / 60%), -1px -1px 4px 0px rgb(255 255 255 / 60%), -2px -2px 8px 0px rgb(255 255 255 / 60%), 1px 1px 1px 0px rgb(12 13 18 / 6%), 1px 1px 4px 0px rgb(12 13 18 / 6%), 2px 2px 8px 0px rgb(12 13 18 / 6%), inset -1px -1px 1px hsl(0deg 0% 0%);
+    text-shadow: 0.25px 0.25px 0.25px hsl(233deg 5% 26% / 85%), 0.35px 0.35px 0.35px hsl(233deg 5% 26% / 85%), 0 -1.1px 0px hsl(0deg 0% 0% / 90%), 0 1.2px 0 hsl(0deg 0% 0%);
+    padding: 2.125pt 4.125pt;
+    font-weight: 300;
+    background-color: hsl(0deg 0% 22% / 98%);
+    font-family: 'VT323', monospace;
+    color: hsl(0deg 0% 92%);
+    border: 0.15px solid hsl(0deg 0% 45%);
+}
+
+.quarto-title-meta-contents p {
+    letter-spacing: 2px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    font-size: 11px !important;
+    font-weight: 400;
+    font-family: Roboto;
+}
+
+
+
+strong {
+    /* font-family: 'Fira Sans Condensed', sans-serif; */
+    text-transform: uppercase;
+    letter-spacing: 1.25px;
+    font-weight: 600 !important;
+}
+
+
+a.sidebar-item-text.sidebar-link.active span {
+    text-transform: uppercase;
+    font-weight: 600 !important;
+    color: hsl(275deg 100% 70%) !important;
+    text-shadow: 0 0 1px hsl(275deg 100% 55% / 50%), 0.6px 0.6px 0 #fff;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    font-size: 11px;
+    font-family: Roboto;
+}
+
+pre.sourceCode {
+    color: white;
+}
+
+div.sourceCode {
+    border-radius: 5px;
+    box-shadow: 0 0.22px 0.4px #0004, 0 1px 1.6px 0.2px #0003, 1.25px 3.2px 5px 0.2px #0002;
+    background: rgba(26, 32, 44, 1);
+    background-color: #111518;
+    background-image: linear-gradient(0deg, #111827 0%, #20262e 90%);
+    line-height: 1.3;
+    border-bottom: 1px solid #fff2;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    box-shadow: 0 2px 2px #888;
+    padding: 8px 10px;
+    /* background: #212121; */
+    /* background: #2D2A2E; */
+    /* background: #25252d; */
+}
+
+pre code {
+    background-color: rgba(0, 0, 0, 0);
+    font-size: inherit;
+    color: inherit;
+    word-break: normal;
+    font-size: 12px;
+    font-family: 'Inconsolata';
+}
+
+
+p code:not(.sourceCode), li code:not(.sourceCode), td code:not(.sourceCode) {
+    padding: .2em;
+    padding: 3px 4px;
+    color: #61677c;
+    font-family: 'Inconsolata';
+    font-size: 75%;
+    letter-spacing: 0.25px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 1px 2px rgb(0 0 0 / 20%), inset 1px 1px 1px rgb(255 255 255 / 60%), inset -1px -1px 1px rgb(12 13 18 / 6%), -1px -1px 1px 0px rgb(255 255 255 / 60%), -1px -1px 4px 0px rgb(255 255 255 / 60%), -2px -2px 8px 0px rgb(255 255 255 / 60%), 1px 1px 1px 0px rgb(12 13 18 / 6%), 1px 1px 4px 0px rgb(12 13 18 / 6%), 2px 2px 8px 0px rgb(12 13 18 / 6%);
+    background-color: hsl(228deg 14% 93%);
+    text-shadow: 0.25px 0.25px 0.25px hsl(233deg 5% 26% / 85%), 0.35px 0.35px 0.35px hsl(233deg 5% 26% / 85%), 0 -1.1px 0px rgb(12 13 18 / 8%), 0 1.2px 0 rgb(255 255 255);
+    color: hsl(233deg 5% 26%);
+    font-weight: 300;
+}
+
+
+tbody {
+    font-size: 12px;
+    line-height: 1.1;
+    font-family: 'Source Sans Pro';
+}
+
+
+/**** LIST STYLES ***/
+
+.roundedlist {
+    font-family: 'Fira Sans Condensed';
+}
+
+.roundedlist li {
+    counter-increment: cupcake;
+    font-size: 14px;
+}
+
+.roundedlist ol li::before {
+    content: counter(cupcake);
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 12px;
+    margin-left: -15px;
+    margin-right: 6px;
+    text-shadow: 0 0 2.5px #000000, 1px 1px 1px rgb(0 0 0);
+    box-shadow: 0.875px 0.875px 1.8px 0 hsl(0deg 0% 0% / 30%), inset -0.875px -0.875px 1.8px 0 hsl(0deg 0% 0%), inset -0.5px -0.5px 1px 0 hsl(227deg 12% 38%), inset 0.5px 0.5px 1px 0 hsl(227deg 12% 45%);
+    background: #252528;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: #FF5370;
+    color: hsl(346deg 100% 80%);
+    color: hsl(300deg 50% 56%);
+    color: hsl(288deg 70% 80%);
+    color: #f859ca;
+    color: hsl(304deg 100% 80%);
+    justify-content: center;
+    align-items: center;
+}
+
+.roundedlist ol li::marker {
+    content: none;
+
+}
+
+
+ol, ul {
+    margin-top: -8px;
+    margin-bottom: 2px;
+}
+
+
+/**** SYNTAX HIGHLIGHTING THEME ***/
+
+
+code span.st {
+    color: #39D4DB;
+    color: #77CB66;
+    font-weight: 300;
+    letter-spacing: 0.25px;
+}
+code span.do {
+    color: #FA64B9;
+    color: #f451b5;
+    font-weight: 600;
+    font-style: normal;
+}
+
+
+
+code span.im {
+    font-weight: 700;
+    color: #FC74FD;
+    color: #E9FC88;
+    color: #878FE8;
+    color: #BCB4FF;
+}
+
+code span.kw {
+    font-weight: 700;
+    color: #b9d650;
+    color: #BADA84;
+}
+
+code span.cf {
+    font-weight: 700;
+    color: #EDB3F8;
+    color: #F1A4FA;
+}
+
+code span.co {
+    color: #60a0b0;
+    font-style: italic;
+    color: #6272a4;
+    font-weight: 400;
 }

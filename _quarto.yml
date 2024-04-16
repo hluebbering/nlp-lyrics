@@ -19,6 +19,7 @@ book:
     - index.ipynb
     - 01_sentiment_analysis/01_data.ipynb
     - 01_sentiment_analysis/02_lyrics.ipynb
+    - 01_sentiment_analysis/03_eda.ipynb
 
 website:
   navbar:

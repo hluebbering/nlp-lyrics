@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>NLP Song Lyrics - 2&nbsp; Extracting Spotify Data</title>
+<title>NLP Song Lyrics - Extracting Spotify Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -119,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01_sentiment_analysis/01_data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Extracting Spotify Data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01_sentiment_analysis/01_data.html"><span class="chapter-title">Extracting Spotify Data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -146,20 +146,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Natural Language Processing Song Lyrics</span></span></a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Overview</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01_sentiment_analysis/01_data.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Extracting Spotify Data</span></span></a>
+  <a href="../01_sentiment_analysis/01_data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Extracting Spotify Data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01_sentiment_analysis/02_lyrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span></a>
+  <a href="../01_sentiment_analysis/02_lyrics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01_sentiment_analysis/03_eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">EDA</span></a>
   </div>
 </li>
     </ul>
@@ -172,8 +174,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#accessing-the-spotify-web-api" id="toc-accessing-the-spotify-web-api" class="nav-link active" data-scroll-target="#accessing-the-spotify-web-api"><span class="header-section-number">2.0.1</span> Accessing the Spotify Web API</a></li>
-  <li><a href="#extracting-tracks-from-a-playlist" id="toc-extracting-tracks-from-a-playlist" class="nav-link" data-scroll-target="#extracting-tracks-from-a-playlist"><span class="header-section-number">2.0.2</span> Extracting Tracks From a Playlist</a></li>
+  <li><a href="#accessing-the-spotify-web-api" id="toc-accessing-the-spotify-web-api" class="nav-link active" data-scroll-target="#accessing-the-spotify-web-api">Accessing the Spotify Web API</a></li>
+  <li><a href="#extracting-tracks-from-a-playlist" id="toc-extracting-tracks-from-a-playlist" class="nav-link" data-scroll-target="#extracting-tracks-from-a-playlist">Extracting Tracks From a Playlist</a></li>
   </ul>
 </nav>
     </div>
@@ -182,7 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Extracting Spotify Data</span></h1>
+<h1 class="title"><span class="chapter-title">Extracting Spotify Data</span></h1>
 </div>
 
 
@@ -201,8 +203,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Getting started, we want to extract data for a set of tracks within one of Spotify’s top-featured playlists. Leveraging the <strong>Spotify Web API</strong>, we can seamlessly obtain detailed data for a song, such as the performing artist, the album it belongs to, its release date, popularity, and audio features like danceability, energy, and tempo.</p>
 <p>Python libraries like <code>spotipy</code> offer a user-friendly way to interact with the Spotify API, offering a range of functions that streamline tasks like API authentication, retrieving playlist data, and obtaining information about any given song.</p>
-<section id="accessing-the-spotify-web-api" class="level3" data-number="2.0.1">
-<h3 data-number="2.0.1" class="anchored" data-anchor-id="accessing-the-spotify-web-api"><span class="header-section-number">2.0.1</span> Accessing the Spotify Web API</h3>
+<section id="accessing-the-spotify-web-api" class="level3">
+<h3 class="anchored" data-anchor-id="accessing-the-spotify-web-api">Accessing the Spotify Web API</h3>
 <p>To access data from Spotify, we import the <code>spotipy</code> library and the <code>SpotifyClientCredentials</code> module. Additionally, we utilize the <code>pandas</code> package for data manipulation and display. In order to authenticate our access to the Spotify API, we must provide our <strong>client ID</strong> and <strong>client secret</strong> to a client credentials manager. Once authenticated, we can use the spotipy module to interact with the Spotify API and retrieve data.</p>
 <div id="cell-2" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spotipy</span>
@@ -214,8 +216,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="annotated-cell-1-7"><a href="#annotated-cell-1-7" aria-hidden="true" tabindex="-1"></a>my_auth <span class="op">=</span> SpotifyClientCredentials(client_id, client_secret)</span>
 <span id="annotated-cell-1-8"><a href="#annotated-cell-1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">sp</span> <span class="op">=</span> spotipy.<span class="do">Spotify</span>(auth_manager<span class="op">=</span>my_auth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="spotifys-featured-playlists" class="level4" data-number="2.0.1.1">
-<h4 data-number="2.0.1.1" class="anchored" data-anchor-id="spotifys-featured-playlists"><span class="header-section-number">2.0.1.1</span> Spotify’s Featured Playlists</h4>
+<section id="spotifys-featured-playlists" class="level4">
+<h4 class="anchored" data-anchor-id="spotifys-featured-playlists">Spotify’s Featured Playlists</h4>
 <p>Let’s take a look at the popular Spotify playlists. Below, the code retrieves a range of Spotify playlists and generates a dataframe containing details for each playlist, including its name, ID, description, thumbnail, total number of tracks, and follower count. The resulting dataframe is displayed as an HTML table.</p>
 <div id="cell-7" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>username <span class="op">=</span> <span class="st">"spotify"</span></span>
@@ -241,30 +243,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td><img src="https://i.scdn.co/image/ab67706f00000003fe878c72862acf8441676f13" class="img-fluid" width="40"></td>
+<td><img src="https://i.scdn.co/image/ab67706f000000036b54553d2151369598998b78" class="img-fluid" width="40"></td>
 <td>Today’s Top Hits</td>
 <td>37i9dQZF1DXcBWIGoYBM5M</td>
-<td>Olivia Rodrigo is on top of the Hottest 50!</td>
+<td>Doja Cat is on top of the Hottest 50!</td>
 <td>50</td>
-<td>34686033</td>
+<td>34782068</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td><img src="https://i.scdn.co/image/ab67706f00000003d0347f6b6580e6c76046c189" class="img-fluid" width="40"></td>
+<td><img src="https://i.scdn.co/image/ab67706f00000003d1963706ee048ac647ec1d5c" class="img-fluid" width="40"></td>
 <td>RapCaviar</td>
 <td>37i9dQZF1DX0XUsuxWHRQd</td>
-<td>New music from Future and Metro Boomin.</td>
+<td>New music from J. Cole, Lil Wayne and Doja Cat.</td>
 <td>50</td>
-<td>15846375</td>
+<td>15925885</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">3</td>
-<td><img src="https://i.scdn.co/image/ab67706f000000031203af78282376bca621dd67" class="img-fluid" width="40"></td>
+<td><img src="https://i.scdn.co/image/ab67706f00000003b05bc225192371df74427e24" class="img-fluid" width="40"></td>
 <td>Viva Latino</td>
 <td>37i9dQZF1DX10zKzsJ2jva</td>
-<td>Today's top Latin hits, elevando nuestra música. Shakira tiene <a href="spotify:playlist:37i9dQZF1DXcLSxNcHepOK">algo especial para ti</a>. ❤️‍🔥</td>
+<td>Today's top Latin hits, elevando nuestra música. Cover: Young Miko</td>
 <td>50</td>
-<td>14838128</td>
+<td>14927961</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
@@ -273,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>37i9dQZF1DWXRqgorJj26U</td>
 <td>Rock legends &amp; epic songs that continue to inspire generations. Cover: Nirvana</td>
 <td>200</td>
-<td>12095843</td>
+<td>12122088</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">12</td>
@@ -282,16 +284,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>37i9dQZF1DX4o1oenSJRJd</td>
 <td>The biggest songs of the 2000s. Cover: Kelly Clarkson</td>
 <td>150</td>
-<td>11125180</td>
+<td>11163325</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">14</td>
-<td><img src="https://i.scdn.co/image/ab67706f000000037fe7af589297338597341d85" class="img-fluid" width="40"></td>
+<td><img src="https://i.scdn.co/image/ab67706f00000003fe154a455809e72e4d854880" class="img-fluid" width="40"></td>
 <td>All Out 80s</td>
 <td>37i9dQZF1DX4UtSsGT1Sbe</td>
-<td>The biggest songs of the 1980s. Cover: Madonna</td>
+<td>The biggest songs of the 1980s. Cover: Bonnie Tyler.</td>
 <td>150</td>
-<td>10805624</td>
+<td>10852998</td>
 </tr>
 </tbody>
 </table>
@@ -301,8 +303,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 </section>
-<section id="extracting-tracks-from-a-playlist" class="level3" data-number="2.0.2">
-<h3 data-number="2.0.2" class="anchored" data-anchor-id="extracting-tracks-from-a-playlist"><span class="header-section-number">2.0.2</span> Extracting Tracks From a Playlist</h3>
+<section id="extracting-tracks-from-a-playlist" class="level3">
+<h3 class="anchored" data-anchor-id="extracting-tracks-from-a-playlist">Extracting Tracks From a Playlist</h3>
 <p>The following script enables the compilation of song and artist data from any Spotify playlist through its URI. To analyze a particular playlist, simply copy the URI from the Spotify Player interface and input it into the function defined below. The <code>get_playlist_tracks</code> method returns a complete list of track IDs and corresponding artists from the selected playlist.</p>
 <div id="cell-11" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="do">get_playlist_tracks</span>(playlist_URI):</span>
@@ -314,8 +316,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        tracks.extend(results[<span class="st">"items"</span>])</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tracks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="extracting-features-from-tracks" class="level4" data-number="2.0.2.1">
-<h4 data-number="2.0.2.1" class="anchored" data-anchor-id="extracting-features-from-tracks"><span class="header-section-number">2.0.2.1</span> Extracting Features from Tracks</h4>
+<section id="extracting-features-from-tracks" class="level4">
+<h4 class="anchored" data-anchor-id="extracting-features-from-tracks">Extracting Features from Tracks</h4>
 <p>The following script utilizes Spotify’s API to extract further details about each song within the playlist. It obtains metadata such as the track name, the artist it’s sung by, the album it belongs to, the release date, and track features such as danceability, tempo, and popularity.</p>
 <div id="cell-13" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="do">playlist_features</span>(<span class="bu">id</span>, artist_id, playlist_id):</span>
@@ -342,26 +344,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    artist_pop <span class="op">=</span> artist_info[<span class="st">"popularity"</span>]</span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    artist_genres <span class="op">=</span> artist_info[<span class="st">"genres"</span>]</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    acousticness <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'acousticness'</span>]</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    danceability <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'danceability'</span>]</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    energy <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'energy'</span>]</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    instrumentalness <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'instrumentalness'</span>]</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    liveness <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'liveness'</span>]</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    loudness <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'loudness'</span>]</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    speechiness <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'speechiness'</span>]</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    tempo <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'tempo'</span>]</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    valence <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'valence'</span>]</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'key'</span>]</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    mode <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'mode'</span>]</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    time_signature <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'time_signature'</span>]</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    playlist_name <span class="op">=</span> playlist_info[<span class="st">'name'</span>]</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [name, track_id, album, artist, artist_id, release_date, length, popularity, </span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>            artist_pop, artist_genres, acousticness, danceability, </span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>            energy, instrumentalness, liveness, loudness, speechiness, </span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>            tempo, valence, key, mode, time_signature, playlist_name]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    artist_followers <span class="op">=</span> artist_info[<span class="st">"followers"</span>][<span class="st">'total'</span>]</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    acousticness <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'acousticness'</span>]</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    danceability <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'danceability'</span>]</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    energy <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'energy'</span>]</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    instrumentalness <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'instrumentalness'</span>]</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    liveness <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'liveness'</span>]</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    loudness <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'loudness'</span>]</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    speechiness <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'speechiness'</span>]</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    tempo <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'tempo'</span>]</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    valence <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'valence'</span>]</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'key'</span>]</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    mode <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'mode'</span>]</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    time_signature <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'time_signature'</span>]</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    playlist_name <span class="op">=</span> playlist_info[<span class="st">'name'</span>]</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [name, track_id, album, artist, artist_id, release_date, length, popularity, </span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>            artist_pop, artist_genres, artist_followers, acousticness, danceability, </span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>            energy, instrumentalness, liveness, loudness, speechiness, </span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>            tempo, valence, key, mode, time_signature, playlist_name]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Choose a specific playlist to analyze by copying the URL from the Spotify Player interface. Using that link, the <code>playlist_tracks</code> method retrieves a list of IDs and corresponding artists for each track from the playlist. Specifically, we analyze Spotify’s <em>Today’s Top Hits</em> playlist.</p>
 <div id="cell-15" class="cell" data-execution_count="9">
@@ -380,153 +383,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create dataframe</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    all_tracks, columns<span class="op">=</span>[<span class="st">'name'</span>, <span class="st">'track_id'</span>, <span class="st">'album'</span>, <span class="st">'artist'</span>, <span class="st">'artist_id'</span>,<span class="st">'release_date'</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'length'</span>, <span class="st">'popularity'</span>, <span class="st">'artist_pop'</span>, <span class="st">'artist_genres'</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'length'</span>, <span class="st">'popularity'</span>, <span class="st">'artist_pop'</span>, <span class="st">'artist_genres'</span>, <span class="st">'artist_followers'</span>,</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'acousticness'</span>, <span class="st">'danceability'</span>, <span class="st">'energy'</span>,</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'instrumentalness'</span>, <span class="st">'liveness'</span>, <span class="st">'loudness'</span>,</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'speechiness'</span>, <span class="st">'tempo'</span>, <span class="st">'valence'</span>, <span class="st">'key'</span>, <span class="st">'mode'</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'time_signature'</span>, <span class="st">'playlist'</span>])</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>df.tail(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
-<div>
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">name</th>
-<th data-quarto-table-cell-role="th">track_id</th>
-<th data-quarto-table-cell-role="th">album</th>
-<th data-quarto-table-cell-role="th">artist</th>
-<th data-quarto-table-cell-role="th">artist_id</th>
-<th data-quarto-table-cell-role="th">release_date</th>
-<th data-quarto-table-cell-role="th">length</th>
-<th data-quarto-table-cell-role="th">popularity</th>
-<th data-quarto-table-cell-role="th">artist_pop</th>
-<th data-quarto-table-cell-role="th">artist_genres</th>
-<th data-quarto-table-cell-role="th">...</th>
-<th data-quarto-table-cell-role="th">instrumentalness</th>
-<th data-quarto-table-cell-role="th">liveness</th>
-<th data-quarto-table-cell-role="th">loudness</th>
-<th data-quarto-table-cell-role="th">speechiness</th>
-<th data-quarto-table-cell-role="th">tempo</th>
-<th data-quarto-table-cell-role="th">valence</th>
-<th data-quarto-table-cell-role="th">key</th>
-<th data-quarto-table-cell-role="th">mode</th>
-<th data-quarto-table-cell-role="th">time_signature</th>
-<th data-quarto-table-cell-role="th">playlist</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">46</td>
-<td>Daylight</td>
-<td>1odExI7RdWc4BT515LTAwj</td>
-<td>Daylight</td>
-<td>David Kushner</td>
-<td>33NVpKoXjItPwUJTMZIOiY</td>
-<td>2023-04-14</td>
-<td>212953</td>
-<td>91</td>
-<td>77</td>
-<td>[gen z singer-songwriter, singer-songwriter pop]</td>
-<td>...</td>
-<td>0.000441</td>
-<td>0.093</td>
-<td>-9.475</td>
-<td>0.0335</td>
-<td>130.090</td>
-<td>0.324</td>
-<td>2</td>
-<td>0</td>
-<td>4</td>
-<td>Today’s Top Hits</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">47</td>
-<td>LA FALDA</td>
-<td>7iUtQNMRB8ZkKC4AmEuCJC</td>
-<td>LVEU: VIVE LA TUYA...NO LA MIA</td>
-<td>Myke Towers</td>
-<td>7iK8PXO48WeuP03g8YR51W</td>
-<td>2023-09-18</td>
-<td>174229</td>
-<td>92</td>
-<td>87</td>
-<td>[reggaeton, trap latino, urbano latino]</td>
-<td>...</td>
-<td>0.008770</td>
-<td>0.190</td>
-<td>-4.260</td>
-<td>0.0691</td>
-<td>103.008</td>
-<td>0.267</td>
-<td>7</td>
-<td>1</td>
-<td>4</td>
-<td>Today’s Top Hits</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">48</td>
-<td>Is It Over Now? (Taylor's Version) (From The V...</td>
-<td>1Iq8oo9XkmmvCQiGOfORiz</td>
-<td>1989 (Taylor's Version)</td>
-<td>Taylor Swift</td>
-<td>06HL4z0CvFAxyc27GXpf02</td>
-<td>2023-10-26</td>
-<td>229477</td>
-<td>89</td>
-<td>100</td>
-<td>[pop]</td>
-<td>...</td>
-<td>0.000000</td>
-<td>0.127</td>
-<td>-7.346</td>
-<td>0.0360</td>
-<td>100.012</td>
-<td>0.176</td>
-<td>0</td>
-<td>1</td>
-<td>4</td>
-<td>Today’s Top Hits</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">49</td>
-<td>Standing Next to You</td>
-<td>2KslE17cAJNHTsI2MI0jb2</td>
-<td>GOLDEN</td>
-<td>Jung Kook</td>
-<td>6HaGTQPmzraVmaVxvz6EUc</td>
-<td>2023-11-03</td>
-<td>206019</td>
-<td>92</td>
-<td>86</td>
-<td>[k-pop]</td>
-<td>...</td>
-<td>0.000000</td>
-<td>0.339</td>
-<td>-4.389</td>
-<td>0.0955</td>
-<td>106.017</td>
-<td>0.816</td>
-<td>2</td>
-<td>0</td>
-<td>4</td>
-<td>Today’s Top Hits</td>
-</tr>
-</tbody>
-</table>
-
-<p>4 rows × 23 columns</p>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'time_signature'</span>, <span class="st">'playlist'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
+<section id="loudness-scaled" class="level5">
+<h5 class="anchored" data-anchor-id="loudness-scaled">Loudness Scaled</h5>
+<div id="cell-20" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loudness Scaled</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> preprocessing.MinMaxScaler()</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># scale loudness to fit the same range [0, 1]</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>loudness2 <span class="op">=</span> df[<span class="st">"loudness"</span>].values</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>loudness_scaled<span class="op">=</span>scaler.fit_transform(loudness2.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'loudness_scaled'</span>] <span class="op">=</span> loudness_scaled</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 
 
+</section>
 </section>
 </section>
 
@@ -942,13 +820,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Natural Language Processing Song Lyrics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Natural Language Processing Song Lyrics</span></span>
+      <a href="../index.html" class="pagination-link" aria-label="Overview">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Overview</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../01_sentiment_analysis/02_lyrics.html" class="pagination-link" aria-label="Natural Language Processing">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Natural Language Processing</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">Natural Language Processing</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
