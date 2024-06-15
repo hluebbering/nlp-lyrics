@@ -14,12 +14,12 @@ execute:
 book:
   title: "NLP Song Lyrics"
   author: "Hannah Luebbering"
-  date: "8/10/2023"
+  date: "4/16/2024"
   chapters:
     - index.ipynb
     - 01_sentiment_analysis/01_data.ipynb
-    - 01_sentiment_analysis/02_lyrics.ipynb
-    - 01_sentiment_analysis/03_eda.ipynb
+    - 01_sentiment_analysis/02_nlp.ipynb
+    - 02_genre_classification/01_classification_model.ipynb
 
 website:
   navbar:

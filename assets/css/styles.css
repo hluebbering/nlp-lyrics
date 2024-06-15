@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@200;300;400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* css styles */
 tr.header {
@@ -22,6 +22,12 @@ tr.header {
     border-top-color: #dee2e6;
     border-bottom: 1px solid #b6babc;
     background: linear-gradient(33deg, #a16bfe, #deb0df);
+}
+
+img.img-fluid {
+    max-width: 50%;
+    border-radius: 20%;
+    box-shadow: 1px 1px 1px 0px hsl(0deg 0% 0% / 50%);
 }
 
 
@@ -63,6 +69,7 @@ h1.title {
 
 #overview h1 {
     display: inline-flex;
+    display: none;
     margin-top: 8px;
     margin-bottom: 14px;
 }
@@ -209,18 +216,18 @@ div.sourceCode {
     border-top-right-radius: 3px;
     box-shadow: 0 2px 2px #888;
     padding: 8px 10px;
-    /* background: #212121; */
-    /* background: #2D2A2E; */
-    /* background: #25252d; */
+    
 }
 
 pre code {
     background-color: rgba(0, 0, 0, 0);
-    font-size: inherit;
     color: inherit;
     word-break: normal;
-    font-size: 12px;
+    font-size: 11px;
+    letter-spacing: -0.2px;
     font-family: 'Inconsolata';
+    font-family: "IBM Plex Mono", monospace;
+    
 }
 
 
@@ -288,7 +295,7 @@ tbody {
 }
 
 
-ol, ul {
+.roundedlist ol, .roundedlist ul {
     margin-top: -8px;
     margin-bottom: 2px;
 }
@@ -300,6 +307,7 @@ ol, ul {
 code span.st {
     color: #39D4DB;
     color: #77CB66;
+    color: #9BADF8;
     font-weight: 300;
     letter-spacing: 0.25px;
 }
@@ -316,8 +324,13 @@ code span.im {
     font-weight: 700;
     color: #FC74FD;
     color: #E9FC88;
+    color: #FFCB4A;
     color: #878FE8;
+    color: #FFC24C;
+    color: hsl(108 22% 45% / 1);
+    color: #9BADF8;
     color: #BCB4FF;
+    #color: hsl(108 22% 45% / 1);
 }
 
 code span.kw {
@@ -337,4 +350,9 @@ code span.co {
     font-style: italic;
     color: #6272a4;
     font-weight: 400;
+}
+
+code span.va {
+    font-style: inherit;
+    color: #FFCB4A;
 }

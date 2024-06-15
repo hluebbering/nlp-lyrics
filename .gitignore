@@ -1,2 +1,5 @@
 /.quarto/
 .cache
+/01_sentiment_analysis/.cache
+test.ipynb
+

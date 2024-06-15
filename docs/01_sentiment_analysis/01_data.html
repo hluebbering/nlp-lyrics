@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../01_sentiment_analysis/02_lyrics.html" rel="next">
+<link href="../01_sentiment_analysis/02_nlp.html" rel="next">
 <link href="../index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -104,7 +104,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
+
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
 
 
 <link rel="stylesheet" href="../assets/css/styles.css">
@@ -156,12 +159,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01_sentiment_analysis/02_lyrics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  <a href="../01_sentiment_analysis/02_nlp.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01_sentiment_analysis/03_eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">EDA</span></a>
+  <a href="../02_genre_classification/01_classification_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Genre Classification Model</span></a>
   </div>
 </li>
     </ul>
@@ -243,57 +246,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td><img src="https://i.scdn.co/image/ab67706f000000036b54553d2151369598998b78" class="img-fluid" width="40"></td>
+<td><img src="https://i.scdn.co/image/ab67706f00000002100e87512faecef9861e5102" class="img-fluid" width="40"></td>
 <td>Today’s Top Hits</td>
 <td>37i9dQZF1DXcBWIGoYBM5M</td>
-<td>Doja Cat is on top of the Hottest 50!</td>
+<td>Sabrina Carpenter is on top of the Hottest 50!</td>
 <td>50</td>
-<td>34782068</td>
+<td>34638307</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td><img src="https://i.scdn.co/image/ab67706f00000003d1963706ee048ac647ec1d5c" class="img-fluid" width="40"></td>
+<td><img src="https://i.scdn.co/image/ab67706f00000002c042e625cda499b89b6ba801" class="img-fluid" width="40"></td>
 <td>RapCaviar</td>
 <td>37i9dQZF1DX0XUsuxWHRQd</td>
-<td>New music from J. Cole, Lil Wayne and Doja Cat.</td>
-<td>50</td>
-<td>15925885</td>
+<td>Music from Central Cee, Future, Metro Boomin and Kendrick Lamar.</td>
+<td>51</td>
+<td>15929532</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">3</td>
-<td><img src="https://i.scdn.co/image/ab67706f00000003b05bc225192371df74427e24" class="img-fluid" width="40"></td>
+<td><img src="https://i.scdn.co/image/ab67706f0000000200edbd571c75448765a4e5e4" class="img-fluid" width="40"></td>
 <td>Viva Latino</td>
 <td>37i9dQZF1DX10zKzsJ2jva</td>
-<td>Today's top Latin hits, elevando nuestra música. Cover: Young Miko</td>
+<td>Today's top Latin hits, elevando nuestra música. Cover: Trueno</td>
 <td>50</td>
-<td>14927961</td>
+<td>15093527</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
-<td><img src="https://i.scdn.co/image/ab67706f00000003d855fad81c27d9e383a65dcb" class="img-fluid" width="40"></td>
-<td>Rock Classics</td>
-<td>37i9dQZF1DWXRqgorJj26U</td>
-<td>Rock legends &amp; epic songs that continue to inspire generations. Cover: Nirvana</td>
-<td>200</td>
-<td>12122088</td>
-</tr>
-<tr class="odd">
 <td data-quarto-table-cell-role="th">12</td>
-<td><img src="https://i.scdn.co/image/ab67706f00000003603c97e588c19d27695b69c5" class="img-fluid" width="40"></td>
+<td><img src="https://i.scdn.co/image/ab67706f00000002c900fae23e2a3cf42b0e1556" class="img-fluid" width="40"></td>
 <td>All Out 2000s</td>
 <td>37i9dQZF1DX4o1oenSJRJd</td>
-<td>The biggest songs of the 2000s. Cover: Kelly Clarkson</td>
+<td>The biggest songs of the 2000s. Cover: The Killers</td>
 <td>150</td>
-<td>11163325</td>
+<td>12324392</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">7</td>
+<td><img src="https://i.scdn.co/image/ab67706f000000024a83d42ca84e63abc9413b5d" class="img-fluid" width="40"></td>
+<td>Rock Classics</td>
+<td>37i9dQZF1DWXRqgorJj26U</td>
+<td>Rock legends &amp; epic songs that continue to inspire generations. Cover: The Rolling Stones</td>
+<td>200</td>
+<td>12167228</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">14</td>
-<td><img src="https://i.scdn.co/image/ab67706f00000003fe154a455809e72e4d854880" class="img-fluid" width="40"></td>
+<td><img src="https://i.scdn.co/image/ab67706f00000002d6710ea346fec48e89d77dba" class="img-fluid" width="40"></td>
 <td>All Out 80s</td>
 <td>37i9dQZF1DX4UtSsGT1Sbe</td>
-<td>The biggest songs of the 1980s. Cover: Bonnie Tyler.</td>
+<td>The biggest songs of the 1980s. Cover: Bruce Springsteen</td>
 <td>150</td>
-<td>10852998</td>
+<td>11278061</td>
 </tr>
 </tbody>
 </table>
@@ -379,27 +382,179 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Putting it all together, the <code>get_playlist_tracks</code> function retrieves basic details for each song in a specified Spotify playlist using its URI. The <code>playlist_features</code> function then iterates through these tracks using their IDs to extract additional information, such as danceability, energy, loudness, speechiness, acousticness, instrumentalness, liveness, valence, tempo, and more. From there, we create a Pandas dataframe by passing in the extracted information.</p>
-<div id="cell-18" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create dataframe</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    all_tracks, columns<span class="op">=</span>[<span class="st">'name'</span>, <span class="st">'track_id'</span>, <span class="st">'album'</span>, <span class="st">'artist'</span>, <span class="st">'artist_id'</span>,<span class="st">'release_date'</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'length'</span>, <span class="st">'popularity'</span>, <span class="st">'artist_pop'</span>, <span class="st">'artist_genres'</span>, <span class="st">'artist_followers'</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'acousticness'</span>, <span class="st">'danceability'</span>, <span class="st">'energy'</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'instrumentalness'</span>, <span class="st">'liveness'</span>, <span class="st">'loudness'</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'speechiness'</span>, <span class="st">'tempo'</span>, <span class="st">'valence'</span>, <span class="st">'key'</span>, <span class="st">'mode'</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'time_signature'</span>, <span class="st">'playlist'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <section id="loudness-scaled" class="level5">
 <h5 class="anchored" data-anchor-id="loudness-scaled">Loudness Scaled</h5>
 <div id="cell-20" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loudness Scaled</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> preprocessing.MinMaxScaler()</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># scale loudness to fit the same range [0, 1]</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>loudness2 <span class="op">=</span> df[<span class="st">"loudness"</span>].values</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>loudness_scaled<span class="op">=</span>scaler.fit_transform(loudness2.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'loudness_scaled'</span>] <span class="op">=</span> loudness_scaled</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loudness Scaled</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> preprocessing.MinMaxScaler()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># scale loudness to fit the same range [0, 1]</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>loudness2 <span class="op">=</span> df[<span class="st">"loudness"</span>].values</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>loudness_scaled<span class="op">=</span>scaler.fit_transform(loudness2.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'loudness_scaled'</span>] <span class="op">=</span> loudness_scaled</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-21" class="cell" data-tags="[&quot;hide-code&quot;]" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">track_id</th>
+<th data-quarto-table-cell-role="th">album</th>
+<th data-quarto-table-cell-role="th">artist</th>
+<th data-quarto-table-cell-role="th">artist_id</th>
+<th data-quarto-table-cell-role="th">release_date</th>
+<th data-quarto-table-cell-role="th">length</th>
+<th data-quarto-table-cell-role="th">popularity</th>
+<th data-quarto-table-cell-role="th">artist_pop</th>
+<th data-quarto-table-cell-role="th">artist_genres</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">liveness</th>
+<th data-quarto-table-cell-role="th">loudness</th>
+<th data-quarto-table-cell-role="th">speechiness</th>
+<th data-quarto-table-cell-role="th">tempo</th>
+<th data-quarto-table-cell-role="th">valence</th>
+<th data-quarto-table-cell-role="th">key</th>
+<th data-quarto-table-cell-role="th">mode</th>
+<th data-quarto-table-cell-role="th">time_signature</th>
+<th data-quarto-table-cell-role="th">playlist</th>
+<th data-quarto-table-cell-role="th">loudness_scaled</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Espresso</td>
+<td>2qSkIjg1o9h3YT9RAgYN75</td>
+<td>Espresso</td>
+<td>Sabrina Carpenter</td>
+<td>74KM79TiuVKeVCqs8QtB0B</td>
+<td>2024-04-12</td>
+<td>175459</td>
+<td>95</td>
+<td>87</td>
+<td>[pop]</td>
+<td>...</td>
+<td>0.1850</td>
+<td>-5.478</td>
+<td>0.0285</td>
+<td>103.969</td>
+<td>0.690</td>
+<td>0</td>
+<td>1</td>
+<td>4</td>
+<td>Today’s Top Hits</td>
+<td>0.721830</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>BIRDS OF A FEATHER</td>
+<td>6dOtVTDdiauQNBQEDOtlAB</td>
+<td>HIT ME HARD AND SOFT</td>
+<td>Billie Eilish</td>
+<td>6qqNVTkY8uBg9cP3Jd7DAH</td>
+<td>2024-05-17</td>
+<td>210373</td>
+<td>92</td>
+<td>94</td>
+<td>[art pop, pop]</td>
+<td>...</td>
+<td>0.1170</td>
+<td>-10.171</td>
+<td>0.0358</td>
+<td>104.978</td>
+<td>0.438</td>
+<td>2</td>
+<td>1</td>
+<td>4</td>
+<td>Today’s Top Hits</td>
+<td>0.241531</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>I Had Some Help (Feat. Morgan Wallen)</td>
+<td>7221xIgOnuakPdLqT0F3nP</td>
+<td>I Had Some Help</td>
+<td>Post Malone</td>
+<td>246dkjvS1zLTtiykXe5h60</td>
+<td>2024-05-10</td>
+<td>178205</td>
+<td>91</td>
+<td>90</td>
+<td>[dfw rap, melodic rap, pop, rap]</td>
+<td>...</td>
+<td>0.2450</td>
+<td>-4.860</td>
+<td>0.0264</td>
+<td>127.986</td>
+<td>0.731</td>
+<td>7</td>
+<td>1</td>
+<td>4</td>
+<td>Today’s Top Hits</td>
+<td>0.785078</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Too Sweet</td>
+<td>4IadxL6BUymXlh8RCJJu7T</td>
+<td>Unheard</td>
+<td>Hozier</td>
+<td>2FXC3k01G6Gw61bmprjgqS</td>
+<td>2024-03-22</td>
+<td>251424</td>
+<td>80</td>
+<td>85</td>
+<td>[irish singer-songwriter, modern rock, pov: in...</td>
+<td>...</td>
+<td>0.0398</td>
+<td>-5.505</td>
+<td>0.0412</td>
+<td>117.038</td>
+<td>0.934</td>
+<td>10</td>
+<td>1</td>
+<td>4</td>
+<td>Today’s Top Hits</td>
+<td>0.719067</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>MILLION DOLLAR BABY</td>
+<td>7fzHQizxTqy8wTXwlrgPQQ</td>
+<td>MILLION DOLLAR BABY</td>
+<td>Tommy Richman</td>
+<td>1WaFQSHVGZQJTbf0BdxdNo</td>
+<td>2024-04-26</td>
+<td>155151</td>
+<td>92</td>
+<td>82</td>
+<td>[chill abstract hip hop]</td>
+<td>...</td>
+<td>0.0680</td>
+<td>-5.106</td>
+<td>0.0436</td>
+<td>138.003</td>
+<td>0.927</td>
+<td>1</td>
+<td>0</td>
+<td>4</td>
+<td>Today’s Top Hits</td>
+<td>0.759902</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 25 columns</p>
+</div>
+</div>
+</div>
 </div>
 <hr>
 
@@ -825,7 +980,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../01_sentiment_analysis/02_lyrics.html" class="pagination-link" aria-label="Natural Language Processing">
+      <a href="../01_sentiment_analysis/02_nlp.html" class="pagination-link" aria-label="Natural Language Processing">
         <span class="nav-page-text"><span class="chapter-title">Natural Language Processing</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

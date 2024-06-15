@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.551">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>NLP Song Lyrics - Natural Language Processing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../02_genre_classification/01_classification_model.html" rel="next">
+<link href="../01_sentiment_analysis/01_data.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01_sentiment_analysis/02_nlp.html"><span class="chapter-title">Natural Language Processing</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">NLP Song Lyrics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01_sentiment_analysis/01_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extracting Spotify Data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01_sentiment_analysis/02_nlp.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02_genre_classification/01_classification_model.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Genre Classification Model</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#scraping-the-web" id="toc-scraping-the-web" class="nav-link active" data-scroll-target="#scraping-the-web">Scraping the Web</a></li>
+  <li><a href="#pre-processing-text-data" id="toc-pre-processing-text-data" class="nav-link" data-scroll-target="#pre-processing-text-data">Pre-Processing Text Data</a></li>
+  <li><a href="#sentiment-analysis" id="toc-sentiment-analysis" class="nav-link" data-scroll-target="#sentiment-analysis">Sentiment Analysis</a></li>
+  <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together">Putting it All Together</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Natural Language Processing</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Using the data gathered from the Spotify API, we now want to extract and process the lyrics for each song. This is accomplished through scraping textual information, namely lyrical data, from the <strong>Genius Lyrics</strong> website. Following extraction, the lyrics are thoroughly processed and cleaned before undergoing sentiment analysis.</p>
+<!--### Scraping the Genius Lyrics Website
+scraping textual information
+Scraping the Genius Lyrics Website-->
+<section id="scraping-the-web" class="level3">
+<h3 class="anchored" data-anchor-id="scraping-the-web">Scraping the Web</h3>
+<p>To get started, the script below imports <code>lyricsgenius</code>, a fundamental package libary allowing for web scraping of the Genius Lyrics website to retrieve the lyrics of any given song. Through the initialization of the <code>genius</code> variable, one can access the Genius API and retrieve the lyrics of any given song, such as “Too Many Nights” by Metro Boomin.</p>
+<div id="cell-3" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> lyricsgenius</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">genius</span> <span class="op">=</span> lyricsgenius.Genius(<span class="st">"epFCxujgBe-Y6WrkZedI8kerKxiCpR6Rh0DAHYNlKDf9B4H1nXTdZIkj7krNUHVV"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>song <span class="op">=</span> <span class="do">genius</span>.search_song(<span class="st">"Too Many Nights"</span>, <span class="st">"Metro Boomin"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Searching for "Too Many Nights" by Metro Boomin...
+Done.</code></pre>
+</div>
+</div>
+<p>First, we define a function that retrieves the lyrics for any song and artist from the Genius database. As shown below, it first searches for the track using the provided name and artist and then extracts the lyrics from the search results.</p>
+<div id="cell-5" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_song_lyrics(song_name, song_artist):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    song_genius <span class="op">=</span> <span class="do">genius</span>.search_song(song_name, song_artist)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    song_lyrics <span class="op">=</span> song_genius.lyrics.partition(<span class="st">"Lyrics"</span>)[<span class="dv">2</span>]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove any numbers followed by 'Embed'</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    song_lyrics <span class="op">=</span> re.sub(<span class="vs">r"[\[].*?[\]]|\d+Embed"</span>, <span class="st">""</span>, song_lyrics)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove text between square brackets</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    song_lyrics <span class="op">=</span> re.sub(<span class="vs">r"(\-[A-Za-z]+\-)"</span>, <span class="st">""</span>, song_lyrics)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    song_lyrics <span class="op">=</span> re.sub(<span class="vs">r'\d+'</span>, <span class="st">''</span>, song_lyrics)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> song_lyrics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="pre-processing-text-data" class="level3">
+<h3 class="anchored" data-anchor-id="pre-processing-text-data">Pre-Processing Text Data</h3>
+<p>Using the genius package, we define a function to fetch the lyrics of a song given the track name and artist. Once retrieved, the next step is to pre-process the textual data. This involves a cleansing process to eliminate profanity and patterns that may hinder the overall readability. The Python script contains the following steps:</p>
+<ol type="1">
+<li>Language Detection</li>
+<li>Expanding Contractions</li>
+<li>Converting Text to Lowercase</li>
+<li>Spell Checking + Censoring</li>
+<li>Removing Punctuations</li>
+<li>Tokenization</li>
+</ol>
+<p>The function <code>detect_and_translate</code> below is designed to identify and translate text into a specified language, specifically English. It first checks the language of the original text and compares it to the target language. If the detected language differs from the target language, the function utilizes GoogleTranslator to translate the input text into the target language (English).</p>
+<div id="cell-8" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to detect and translate text</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> detect_and_translate(track_lyrics, target_lang<span class="op">=</span><span class="st">'en'</span>):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> detect(track_lyrics) <span class="op">==</span> target_lang:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> track_lyrics</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    translator <span class="op">=</span> GoogleTranslator(source<span class="op">=</span><span class="st">'auto'</span>, target<span class="op">=</span>target_lang)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> translator.translate(track_lyrics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We also develop various functions to support the preprocessing of textual data, streamlining the process and improving the accuracy of the final output. Among these functions are a method for removing punctuation from a given string of lyrics and a spell-checker that automatically finds and corrects any spelling errors.</p>
+<div id="cell-10" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> remove_punctuation(text):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    no_punct <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> char <span class="kw">in</span> text:</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> char <span class="kw">not</span> <span class="kw">in</span> string.punctuation:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>            no_punct <span class="op">=</span> no_punct <span class="op">+</span> char</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> no_punct  <span class="co"># return unpunctuated string</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-11" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spell Check + Censor</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>spell <span class="op">=</span> SpellChecker()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> spell_check(word_list_str):</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    word_corrected_list <span class="op">=</span> []</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> word <span class="kw">in</span> word_list_str.split():</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        word_corrected <span class="op">=</span> spell.correction(word)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> word_corrected <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>            word_corrected_list.append(word_corrected)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>            word_corrected_list.append(word)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> word_corrected_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>clean_song_lyrics</code> function is designed to simplify the processing of lyrics for a specific song and artist. The function extracts the lyrics from the Genius database and performs a series of modifications, including expanding contractions, removing repetitive phrases, and converting the text to lowercase. It also ensures that the spelling is correct and eliminates any profanity. The end result is a cleaned set of lyrics, tokenized and encoded as a list of words.</p>
+<div id="cell-13" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode python code-annotation-code code-with-copy"><code class="sourceCode python"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="do">clean_song_lyrics</span>(song_name, artist_name):</span>
+<span id="annotated-cell-6-2"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>    genius_lyrics <span class="op">=</span> get_song_lyrics(song_name, artist_name)</span>
+<span id="annotated-cell-6-3"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a>    lyrics_en <span class="op">=</span> detect_and_translate(genius_lyrics, <span class="st">"en"</span>)</span>
+<span id="annotated-cell-6-4"><a href="#annotated-cell-6-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="annotated-cell-6-5"><a href="#annotated-cell-6-5" aria-hidden="true" tabindex="-1"></a>    no_contract <span class="op">=</span> [contractions.fix(word) <span class="cf">for</span> word <span class="kw">in</span> lyrics_en.split()]</span>
+<span id="annotated-cell-6-6"><a href="#annotated-cell-6-6" aria-hidden="true" tabindex="-1"></a>    no_contract_str <span class="op">=</span> <span class="st">" "</span>.join(no_contract).lower()  <span class="co"># lowercase</span></span>
+<span id="annotated-cell-6-7"><a href="#annotated-cell-6-7" aria-hidden="true" tabindex="-1"></a>    no_contract_str <span class="op">=</span> re.sub(<span class="vs">r"nana|lala"</span>, <span class="st">""</span>, no_contract_str)</span>
+<span id="annotated-cell-6-8"><a href="#annotated-cell-6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-6-9"><a href="#annotated-cell-6-9" aria-hidden="true" tabindex="-1"></a>    corrected <span class="op">=</span> spell_check(no_contract_str) <span class="co"># &lt;5&gt; # Spell Check + Censor</span></span>
+<span id="annotated-cell-6-10"><a href="#annotated-cell-6-10" aria-hidden="true" tabindex="-1"></a>    censored <span class="op">=</span> profanity.censor(<span class="st">" "</span>.join(corrected), censor_char<span class="op">=</span><span class="st">""</span>)</span>
+<span id="annotated-cell-6-11"><a href="#annotated-cell-6-11" aria-hidden="true" tabindex="-1"></a>    no_punct <span class="op">=</span> remove_punctuation(censored) <span class="co"># &lt;6&gt; # Remove Punctuation</span></span>
+<span id="annotated-cell-6-12"><a href="#annotated-cell-6-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="annotated-cell-6-13"><a href="#annotated-cell-6-13" aria-hidden="true" tabindex="-1"></a>    tokenized <span class="op">=</span> word_tokenize(no_punct)  <span class="co"># Tokenize</span></span>
+<span id="annotated-cell-6-14"><a href="#annotated-cell-6-14" aria-hidden="true" tabindex="-1"></a>    strencode <span class="op">=</span> [i.encode(<span class="st">"ascii"</span>, <span class="st">"ignore"</span>) <span class="cf">for</span> i <span class="kw">in</span> tokenized]  <span class="co"># Encode() method</span></span>
+<span id="annotated-cell-6-15"><a href="#annotated-cell-6-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [i.decode() <span class="cf">for</span> i <span class="kw">in</span> strencode]  <span class="co"># Decode() method</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="removing-stop-words" class="level4">
+<h4 class="anchored" data-anchor-id="removing-stop-words">Removing Stop Words</h4>
+<p>We employ the Natural Language Toolkit (<em>NLTK</em>) library and its <code>WordNetLemmatizer</code> tool to filter out stopwords. By removing frequently used words like “the,” “and,” or “of,” the resulting text becomes more concise, enabling a more thorough examination of the lyrics and their underlying message.</p>
+<div id="cell-15" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="do">remove_stopwords_lyrics</span>(clean_lyrics_decode):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    stopword <span class="op">=</span> stopwords.words(<span class="st">"english"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    stopword.extend([<span class="st">"yeah"</span>, <span class="st">"nanana"</span>, <span class="st">"nana"</span>, <span class="st">"oh"</span>, <span class="st">"la"</span>])</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [word <span class="cf">for</span> word <span class="kw">in</span> clean_lyrics_decode <span class="cf">if</span> word <span class="kw">not</span> <span class="kw">in</span> stopword]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="lemmatization" class="level4">
+<h4 class="anchored" data-anchor-id="lemmatization">Lemmatization</h4>
+<p>Next, we define a function to perform lemmatization on a set of words using the <code>WordNetLemmatizer</code> class from the NLTK library. Lemmatization helps to standardize words and reduce their complexity by reducing words to their root or base form. Our function specifically targets verbs and transforms different variations of the same verb into its most basic form.</p>
+<div id="cell-17" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> stopwords, wordnet</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_wordnet_pos(tag):</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> tag.startswith(<span class="st">"J"</span>):</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> wordnet.ADJ</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> tag.startswith(<span class="st">"V"</span>):</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> wordnet.VERB</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> tag.startswith(<span class="st">"N"</span>):</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> wordnet.NOUN</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> tag.startswith(<span class="st">"R"</span>):</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> wordnet.ADV</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> wordnet.NOUN</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-18" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.tag <span class="im">import</span> pos_tag</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk <span class="im">import</span> pos_tag</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> word_lemmatize(lyrics_cleaned):  <span class="co"># clean_lyrics_decode):</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    pos_tags <span class="op">=</span> pos_tag(lyrics_cleaned)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    wordnet_pos <span class="op">=</span> [(word, get_wordnet_pos(pos_tag)) <span class="cf">for</span> (word, pos_tag) <span class="kw">in</span> pos_tags]</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    wnl <span class="op">=</span> WordNetLemmatizer()  <span class="co"># Lemmatize Lyrics</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [wnl.lemmatize(word, tag) <span class="cf">for</span> word, tag <span class="kw">in</span> wordnet_pos]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In summary, the code above defines a function that makes use of the WordNetLemmatizer class from the NLTK library to conduct lemmatization specifically targeting verbs, thereby converting words to their most basic form.</p>
+<hr>
+</section>
+</section>
+<section id="sentiment-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="sentiment-analysis">Sentiment Analysis</h2>
+<p>Subsequently, the process involves the implementation of pipeline classes to carry out predictions using models accessible in the Hub. The code imports and employs multiple transformer models specifically designed for text classification and sentiment analysis. Specifically, the following procedure creates three distinct pipelines, each equipped with different models that facilitate the assessment of emotions and sentiment in textual content.</p>
+<div id="cell-22" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> transformers</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> <span class="do">pipeline</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize Genius API and sentiment classifiers</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>classifiers <span class="op">=</span> [</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="do">pipeline</span>(<span class="st">"text-classification"</span>, model<span class="op">=</span><span class="st">'bhadresh-savani/distilbert-base-uncased-emotion'</span>, return_all_scores<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="do">pipeline</span>(<span class="st">"text-classification"</span>, model<span class="op">=</span><span class="st">'cardiffnlp/twitter-roberta-base-sentiment'</span>, return_all_scores<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="do">pipeline</span>(<span class="st">"sentiment-analysis"</span>, return_all_scores<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No model was supplied, defaulted to distilbert-base-uncased-finetuned-sst-2-english and revision af0f99b (https://huggingface.co/distilbert-base-uncased-finetuned-sst-2-english).
+Using a pipeline without specifying a model name and revision in production is not recommended.</code></pre>
+</div>
+</div>
+<p>The <code>get_lyric_sentiment</code> function takes in pre-processed lyrics as input and produces a dictionary of sentiment scores. It leverages three distinct classifiers to calculate the scores and aggregates them into a final result. For instance, one of these classifiers is the <em>distilbert-base-uncased-emotion</em> model, specifically trained to detect “emotions in texts such as sadness, joy, love, anger, fear, and surprise”.</p>
+<div id="cell-24" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to perform sentiment analysis</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="do">get_lyric_sentiment</span>(lyrics, classifiers):</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="st">' '</span>.join(lyrics)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> {}</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> classifier <span class="kw">in</span> classifiers:</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>            predictions <span class="op">=</span> classifier(text, truncation<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> prediction <span class="kw">in</span> predictions[<span class="dv">0</span>]:</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                scores[prediction[<span class="st">'label'</span>]] <span class="op">=</span> prediction[<span class="st">'score'</span>]</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Error during sentiment analysis: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If the lyric sequence contains more than 512 tokens, it will trigger an error message indicating an exception encountered in the ‘embeddings’ layer. However, we have implemented measures to properly manage lyric sequences that exceed 512 words in the function mentioned above.</p>
+<hr>
+</section>
+<section id="putting-it-all-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-all-together">Putting it All Together</h2>
+<p>To summarize, the code efficiently collects data and performs text analysis on every song in a playlist. Specifically, it systematically processes a list of tracks and corresponding artists while simultaneously conducting a thorough cleaning procedure on the lyrics. The cleaning process involves removing all nonessential characters, resulting in a more precise depiction of the song’s content. The outcome is a comprehensive frequency analysis of each word in a song’s lyrics, providing deeper insights into the overall conveyed message.</p>
+<p>Additionally, the program computes a sentiment score for each song based on the lyrics, indicating whether the lyrics are positive, negative, or neutral. It also collects information about the song and artist, such as the release date, length, popularity, and genre. Finally, the program compiles all this information into a dataframe for further analysis.</p>
+<div id="cell-27" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>track_data <span class="op">=</span> []</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, track <span class="kw">in</span> all_tracks.iterrows():</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    song_name <span class="op">=</span> track[<span class="st">"name"</span>] <span class="co">#.partition(" (")[0]</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    song_name <span class="op">=</span> track[<span class="st">'name'</span>].partition(<span class="st">" (with"</span>)[<span class="dv">0</span>]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    song_name <span class="op">=</span> song_name.partition(<span class="st">" - From"</span>)[<span class="dv">0</span>]</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    artist_name <span class="op">=</span> track[<span class="st">"artist"</span>]</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        track_lyrics <span class="op">=</span> <span class="do">clean_song_lyrics</span>(song_name, artist_name)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        stopwords_removed <span class="op">=</span> <span class="do">remove_stopwords_lyrics</span>(track_lyrics)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        lemmatized <span class="op">=</span> word_lemmatize(stopwords_removed)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        sentiment_scores <span class="op">=</span> <span class="do">get_lyric_sentiment</span>(stopwords_removed, classifiers)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        track_info <span class="op">=</span> track.to_dict()</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        track_info.update(sentiment_scores)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        track_info[<span class="st">"lyrics"</span>] <span class="op">=</span> track_lyrics</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        track_info[<span class="st">"stopwords_removed"</span>] <span class="op">=</span> stopwords_removed</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        track_info[<span class="st">"lemmatized"</span>] <span class="op">=</span> lemmatized</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>        track_data.append(track_info)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Error processing track </span><span class="sc">{</span>track[<span class="st">'name'</span>]<span class="sc">}</span><span class="ss"> by </span><span class="sc">{</span>track[<span class="st">'artist'</span>]<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>df_tracks <span class="op">=</span> pd.DataFrame(track_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Searching for "Espresso" by Sabrina Carpenter...
+Done.
+Searching for "BIRDS OF A FEATHER" by Billie Eilish...
+Done.
+Searching for "I Had Some Help (Feat. Morgan Wallen)" by Post Malone...
+Done.
+Searching for "Too Sweet" by Hozier...
+Done.
+Searching for "MILLION DOLLAR BABY" by Tommy Richman...
+Done.
+Searching for "we can't be friends (wait for your love)" by Ariana Grande...
+Done.
+Searching for "A Bar Song (Tipsy)" by Shaboozey...
+Done.
+Searching for "LUNCH" by Billie Eilish...
+Done.
+Searching for "Fortnight (feat. Post Malone)" by Taylor Swift...
+Done.
+Searching for "Beautiful Things" by Benson Boone...
+Done.
+Searching for "i like the way you kiss me" by Artemas...
+Done.
+Searching for "Please Please Please" by Sabrina Carpenter...
+Done.
+Searching for "End of Beginning" by Djo...
+Done.
+Searching for "Houdini" by Eminem...
+Done.
+Searching for "Lose Control" by Teddy Swims...
+Done.
+Searching for "Not Like Us" by Kendrick Lamar...
+Done.
+Error during sentiment analysis: The expanded size of the tensor (529) must match the existing size (514) at non-singleton dimension 1.  Target sizes: [1, 529].  Tensor sizes: [1, 514]
+Searching for "Good Luck, Babe!" by Chappell Roan...
+Done.
+Searching for "I Can Do It With a Broken Heart" by Taylor Swift...
+Done.
+Searching for "Belong Together" by Mark Ambor...
+Done.
+Searching for "Saturn" by SZA...
+Done.
+Searching for "Slow It Down" by Benson Boone...
+Done.
+Searching for "Austin" by Dasha...
+Done.
+Searching for "Stargazing" by Myles Smith...
+Done.
+Searching for "Pink Skies" by Zach Bryan...
+Done.
+Searching for "Stick Season" by Noah Kahan...
+Done.
+Searching for "greedy" by Tate McRae...
+Done.
+Searching for "Scared To Start" by Michael Marcagi...
+Done.
+Searching for "Nasty" by Tinashe...
+Done.
+Searching for "Water" by Tyla...
+Done.
+Searching for "Gata Only" by FloyyMenor...
+Done.
+Searching for "Miles On It" by Marshmello...
+Done.
+Searching for "yes, and?" by Ariana Grande...
+Done.
+Searching for "TEXAS HOLD 'EM" by Beyoncé...
+Done.
+Searching for "BAND4BAND (feat. Lil Baby)" by Central Cee...
+Done.
+Searching for "Feel It" by d4vd...
+Done.
+Searching for "One Of The Girls" by The Weeknd...
+Done.
+Searching for "Tell Ur Girlfriend" by Lay Bankz...
+Done.
+Searching for "Lovin On Me" by Jack Harlow...
+Done.
+Searching for "Santa" by Rvssian...
+Done.
+Searching for "CHIHIRO" by Billie Eilish...
+Done.
+Searching for "Whatever" by Kygo...
+Done.
+Searching for "Illusion" by Dua Lipa...
+Done.
+Searching for "I Don't Wanna Wait" by David Guetta...
+Done.
+Searching for "Whatever She Wants" by Bryson Tiller...
+Error processing track Whatever She Wants by Bryson Tiller: Request timed out:
+HTTPSConnectionPool(host='genius.com', port=443): Read timed out. (read timeout=5)
+Searching for "Jump" by Tyla...
+Done.
+Searching for "I Remember Everything (feat. Kacey Musgraves)" by Zach Bryan...
+Done.
+Error during sentiment analysis: The expanded size of the tensor (517) must match the existing size (514) at non-singleton dimension 1.  Target sizes: [1, 517].  Tensor sizes: [1, 514]
+Searching for "one of wun" by Gunna...
+Done.
+Searching for "obsessed" by Olivia Rodrigo...
+Done.
+Searching for "Magnetic" by ILLIT...
+Done.
+Searching for "redrum" by 21 Savage...
+Done.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.</code></pre>
+</div>
+</div>
+<div id="cell-28" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#df_tracks = pd.DataFrame(track_data)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df_tracks.to_csv(<span class="st">"../assets/data/all_tracks+lyrics.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-29" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_tracks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">track_id</th>
+<th data-quarto-table-cell-role="th">album</th>
+<th data-quarto-table-cell-role="th">artist</th>
+<th data-quarto-table-cell-role="th">artist_id</th>
+<th data-quarto-table-cell-role="th">release_date</th>
+<th data-quarto-table-cell-role="th">length</th>
+<th data-quarto-table-cell-role="th">popularity</th>
+<th data-quarto-table-cell-role="th">artist_pop</th>
+<th data-quarto-table-cell-role="th">artist_genres</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">fear</th>
+<th data-quarto-table-cell-role="th">surprise</th>
+<th data-quarto-table-cell-role="th">LABEL_0</th>
+<th data-quarto-table-cell-role="th">LABEL_1</th>
+<th data-quarto-table-cell-role="th">LABEL_2</th>
+<th data-quarto-table-cell-role="th">NEGATIVE</th>
+<th data-quarto-table-cell-role="th">POSITIVE</th>
+<th data-quarto-table-cell-role="th">lyrics</th>
+<th data-quarto-table-cell-role="th">stopwords_removed</th>
+<th data-quarto-table-cell-role="th">lemmatized</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Espresso</td>
+<td>2qSkIjg1o9h3YT9RAgYN75</td>
+<td>Espresso</td>
+<td>Sabrina Carpenter</td>
+<td>74KM79TiuVKeVCqs8QtB0B</td>
+<td>2024-04-12</td>
+<td>175459</td>
+<td>95</td>
+<td>87</td>
+<td>['pop']</td>
+<td>...</td>
+<td>0.046130</td>
+<td>0.005205</td>
+<td>0.058558</td>
+<td>0.745153</td>
+<td>0.196289</td>
+<td>0.988320</td>
+<td>0.011680</td>
+<td>[now, he, is, thinking, about, me, every, nigh...</td>
+<td>[thinking, every, night, sweet, guess, say, sl...</td>
+<td>[think, every, night, sweet, guess, say, sleep...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>BIRDS OF A FEATHER</td>
+<td>6dOtVTDdiauQNBQEDOtlAB</td>
+<td>HIT ME HARD AND SOFT</td>
+<td>Billie Eilish</td>
+<td>6qqNVTkY8uBg9cP3Jd7DAH</td>
+<td>2024-05-17</td>
+<td>210373</td>
+<td>92</td>
+<td>94</td>
+<td>['art pop', 'pop']</td>
+<td>...</td>
+<td>0.548626</td>
+<td>0.067396</td>
+<td>0.112151</td>
+<td>0.500842</td>
+<td>0.387007</td>
+<td>0.963745</td>
+<td>0.036255</td>
+<td>[i, want, you, to, stay, i, want, you, to, sta...</td>
+<td>[want, stay, want, stay, til, grave, til, rot,...</td>
+<td>[want, stay, want, stay, til, grave, til, rot,...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>I Had Some Help (Feat. Morgan Wallen)</td>
+<td>7221xIgOnuakPdLqT0F3nP</td>
+<td>I Had Some Help</td>
+<td>Post Malone</td>
+<td>246dkjvS1zLTtiykXe5h60</td>
+<td>2024-05-10</td>
+<td>178205</td>
+<td>91</td>
+<td>90</td>
+<td>['dfw rap', 'melodic rap', 'pop', 'rap']</td>
+<td>...</td>
+<td>0.000706</td>
+<td>0.000557</td>
+<td>0.210037</td>
+<td>0.717910</td>
+<td>0.072052</td>
+<td>0.998456</td>
+<td>0.001544</td>
+<td>[you, got, a, got, ta, nerve, do, not, you, ba...</td>
+<td>[got, got, ta, nerve, baby, hit, curb, made, t...</td>
+<td>[get, get, ta, nerve, baby, hit, curb, make, t...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Too Sweet</td>
+<td>4IadxL6BUymXlh8RCJJu7T</td>
+<td>Unheard</td>
+<td>Hozier</td>
+<td>2FXC3k01G6Gw61bmprjgqS</td>
+<td>2024-03-22</td>
+<td>251424</td>
+<td>80</td>
+<td>85</td>
+<td>['irish singer-songwriter', 'modern rock', 'po...</td>
+<td>...</td>
+<td>0.002293</td>
+<td>0.001093</td>
+<td>0.120370</td>
+<td>0.648945</td>
+<td>0.230685</td>
+<td>0.984314</td>
+<td>0.015686</td>
+<td>[it, can, not, be, said, i, am, an, early, bir...</td>
+<td>[said, early, bird, clock, say, word, baby, ne...</td>
+<td>[say, early, bird, clock, say, word, baby, nev...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>MILLION DOLLAR BABY</td>
+<td>7fzHQizxTqy8wTXwlrgPQQ</td>
+<td>MILLION DOLLAR BABY</td>
+<td>Tommy Richman</td>
+<td>1WaFQSHVGZQJTbf0BdxdNo</td>
+<td>2024-04-26</td>
+<td>155151</td>
+<td>92</td>
+<td>82</td>
+<td>['chill abstract hip hop']</td>
+<td>...</td>
+<td>0.025805</td>
+<td>0.003822</td>
+<td>0.336834</td>
+<td>0.601042</td>
+<td>0.062124</td>
+<td>0.993108</td>
+<td>0.006892</td>
+<td>[do, it, baby, do, what, i, should, think, do,...</td>
+<td>[baby, think, baby, could, think, baby, think,...</td>
+<td>[baby, think, baby, could, think, baby, think,...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>we can't be friends (wait for your love)</td>
+<td>46kspZSY3aKmwQe7O77fCC</td>
+<td>eternal sunshine</td>
+<td>Ariana Grande</td>
+<td>66CXWjxzNUsdJxJ2JdwvnR</td>
+<td>2024-03-08</td>
+<td>228639</td>
+<td>83</td>
+<td>90</td>
+<td>['pop']</td>
+<td>...</td>
+<td>0.000605</td>
+<td>0.000460</td>
+<td>0.063339</td>
+<td>0.507926</td>
+<td>0.428735</td>
+<td>0.996296</td>
+<td>0.003704</td>
+<td>[i, did, not, think, you, would, understand, m...</td>
+<td>[think, would, understand, could, ever, even, ...</td>
+<td>[think, would, understand, could, ever, even, ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>A Bar Song (Tipsy)</td>
+<td>2FQrifJ1N335Ljm3TjTVVf</td>
+<td>A Bar Song (Tipsy)</td>
+<td>Shaboozey</td>
+<td>3y2cIKLjiOlp1Np37WiUdH</td>
+<td>2024-04-12</td>
+<td>171291</td>
+<td>90</td>
+<td>80</td>
+<td>['pop rap']</td>
+<td>...</td>
+<td>0.009928</td>
+<td>0.003751</td>
+<td>0.057218</td>
+<td>0.763994</td>
+<td>0.178788</td>
+<td>0.994249</td>
+<td>0.005751</td>
+<td>[my, baby, want, a, barking, she, is, been, te...</td>
+<td>[baby, want, barking, telling, night, long, ga...</td>
+<td>[baby, want, bark, tell, night, long, gasoline...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>LUNCH</td>
+<td>629DixmZGHc7ILtEntuiWE</td>
+<td>HIT ME HARD AND SOFT</td>
+<td>Billie Eilish</td>
+<td>6qqNVTkY8uBg9cP3Jd7DAH</td>
+<td>2024-05-17</td>
+<td>179586</td>
+<td>92</td>
+<td>94</td>
+<td>['art pop', 'pop']</td>
+<td>...</td>
+<td>0.004807</td>
+<td>0.005700</td>
+<td>0.226971</td>
+<td>0.703515</td>
+<td>0.069515</td>
+<td>0.995480</td>
+<td>0.004520</td>
+<td>[oh, mmmm, i, could, eat, that, girl, for, lun...</td>
+<td>[mmmm, could, eat, girl, lunch, dances, tongue...</td>
+<td>[mmmm, could, eat, girl, lunch, dance, tongue,...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Fortnight (feat. Post Malone)</td>
+<td>2OzhQlSqBEmt7hmkYxfT6m</td>
+<td>THE TORTURED POETS DEPARTMENT</td>
+<td>Taylor Swift</td>
+<td>06HL4z0CvFAxyc27GXpf02</td>
+<td>2024-04-18</td>
+<td>228965</td>
+<td>89</td>
+<td>100</td>
+<td>['pop']</td>
+<td>...</td>
+<td>0.018662</td>
+<td>0.010463</td>
+<td>0.575611</td>
+<td>0.374097</td>
+<td>0.050291</td>
+<td>0.991912</td>
+<td>0.008088</td>
+<td>[i, was, supposed, to, be, sent, away, i, shou...</td>
+<td>[supposed, sent, away, taken, away, forgot, co...</td>
+<td>[suppose, send, away, take, away, forgot, come...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>Beautiful Things</td>
+<td>6tNQ70jh4OwmPGpYy6R2o9</td>
+<td>Beautiful Things</td>
+<td>Benson Boone</td>
+<td>22wbnEMDvgVIAGdFeek6ET</td>
+<td>2024-01-18</td>
+<td>180304</td>
+<td>88</td>
+<td>85</td>
+<td>['singer-songwriter pop']</td>
+<td>...</td>
+<td>0.996488</td>
+<td>0.000843</td>
+<td>0.033857</td>
+<td>0.318134</td>
+<td>0.648009</td>
+<td>0.012351</td>
+<td>0.987649</td>
+<td>[for, a, while, there, it, was, rough, but, la...</td>
+<td>[rough, lately, better, last, four, cold, reme...</td>
+<td>[rough, lately, well, last, four, cold, rememb...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>i like the way you kiss me</td>
+<td>2GxrNKugF82CnoRFbQfzPf</td>
+<td>i like the way you kiss me</td>
+<td>Artemas</td>
+<td>0PCCGZ0wGLizHt2KZ7hhA2</td>
+<td>2024-03-19</td>
+<td>142514</td>
+<td>92</td>
+<td>81</td>
+<td>[]</td>
+<td>...</td>
+<td>0.001377</td>
+<td>0.001145</td>
+<td>0.034661</td>
+<td>0.521730</td>
+<td>0.443609</td>
+<td>0.984495</td>
+<td>0.015505</td>
+<td>[i, like, the, way, you, kiss, me, i, like, th...</td>
+<td>[like, way, kiss, like, way, uh, like, way, ki...</td>
+<td>[like, way, kiss, like, way, uh, like, way, ki...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>Please Please Please</td>
+<td>5N3hjp1WNayUPZrA8kJmJP</td>
+<td>Please Please Please</td>
+<td>Sabrina Carpenter</td>
+<td>74KM79TiuVKeVCqs8QtB0B</td>
+<td>2024-06-06</td>
+<td>186365</td>
+<td>83</td>
+<td>87</td>
+<td>['pop']</td>
+<td>...</td>
+<td>0.000562</td>
+<td>0.000837</td>
+<td>0.269767</td>
+<td>0.516786</td>
+<td>0.213447</td>
+<td>0.825784</td>
+<td>0.174216</td>
+<td>[i, know, i, have, good, judgment, i, know, i,...</td>
+<td>[know, good, judgment, know, good, taste, funn...</td>
+<td>[know, good, judgment, know, good, taste, funn...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>End of Beginning</td>
+<td>3qhlB30KknSejmIvZZLjOD</td>
+<td>DECIDE</td>
+<td>Djo</td>
+<td>5p9HO3XC5P3BLxJs5Mtrhm</td>
+<td>2022-09-16</td>
+<td>159245</td>
+<td>90</td>
+<td>77</td>
+<td>['pov: indie', 'psychedelic pop']</td>
+<td>...</td>
+<td>0.018631</td>
+<td>0.004027</td>
+<td>0.159378</td>
+<td>0.691760</td>
+<td>0.148862</td>
+<td>0.964887</td>
+<td>0.035113</td>
+<td>[just, one, more, tear, to, cry, one, teardrop...</td>
+<td>[one, tear, cry, one, teardrop, eye, better, s...</td>
+<td>[one, tear, cry, one, teardrop, eye, well, sav...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>Houdini</td>
+<td>2HYFX63wP3otVIvopRS99Z</td>
+<td>Houdini</td>
+<td>Eminem</td>
+<td>7dGJo4pcD2V6oG8kP0tJRR</td>
+<td>2024-05-31</td>
+<td>227239</td>
+<td>88</td>
+<td>90</td>
+<td>['detroit hip hop', 'hip hop', 'rap']</td>
+<td>...</td>
+<td>0.059232</td>
+<td>0.007880</td>
+<td>0.143081</td>
+<td>0.793169</td>
+<td>0.063750</td>
+<td>0.994274</td>
+<td>0.005726</td>
+<td>[hey, them, it, is, pal, uh, i, was, listening...</td>
+<td>[hey, pal, uh, listening, album, good, lucky, ...</td>
+<td>[hey, pal, uh, listen, album, good, lucky, gue...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>Lose Control</td>
+<td>17phhZDn6oGtzMe56NuWvj</td>
+<td>I've Tried Everything But Therapy (Part 1)</td>
+<td>Teddy Swims</td>
+<td>33qOK5uJ8AR2xuQQAhHump</td>
+<td>2023-09-15</td>
+<td>210688</td>
+<td>87</td>
+<td>81</td>
+<td>[]</td>
+<td>...</td>
+<td>0.000485</td>
+<td>0.000120</td>
+<td>0.557471</td>
+<td>0.412347</td>
+<td>0.030183</td>
+<td>0.998184</td>
+<td>0.001816</td>
+<td>[something, is, got, a, hold, of, me, lately, ...</td>
+<td>[something, got, hold, lately, know, anymore, ...</td>
+<td>[something, get, hold, lately, know, anymore, ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>Not Like Us</td>
+<td>6AI3ezQ4o3HUoP6Dhudph3</td>
+<td>Not Like Us</td>
+<td>Kendrick Lamar</td>
+<td>2YZyLoL8N0Wb9xBt1NhZWg</td>
+<td>2024-05-04</td>
+<td>274192</td>
+<td>92</td>
+<td>92</td>
+<td>['conscious hip hop', 'hip hop', 'rap', 'west ...</td>
+<td>...</td>
+<td>0.005929</td>
+<td>0.003224</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0.997200</td>
+<td>0.002800</td>
+<td>[psst, i, see, dead, people, mustard, on, the,...</td>
+<td>[psst, see, dead, people, mustard, beat, musta...</td>
+<td>[psst, see, dead, people, mustard, beat, musta...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">16</td>
+<td>Good Luck, Babe!</td>
+<td>0WbMK4wrZ1wFSty9F7FCgu</td>
+<td>Good Luck, Babe!</td>
+<td>Chappell Roan</td>
+<td>7GlBOeep6PqTfFi59PTUUN</td>
+<td>2024-04-05</td>
+<td>218423</td>
+<td>87</td>
+<td>81</td>
+<td>['indie pop', 'pov: indie', 'springfield mo in...</td>
+<td>...</td>
+<td>0.000427</td>
+<td>0.000471</td>
+<td>0.343443</td>
+<td>0.554660</td>
+<td>0.101897</td>
+<td>0.981645</td>
+<td>0.018355</td>
+<td>[it, is, fine, it, is, cool, you, can, say, th...</td>
+<td>[fine, cool, say, nothing, know, truth, guess,...</td>
+<td>[fine, cool, say, nothing, know, truth, guess,...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17</td>
+<td>I Can Do It With a Broken Heart</td>
+<td>4q5YezDOIPcoLr8R81x9qy</td>
+<td>THE TORTURED POETS DEPARTMENT</td>
+<td>Taylor Swift</td>
+<td>06HL4z0CvFAxyc27GXpf02</td>
+<td>2024-04-18</td>
+<td>218004</td>
+<td>84</td>
+<td>100</td>
+<td>['pop']</td>
+<td>...</td>
+<td>0.001501</td>
+<td>0.000734</td>
+<td>0.268903</td>
+<td>0.570628</td>
+<td>0.160469</td>
+<td>0.992031</td>
+<td>0.007969</td>
+<td>[i, can, read, your, mind, she, is, having, th...</td>
+<td>[read, mind, time, life, glittering, prime, li...</td>
+<td>[read, mind, time, life, glitter, prime, light...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">18</td>
+<td>Belong Together</td>
+<td>5uQ7de4EWjb3rkcFxyEOpu</td>
+<td>Belong Together</td>
+<td>Mark Ambor</td>
+<td>11p2E654TTU8e0nZWBR4AL</td>
+<td>2024-02-16</td>
+<td>148317</td>
+<td>87</td>
+<td>75</td>
+<td>['singer-songwriter pop']</td>
+<td>...</td>
+<td>0.005112</td>
+<td>0.002070</td>
+<td>0.018785</td>
+<td>0.284418</td>
+<td>0.696797</td>
+<td>0.206854</td>
+<td>0.793146</td>
+<td>[i, know, sleep, is, friends, with, death, but...</td>
+<td>[know, sleep, friends, death, maybe, get, rest...</td>
+<td>[know, sleep, friend, death, maybe, get, rest,...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19</td>
+<td>Saturn</td>
+<td>1bjeWoagtHmUKputLVyDxQ</td>
+<td>Saturn</td>
+<td>SZA</td>
+<td>7tYKF4w9nC0nq9CsPZTHyP</td>
+<td>2024-02-22</td>
+<td>186191</td>
+<td>87</td>
+<td>89</td>
+<td>['pop', 'r&amp;b', 'rap']</td>
+<td>...</td>
+<td>0.077055</td>
+<td>0.002667</td>
+<td>0.401661</td>
+<td>0.494084</td>
+<td>0.104256</td>
+<td>0.998026</td>
+<td>0.001974</td>
+<td>[if, there, is, another, universe, please, mak...</td>
+<td>[another, universe, please, make, noise, noise...</td>
+<td>[another, universe, please, make, noise, noise...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">20</td>
+<td>Slow It Down</td>
+<td>51eSHglvG1RJXtL3qI5trr</td>
+<td>Fireworks &amp; Rollerblades</td>
+<td>Benson Boone</td>
+<td>22wbnEMDvgVIAGdFeek6ET</td>
+<td>2024-04-05</td>
+<td>161831</td>
+<td>85</td>
+<td>85</td>
+<td>['singer-songwriter pop']</td>
+<td>...</td>
+<td>0.669380</td>
+<td>0.007431</td>
+<td>0.709808</td>
+<td>0.263808</td>
+<td>0.026384</td>
+<td>0.983390</td>
+<td>0.016610</td>
+<td>[i, would, never, met, you, but, i, wanted, to...</td>
+<td>[would, never, met, wanted, invite, party, wal...</td>
+<td>[would, never, meet, want, invite, party, walk...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">21</td>
+<td>Austin</td>
+<td>4NJqhmkGN042BrvHoMKUrJ</td>
+<td>Austin</td>
+<td>Dasha</td>
+<td>7Ez6lTtSMjMf2YSYpukP1I</td>
+<td>2023-11-17</td>
+<td>171782</td>
+<td>47</td>
+<td>74</td>
+<td>[]</td>
+<td>...</td>
+<td>0.002042</td>
+<td>0.000548</td>
+<td>0.332335</td>
+<td>0.619888</td>
+<td>0.047777</td>
+<td>0.997655</td>
+<td>0.002345</td>
+<td>[we, had, a, plan, move, out, of, this, town, ...</td>
+<td>[plan, move, town, baby, west, sand, talked, l...</td>
+<td>[plan, move, town, baby, west, sand, talk, lat...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">22</td>
+<td>Stargazing</td>
+<td>3Vr3zh0r7ALn8VLqCiRR10</td>
+<td>Stargazing</td>
+<td>Myles Smith</td>
+<td>3bO19AOone0ubCsfDXDtYt</td>
+<td>2024-05-10</td>
+<td>172533</td>
+<td>87</td>
+<td>76</td>
+<td>['singer-songwriter pop']</td>
+<td>...</td>
+<td>0.000203</td>
+<td>0.000153</td>
+<td>0.479969</td>
+<td>0.450779</td>
+<td>0.069251</td>
+<td>0.994339</td>
+<td>0.005661</td>
+<td>[oohooh, oohooh, oohooh, time, stood, still, j...</td>
+<td>[oohooh, oohooh, oohooh, time, stood, still, l...</td>
+<td>[oohooh, oohooh, oohooh, time, stand, still, l...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">23</td>
+<td>Pink Skies</td>
+<td>4ZJ4vzLQekI0WntDbanNC7</td>
+<td>Pink Skies</td>
+<td>Zach Bryan</td>
+<td>40ZNYROS4zLfyyBSs2PGe2</td>
+<td>2024-05-24</td>
+<td>194920</td>
+<td>84</td>
+<td>88</td>
+<td>['classic oklahoma country']</td>
+<td>...</td>
+<td>0.000670</td>
+<td>0.000719</td>
+<td>0.016503</td>
+<td>0.276442</td>
+<td>0.707055</td>
+<td>0.396575</td>
+<td>0.603425</td>
+<td>[the, kids, are, in, town, for, a, funeral, so...</td>
+<td>[kids, town, funeral, pack, car, dry, eyes, kn...</td>
+<td>[kid, town, funeral, pack, car, dry, eye, know...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">24</td>
+<td>Stick Season</td>
+<td>0mflMxspEfB0VbI1kyLiAv</td>
+<td>Stick Season</td>
+<td>Noah Kahan</td>
+<td>2RQXRUsr4IW1f3mKyKsy4B</td>
+<td>2022-10-14</td>
+<td>182346</td>
+<td>86</td>
+<td>84</td>
+<td>['pov: indie']</td>
+<td>...</td>
+<td>0.104740</td>
+<td>0.003200</td>
+<td>0.516024</td>
+<td>0.447031</td>
+<td>0.036945</td>
+<td>0.998780</td>
+<td>0.001220</td>
+<td>[as, you, promised, me, that, i, was, more, th...</td>
+<td>[promised, miles, combined, must, change, hear...</td>
+<td>[promise, mile, combine, must, change, heart, ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">25</td>
+<td>greedy</td>
+<td>3rUGC1vUpkDG9CZFHMur1t</td>
+<td>greedy</td>
+<td>Tate McRae</td>
+<td>45dkTj5sMRSjrmBSBeiHym</td>
+<td>2023-09-15</td>
+<td>131872</td>
+<td>87</td>
+<td>82</td>
+<td>['pop']</td>
+<td>...</td>
+<td>0.001383</td>
+<td>0.000401</td>
+<td>0.257882</td>
+<td>0.650690</td>
+<td>0.091428</td>
+<td>0.970451</td>
+<td>0.029549</td>
+<td>[wood, he, said, are, you, serious, i, have, t...</td>
+<td>[wood, said, serious, tried, figure, next, nig...</td>
+<td>[wood, say, serious, tried, figure, next, nigh...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">26</td>
+<td>Scared To Start</td>
+<td>3Pbp7cUCx4d3OAkZSCoNvn</td>
+<td>Scared To Start</td>
+<td>Michael Marcagi</td>
+<td>4j96cMcT8GRi11qbvo1cLQ</td>
+<td>2024-01-12</td>
+<td>159636</td>
+<td>84</td>
+<td>72</td>
+<td>[]</td>
+<td>...</td>
+<td>0.993651</td>
+<td>0.000680</td>
+<td>0.467322</td>
+<td>0.498693</td>
+<td>0.033985</td>
+<td>0.993110</td>
+<td>0.006890</td>
+<td>[she, is, wearing, an, old, dress, walking, it...</td>
+<td>[wearing, old, dress, walking, waiting, someon...</td>
+<td>[wear, old, dress, walk, wait, someone, turn, ...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">27</td>
+<td>Nasty</td>
+<td>6NjWCIYu1W8xa3HIvcIhd4</td>
+<td>Nasty</td>
+<td>Tinashe</td>
+<td>0NIIxcxNHmOoyBx03SfTCD</td>
+<td>2024-04-12</td>
+<td>176027</td>
+<td>76</td>
+<td>69</td>
+<td>['alternative r&amp;b', 'dance pop', 'metropopolis...</td>
+<td>...</td>
+<td>0.003332</td>
+<td>0.002755</td>
+<td>0.546907</td>
+<td>0.416473</td>
+<td>0.036621</td>
+<td>0.997654</td>
+<td>0.002346</td>
+<td>[because, it, feels, like, heaven, when, it, h...</td>
+<td>[feels, like, heaven, hurts, bad, baby, put, l...</td>
+<td>[feel, like, heaven, hurt, bad, baby, put, lik...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">28</td>
+<td>Water</td>
+<td>5aIVCx5tnk0ntmdiinnYvw</td>
+<td>Water</td>
+<td>Tyla</td>
+<td>3SozjO3Lat463tQICI9LcE</td>
+<td>2023-07-28</td>
+<td>200255</td>
+<td>83</td>
+<td>77</td>
+<td>[]</td>
+<td>...</td>
+<td>0.006878</td>
+<td>0.002168</td>
+<td>0.210546</td>
+<td>0.642083</td>
+<td>0.147372</td>
+<td>0.992614</td>
+<td>0.007386</td>
+<td>[make, me, sweat, make, me, hotter, make, me, ...</td>
+<td>[make, sweat, make, hotter, make, lose, breath...</td>
+<td>[make, sweat, make, hotter, make, lose, breath...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">29</td>
+<td>Gata Only</td>
+<td>6XjDF6nds4DE2BBbagZol6</td>
+<td>Gata Only</td>
+<td>FloyyMenor</td>
+<td>7CvTknweLr9feJtRGrpDBy</td>
+<td>2024-02-02</td>
+<td>222000</td>
+<td>92</td>
+<td>80</td>
+<td>['reggaeton chileno']</td>
+<td>...</td>
+<td>0.889733</td>
+<td>0.003425</td>
+<td>0.223531</td>
+<td>0.686388</td>
+<td>0.090082</td>
+<td>0.995981</td>
+<td>0.004019</td>
+<td>[hey, mommy, i, feel, you, far, away, tell, me...</td>
+<td>[hey, mommy, feel, far, away, tell, want, goin...</td>
+<td>[hey, mommy, feel, far, away, tell, want, go, ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">30</td>
+<td>Miles On It</td>
+<td>4pkb8SbRGeHAvdb87v9rpf</td>
+<td>Miles On It</td>
+<td>Marshmello</td>
+<td>64KEffDW9EtZ1y2vBYgq8T</td>
+<td>2024-05-03</td>
+<td>168355</td>
+<td>79</td>
+<td>82</td>
+<td>['brostep', 'edm', 'pop', 'progressive electro...</td>
+<td>...</td>
+<td>0.022199</td>
+<td>0.003526</td>
+<td>0.144933</td>
+<td>0.754521</td>
+<td>0.100546</td>
+<td>0.997120</td>
+<td>0.002880</td>
+<td>[new, truck, big, lift, old, roads, we, have, ...</td>
+<td>[new, truck, big, lift, old, roads, tearing, s...</td>
+<td>[new, truck, big, lift, old, road, tear, since...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">31</td>
+<td>yes, and?</td>
+<td>7gaA3wERFkFkgivjwbSvkG</td>
+<td>yes, and?</td>
+<td>Ariana Grande</td>
+<td>66CXWjxzNUsdJxJ2JdwvnR</td>
+<td>2024-01-12</td>
+<td>214994</td>
+<td>77</td>
+<td>90</td>
+<td>['pop']</td>
+<td>...</td>
+<td>0.001213</td>
+<td>0.000830</td>
+<td>0.136892</td>
+<td>0.807006</td>
+<td>0.056103</td>
+<td>0.868278</td>
+<td>0.131722</td>
+<td>[in, case, you, have, not, noticed, well, ever...</td>
+<td>[case, noticed, well, everybodys, tired, heali...</td>
+<td>[case, notice, well, everybodys, tire, heal, s...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">32</td>
+<td>TEXAS HOLD 'EM</td>
+<td>0Z7nGFVCLfixWctgePsRk9</td>
+<td>TEXAS HOLD 'EM</td>
+<td>Beyoncé</td>
+<td>6vWDO969PvNqNYHIOW5v0m</td>
+<td>2024-02-11</td>
+<td>233456</td>
+<td>81</td>
+<td>86</td>
+<td>['pop', 'r&amp;b']</td>
+<td>...</td>
+<td>0.095105</td>
+<td>0.005935</td>
+<td>0.063050</td>
+<td>0.677763</td>
+<td>0.259187</td>
+<td>0.991808</td>
+<td>0.008192</td>
+<td>[this, are, not, texts, wood, are, not, no, ho...</td>
+<td>[texts, wood, hold, lay, cards, park, nexus, w...</td>
+<td>[texts, wood, hold, lay, card, park, nexus, wo...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">33</td>
+<td>BAND4BAND (feat. Lil Baby)</td>
+<td>7iabz12vAuVQYyekFIWJxD</td>
+<td>BAND4BAND (feat. Lil Baby)</td>
+<td>Central Cee</td>
+<td>5H4yInM5zmHqpKIoMNAx4r</td>
+<td>2024-05-23</td>
+<td>140733</td>
+<td>86</td>
+<td>80</td>
+<td>['melodic drill', 'r&amp;drill']</td>
+<td>...</td>
+<td>0.031337</td>
+<td>0.003643</td>
+<td>0.158056</td>
+<td>0.726879</td>
+<td>0.115065</td>
+<td>0.995000</td>
+<td>0.005000</td>
+<td>[i, am, not, in, the, mood, because, my, fligh...</td>
+<td>[mood, flight, delayed, jumped, private, jet, ...</td>
+<td>[mood, flight, delay, jump, private, jet, ask,...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">34</td>
+<td>Feel It - From The Original Series “Invincible”</td>
+<td>3SAga35lAPYdjj3qyfEsCF</td>
+<td>Feel It (From The Original Series “Invincible”)</td>
+<td>d4vd</td>
+<td>5y8tKLUfMvliMe8IKamR32</td>
+<td>2024-03-28</td>
+<td>157974</td>
+<td>81</td>
+<td>77</td>
+<td>['bedroom pop']</td>
+<td>...</td>
+<td>0.052882</td>
+<td>0.003317</td>
+<td>0.217128</td>
+<td>0.640834</td>
+<td>0.142039</td>
+<td>0.968726</td>
+<td>0.031274</td>
+<td>[what, do, you, have, in, store, one, life, aw...</td>
+<td>[store, one, life, away, explore, want, get, w...</td>
+<td>[store, one, life, away, explore, want, get, w...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">35</td>
+<td>One Of The Girls (with JENNIE, Lily Rose Depp)</td>
+<td>7CyPwkp0oE8Ro9Dd5CUDjW</td>
+<td>The Idol Episode 4 (Music from the HBO Origina...</td>
+<td>The Weeknd</td>
+<td>1Xyo4u8uXC1ZmMpatF05PJ</td>
+<td>2023-06-23</td>
+<td>244684</td>
+<td>87</td>
+<td>92</td>
+<td>['canadian contemporary r&amp;b', 'canadian pop', ...</td>
+<td>...</td>
+<td>0.018034</td>
+<td>0.003468</td>
+<td>0.178038</td>
+<td>0.707149</td>
+<td>0.114813</td>
+<td>0.885132</td>
+<td>0.114868</td>
+<td>[lock, me, up, and, throw, away, the, key, he,...</td>
+<td>[lock, throw, away, key, knows, get, best, for...</td>
+<td>[lock, throw, away, key, know, get, best, forc...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">36</td>
+<td>Tell Ur Girlfriend</td>
+<td>3lMzT16MjAKKXF7pSZn13B</td>
+<td>Tell Ur Girlfriend</td>
+<td>Lay Bankz</td>
+<td>4OVbrPbhvK46A1uXTU1u5F</td>
+<td>2024-02-07</td>
+<td>124444</td>
+<td>83</td>
+<td>72</td>
+<td>['jersey club']</td>
+<td>...</td>
+<td>0.193861</td>
+<td>0.006144</td>
+<td>0.154598</td>
+<td>0.793314</td>
+<td>0.052088</td>
+<td>0.989258</td>
+<td>0.010742</td>
+<td>[should, tell, my, boyfriend, what, i, been, d...</td>
+<td>[tell, boyfriend, thinking, every, time, want,...</td>
+<td>[tell, boyfriend, think, every, time, want, ge...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">37</td>
+<td>Lovin On Me</td>
+<td>4xhsWYTOGcal8zt0J161CU</td>
+<td>Lovin On Me</td>
+<td>Jack Harlow</td>
+<td>2LIk90788K0zvyj2JJVwkJ</td>
+<td>2023-11-10</td>
+<td>138411</td>
+<td>83</td>
+<td>79</td>
+<td>['deep underground hip hop', 'kentucky hip hop...</td>
+<td>...</td>
+<td>0.001004</td>
+<td>0.001236</td>
+<td>0.150591</td>
+<td>0.733557</td>
+<td>0.115853</td>
+<td>0.941148</td>
+<td>0.058852</td>
+<td>[i, do, not, like, no, whips, and, chains, and...</td>
+<td>[like, whips, chains, tie, whip, loving, baby,...</td>
+<td>[like, whip, chain, tie, whip, love, baby, whi...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">38</td>
+<td>Santa</td>
+<td>5bi0gh89wRuH2OgjdAKFsb</td>
+<td>Santa</td>
+<td>Rvssian</td>
+<td>1fctva4kpRbg2k3v7kwRuS</td>
+<td>2024-04-04</td>
+<td>193038</td>
+<td>85</td>
+<td>75</td>
+<td>['reggaeton', 'reggaeton flow', 'trap latino',...</td>
+<td>...</td>
+<td>0.222502</td>
+<td>0.006456</td>
+<td>0.260976</td>
+<td>0.676515</td>
+<td>0.062509</td>
+<td>0.986034</td>
+<td>0.013966</td>
+<td>[they, rvssian, i, can, not, deny, this, desir...</td>
+<td>[rvssian, deny, desire, stop, looking, lips, r...</td>
+<td>[rvssian, deny, desire, stop, look, lip, rejec...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">39</td>
+<td>CHIHIRO</td>
+<td>7BRD7x5pt8Lqa1eGYC4dzj</td>
+<td>HIT ME HARD AND SOFT</td>
+<td>Billie Eilish</td>
+<td>6qqNVTkY8uBg9cP3Jd7DAH</td>
+<td>2024-05-17</td>
+<td>303440</td>
+<td>90</td>
+<td>94</td>
+<td>['art pop', 'pop']</td>
+<td>...</td>
+<td>0.088560</td>
+<td>0.007637</td>
+<td>0.350795</td>
+<td>0.600648</td>
+<td>0.048556</td>
+<td>0.992751</td>
+<td>0.007249</td>
+<td>[to, take, my, love, away, when, i, come, back...</td>
+<td>[take, love, away, come, back, around, know, s...</td>
+<td>[take, love, away, come, back, around, know, s...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">40</td>
+<td>Whatever</td>
+<td>0LMwmV37RCmBO2so0szAFs</td>
+<td>Whatever</td>
+<td>Kygo</td>
+<td>23fqKkggKUBHNkbKtXEls4</td>
+<td>2024-01-19</td>
+<td>178273</td>
+<td>83</td>
+<td>79</td>
+<td>['edm', 'pop', 'pop dance', 'tropical house']</td>
+<td>...</td>
+<td>0.004015</td>
+<td>0.002350</td>
+<td>0.610942</td>
+<td>0.347206</td>
+<td>0.041852</td>
+<td>0.994950</td>
+<td>0.005050</td>
+<td>[there, is, a, space, in, my, heart, when, it,...</td>
+<td>[space, heart, comes, crashing, anytime, hear,...</td>
+<td>[space, heart, come, crash, anytime, hear, nam...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">41</td>
+<td>Illusion</td>
+<td>59xD5osEFsaNt5PXfIKUnX</td>
+<td>Illusion</td>
+<td>Dua Lipa</td>
+<td>6M2wZ9GZgrQXHCFfjv46we</td>
+<td>2024-04-11</td>
+<td>188143</td>
+<td>78</td>
+<td>87</td>
+<td>['dance pop', 'pop', 'uk pop']</td>
+<td>...</td>
+<td>0.292987</td>
+<td>0.295016</td>
+<td>0.178378</td>
+<td>0.761315</td>
+<td>0.060307</td>
+<td>0.980528</td>
+<td>0.019472</td>
+<td>[i, been, known, to, miss, a, red, flag, i, be...</td>
+<td>[known, miss, red, flag, known, put, lover, pe...</td>
+<td>[know, miss, red, flag, know, put, lover, pede...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">42</td>
+<td>I Don't Wanna Wait</td>
+<td>331l3xABO0HMr1Kkyh2LZq</td>
+<td>I Don't Wanna Wait</td>
+<td>David Guetta</td>
+<td>1Cs0zKBU1kc0i8ypK3B9ai</td>
+<td>2024-04-05</td>
+<td>149667</td>
+<td>84</td>
+<td>87</td>
+<td>['big room', 'dance pop', 'edm', 'pop', 'pop d...</td>
+<td>...</td>
+<td>0.000750</td>
+<td>0.001233</td>
+<td>0.186699</td>
+<td>0.667073</td>
+<td>0.146227</td>
+<td>0.926766</td>
+<td>0.073234</td>
+<td>[let, us, make, tonight, the, weekend, i, do, ...</td>
+<td>[let, us, make, tonight, weekend, want, waiait...</td>
+<td>[let, u, make, tonight, weekend, want, waiait,...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">43</td>
+<td>Jump</td>
+<td>0ve0CavjqrUqVmZ605RhTV</td>
+<td>Jump</td>
+<td>Tyla</td>
+<td>3SozjO3Lat463tQICI9LcE</td>
+<td>2024-03-20</td>
+<td>147071</td>
+<td>74</td>
+<td>77</td>
+<td>[]</td>
+<td>...</td>
+<td>0.074129</td>
+<td>0.006129</td>
+<td>0.160605</td>
+<td>0.730697</td>
+<td>0.108697</td>
+<td>0.992549</td>
+<td>0.007451</td>
+<td>[original, goal, you, are, no, replica, not, s...</td>
+<td>[original, goal, replica, smooth, dean, regula...</td>
+<td>[original, goal, replica, smooth, dean, regula...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">44</td>
+<td>I Remember Everything (feat. Kacey Musgraves)</td>
+<td>4KULAymBBJcPRpk1yO4dOG</td>
+<td>Zach Bryan</td>
+<td>Zach Bryan</td>
+<td>40ZNYROS4zLfyyBSs2PGe2</td>
+<td>2023-08-25</td>
+<td>227195</td>
+<td>84</td>
+<td>88</td>
+<td>['classic oklahoma country']</td>
+<td>...</td>
+<td>0.061445</td>
+<td>0.007630</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0.986801</td>
+<td>0.013199</td>
+<td>[each, bran, i, remember, everything, feat, pa...</td>
+<td>[bran, remember, everything, feat, pacey, musg...</td>
+<td>[bran, remember, everything, feat, pacey, musg...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">45</td>
+<td>one of wun</td>
+<td>4Na2HfNSr58chvfX69fy36</td>
+<td>One of Wun</td>
+<td>Gunna</td>
+<td>2hlmm7s2ICUX0LVIhVFlZQ</td>
+<td>2024-05-10</td>
+<td>144000</td>
+<td>82</td>
+<td>86</td>
+<td>['atl hip hop', 'melodic rap', 'rap', 'trap']</td>
+<td>...</td>
+<td>0.047478</td>
+<td>0.007180</td>
+<td>0.224431</td>
+<td>0.700020</td>
+<td>0.075549</td>
+<td>0.991757</td>
+<td>0.008243</td>
+<td>[that, is, a, good, one, pa, someone, they, te...</td>
+<td>[good, one, pa, someone, tens, one, one, never...</td>
+<td>[good, one, pa, someone, tens, one, one, never...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">46</td>
+<td>obsessed</td>
+<td>6tNgRQ0K2NYZ0Rb9l9DzL8</td>
+<td>GUTS (spilled)</td>
+<td>Olivia Rodrigo</td>
+<td>1McMsnEElThX1knmY4oliG</td>
+<td>2024-03-22</td>
+<td>170541</td>
+<td>80</td>
+<td>87</td>
+<td>['pop']</td>
+<td>...</td>
+<td>0.002200</td>
+<td>0.000302</td>
+<td>0.324626</td>
+<td>0.581667</td>
+<td>0.093707</td>
+<td>0.993318</td>
+<td>0.006682</td>
+<td>[law, dada, data, lambda, law, dada, dada, if,...</td>
+<td>[law, dada, data, lambda, law, dada, dada, tol...</td>
+<td>[law, dada, data, lambda, law, dada, dada, tol...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">47</td>
+<td>Magnetic</td>
+<td>1aKvZDoLGkNMxoRYgkckZG</td>
+<td>SUPER REAL ME</td>
+<td>ILLIT</td>
+<td>36cgvBn0aadzOijnjjwqMN</td>
+<td>2024-03-25</td>
+<td>160688</td>
+<td>86</td>
+<td>74</td>
+<td>['5th gen k-pop']</td>
+<td>...</td>
+<td>0.069957</td>
+<td>0.007273</td>
+<td>0.092965</td>
+<td>0.713226</td>
+<td>0.193809</td>
+<td>0.986112</td>
+<td>0.013888</td>
+<td>[baby, i, am, just, trying, to, play, it, cool...</td>
+<td>[baby, trying, play, cool, hide, want, wait, m...</td>
+<td>[baby, try, play, cool, hide, want, wait, minu...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">48</td>
+<td>redrum</td>
+<td>52eIcoLUM25zbQupAZYoFh</td>
+<td>american dream</td>
+<td>21 Savage</td>
+<td>1URnnhqYAYcrqrcwql10ft</td>
+<td>2024-01-12</td>
+<td>270697</td>
+<td>84</td>
+<td>88</td>
+<td>['atl hip hop', 'hip hop', 'rap']</td>
+<td>...</td>
+<td>0.096404</td>
+<td>0.007055</td>
+<td>0.236659</td>
+<td>0.726418</td>
+<td>0.036923</td>
+<td>0.995288</td>
+<td>0.004712</td>
+<td>[cain, a, note, sore, o, boss, armor, cain, e,...</td>
+<td>[cain, note, sore, boss, armor, cain, e, agora...</td>
+<td>[cain, note, sore, bos, armor, cain, e, agora,...</td>
+</tr>
+</tbody>
+</table>
+
+<p>49 rows × 39 columns</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../01_sentiment_analysis/01_data.html" class="pagination-link" aria-label="Extracting Spotify Data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Extracting Spotify Data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../02_genre_classification/01_classification_model.html" class="pagination-link" aria-label="Genre Classification Model">
+        <span class="nav-page-text"><span class="chapter-title">Genre Classification Model</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
