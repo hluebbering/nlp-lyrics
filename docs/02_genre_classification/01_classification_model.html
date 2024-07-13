@@ -209,23 +209,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="cell-2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>genres_v2[<span class="st">'genre'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>acoustic    110
-pop         109
-emo         108
-happy       108
-sad         107
-punk        107
-romance     106
-grunge      106
-hip-hop     105
-chill       105
-dance       103
-piano       103
-indie       102
-rock        101
-edm          77
-techno       59
-r-n-b        58
+<pre><code>pop         142
+acoustic    139
+emo         139
+chill       139
+grunge      134
+punk        134
+romance     133
+rock        132
+sad         132
+happy       132
+piano       131
+hip-hop     130
+indie       129
+dance       127
+techno       95
+r-n-b        91
+edm          84
 Name: genre, dtype: int64</code></pre>
 </div>
 </div>
@@ -261,56 +261,56 @@ Name: genre, dtype: int64</code></pre>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">count</td>
-<td>1674.000000</td>
-<td>1674.000000</td>
-<td>1674.000000</td>
-<td>1674.000000</td>
-<td>1674.000000</td>
-<td>1674.000000</td>
-<td>1674.000000</td>
-<td>1674.000000</td>
-<td>1674.000000</td>
-<td>1674.000000</td>
-<td>1674.000000</td>
-<td>1674.000000</td>
-<td>1674.000000</td>
+<td>2143.000000</td>
+<td>2143.000000</td>
+<td>2143.000000</td>
+<td>2143.000000</td>
+<td>2143.000000</td>
+<td>2143.000000</td>
+<td>2143.000000</td>
+<td>2143.000000</td>
+<td>2143.000000</td>
+<td>2143.000000</td>
+<td>2143.000000</td>
+<td>2143.000000</td>
+<td>2143.000000</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">mean</td>
-<td>27.680406</td>
-<td>0.228153</td>
-<td>0.557579</td>
-<td>0.654587</td>
-<td>0.113044</td>
-<td>0.188549</td>
-<td>-7.521858</td>
-<td>0.079652</td>
-<td>122.751480</td>
-<td>0.441805</td>
-<td>5.263441</td>
-<td>0.648148</td>
-<td>3.931302</td>
+<td>28.085394</td>
+<td>0.229999</td>
+<td>0.559915</td>
+<td>0.654700</td>
+<td>0.114476</td>
+<td>0.188180</td>
+<td>-7.523677</td>
+<td>0.078464</td>
+<td>122.833333</td>
+<td>0.438788</td>
+<td>5.211386</td>
+<td>0.645824</td>
+<td>3.929071</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">std</td>
-<td>27.194546</td>
-<td>0.312398</td>
-<td>0.167096</td>
-<td>0.244701</td>
-<td>0.263844</td>
-<td>0.152054</td>
-<td>4.460943</td>
-<td>0.081385</td>
-<td>28.238078</td>
-<td>0.232465</td>
-<td>3.607028</td>
-<td>0.477691</td>
-<td>0.381192</td>
+<td>27.611174</td>
+<td>0.312395</td>
+<td>0.165951</td>
+<td>0.245871</td>
+<td>0.265948</td>
+<td>0.151159</td>
+<td>4.443536</td>
+<td>0.078789</td>
+<td>28.301679</td>
+<td>0.231271</td>
+<td>3.584855</td>
+<td>0.478375</td>
+<td>0.377482</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">min</td>
 <td>0.000000</td>
-<td>0.000002</td>
+<td>0.000001</td>
 <td>0.062100</td>
 <td>0.001500</td>
 <td>0.000000</td>
@@ -326,15 +326,15 @@ Name: genre, dtype: int64</code></pre>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">25%</td>
 <td>0.000000</td>
-<td>0.005390</td>
-<td>0.444000</td>
-<td>0.489000</td>
+<td>0.005250</td>
+<td>0.446000</td>
+<td>0.488500</td>
 <td>0.000000</td>
-<td>0.095725</td>
-<td>-9.013000</td>
-<td>0.035425</td>
-<td>100.149750</td>
-<td>0.256250</td>
+<td>0.095900</td>
+<td>-8.931000</td>
+<td>0.035500</td>
+<td>100.304500</td>
+<td>0.255000</td>
 <td>2.000000</td>
 <td>0.000000</td>
 <td>4.000000</td>
@@ -342,41 +342,41 @@ Name: genre, dtype: int64</code></pre>
 <tr class="even">
 <td data-quarto-table-cell-role="th">50%</td>
 <td>26.000000</td>
-<td>0.056100</td>
-<td>0.555000</td>
-<td>0.707500</td>
-<td>0.000046</td>
+<td>0.058200</td>
+<td>0.559000</td>
+<td>0.710000</td>
+<td>0.000044</td>
 <td>0.126000</td>
-<td>-6.326000</td>
+<td>-6.340000</td>
 <td>0.048200</td>
-<td>123.467500</td>
-<td>0.417000</td>
-<td>6.000000</td>
+<td>123.279000</td>
+<td>0.415000</td>
+<td>5.000000</td>
 <td>1.000000</td>
 <td>4.000000</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">75%</td>
 <td>53.000000</td>
-<td>0.357750</td>
-<td>0.676000</td>
-<td>0.855000</td>
-<td>0.012950</td>
-<td>0.230750</td>
-<td>-4.653750</td>
-<td>0.084075</td>
-<td>140.063750</td>
-<td>0.613750</td>
+<td>0.362000</td>
+<td>0.678500</td>
+<td>0.856000</td>
+<td>0.012050</td>
+<td>0.234000</td>
+<td>-4.699500</td>
+<td>0.083600</td>
+<td>139.987000</td>
+<td>0.610000</td>
 <td>8.000000</td>
 <td>1.000000</td>
 <td>4.000000</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">max</td>
-<td>83.000000</td>
-<td>0.995000</td>
-<td>0.969000</td>
+<td>85.000000</td>
 <td>0.996000</td>
+<td>0.969000</td>
+<td>0.999000</td>
 <td>0.978000</td>
 <td>0.988000</td>
 <td>-1.264000</td>
@@ -503,20 +503,20 @@ Name: genre, dtype: int64</code></pre>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <div>
 <style type="text/css">
-#T_e7d7e td.col0 {
+#T_62f1b td.col0 {
   font-family: "Roboto";
   color: #e83e8c;
   font-size: 13px;
   font-weight: 800;
   text-transform: uppercase;
 }
-#T_e7d7e td {
+#T_62f1b td {
   font-family: "Roboto";
   color: black;
   font-size: 12px;
   font-weight: 400;
 }
-#T_e7d7e_row1_col1, #T_e7d7e_row1_col2, #T_e7d7e_row1_col3, #T_e7d7e_row1_col4, #T_e7d7e_row6_col5 {
+#T_62f1b_row0_col1, #T_62f1b_row0_col3, #T_62f1b_row0_col4, #T_62f1b_row0_col5, #T_62f1b_row1_col2 {
   color: white !important;
   background-color: #d23d75;
   font-weight: 700 !important;
@@ -524,90 +524,90 @@ Name: genre, dtype: int64</code></pre>
 }
 </style>
 
-<table id="T_e7d7e" data-quarto-postprocess="true" class="table table-sm table-striped small">
+<table id="T_62f1b" data-quarto-postprocess="true" class="table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_e7d7e_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Model</th>
-<th id="T_e7d7e_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Accuracy</th>
-<th id="T_e7d7e_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">ROC-AUC</th>
-<th id="T_e7d7e_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Precision</th>
-<th id="T_e7d7e_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Recall</th>
-<th id="T_e7d7e_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">F1-Score</th>
+<th id="T_62f1b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Model</th>
+<th id="T_62f1b_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Accuracy</th>
+<th id="T_62f1b_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">ROC-AUC</th>
+<th id="T_62f1b_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Precision</th>
+<th id="T_62f1b_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Recall</th>
+<th id="T_62f1b_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">F1-Score</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_e7d7e_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
-<td id="T_e7d7e_row0_col0" class="data row0 col0">Logistic Regression</td>
-<td id="T_e7d7e_row0_col1" class="data row0 col1">0.291169</td>
-<td id="T_e7d7e_row0_col2" class="data row0 col2">0.812339</td>
-<td id="T_e7d7e_row0_col3" class="data row0 col3">0.286944</td>
-<td id="T_e7d7e_row0_col4" class="data row0 col4">0.291169</td>
-<td id="T_e7d7e_row0_col5" class="data row0 col5">0.272028</td>
+<td id="T_62f1b_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_62f1b_row0_col0" class="data row0 col0">Logistic Regression</td>
+<td id="T_62f1b_row0_col1" class="data row0 col1">0.292910</td>
+<td id="T_62f1b_row0_col2" class="data row0 col2">0.823484</td>
+<td id="T_62f1b_row0_col3" class="data row0 col3">0.322340</td>
+<td id="T_62f1b_row0_col4" class="data row0 col4">0.292910</td>
+<td id="T_62f1b_row0_col5" class="data row0 col5">0.275275</td>
 </tr>
 <tr class="even">
-<td id="T_e7d7e_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
-<td id="T_e7d7e_row1_col0" class="data row1 col0">Random Forest</td>
-<td id="T_e7d7e_row1_col1" class="data row1 col1">0.329356</td>
-<td id="T_e7d7e_row1_col2" class="data row1 col2">0.832776</td>
-<td id="T_e7d7e_row1_col3" class="data row1 col3">0.335009</td>
-<td id="T_e7d7e_row1_col4" class="data row1 col4">0.329356</td>
-<td id="T_e7d7e_row1_col5" class="data row1 col5">0.305644</td>
+<td id="T_62f1b_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_62f1b_row1_col0" class="data row1 col0">Random Forest</td>
+<td id="T_62f1b_row1_col1" class="data row1 col1">0.266791</td>
+<td id="T_62f1b_row1_col2" class="data row1 col2">0.826900</td>
+<td id="T_62f1b_row1_col3" class="data row1 col3">0.257971</td>
+<td id="T_62f1b_row1_col4" class="data row1 col4">0.266791</td>
+<td id="T_62f1b_row1_col5" class="data row1 col5">0.237800</td>
 </tr>
 <tr class="odd">
-<td id="T_e7d7e_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
-<td id="T_e7d7e_row2_col0" class="data row2 col0">SVM</td>
-<td id="T_e7d7e_row2_col1" class="data row2 col1">0.298329</td>
-<td id="T_e7d7e_row2_col2" class="data row2 col2">0.816533</td>
-<td id="T_e7d7e_row2_col3" class="data row2 col3">0.287245</td>
-<td id="T_e7d7e_row2_col4" class="data row2 col4">0.298329</td>
-<td id="T_e7d7e_row2_col5" class="data row2 col5">0.278114</td>
+<td id="T_62f1b_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_62f1b_row2_col0" class="data row2 col0">SVM</td>
+<td id="T_62f1b_row2_col1" class="data row2 col1">0.270522</td>
+<td id="T_62f1b_row2_col2" class="data row2 col2">0.816350</td>
+<td id="T_62f1b_row2_col3" class="data row2 col3">0.275629</td>
+<td id="T_62f1b_row2_col4" class="data row2 col4">0.270522</td>
+<td id="T_62f1b_row2_col5" class="data row2 col5">0.252128</td>
 </tr>
 <tr class="even">
-<td id="T_e7d7e_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
-<td id="T_e7d7e_row3_col0" class="data row3 col0">Neural Network</td>
-<td id="T_e7d7e_row3_col1" class="data row3 col1">0.288783</td>
-<td id="T_e7d7e_row3_col2" class="data row3 col2">0.803341</td>
-<td id="T_e7d7e_row3_col3" class="data row3 col3">0.282435</td>
-<td id="T_e7d7e_row3_col4" class="data row3 col4">0.288783</td>
-<td id="T_e7d7e_row3_col5" class="data row3 col5">0.281682</td>
+<td id="T_62f1b_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_62f1b_row3_col0" class="data row3 col0">Neural Network</td>
+<td id="T_62f1b_row3_col1" class="data row3 col1">0.268657</td>
+<td id="T_62f1b_row3_col2" class="data row3 col2">0.815905</td>
+<td id="T_62f1b_row3_col3" class="data row3 col3">0.270748</td>
+<td id="T_62f1b_row3_col4" class="data row3 col4">0.268657</td>
+<td id="T_62f1b_row3_col5" class="data row3 col5">0.258513</td>
 </tr>
 <tr class="odd">
-<td id="T_e7d7e_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
-<td id="T_e7d7e_row4_col0" class="data row4 col0">KNN</td>
-<td id="T_e7d7e_row4_col1" class="data row4 col1">0.233890</td>
-<td id="T_e7d7e_row4_col2" class="data row4 col2">0.669295</td>
-<td id="T_e7d7e_row4_col3" class="data row4 col3">0.226509</td>
-<td id="T_e7d7e_row4_col4" class="data row4 col4">0.233890</td>
-<td id="T_e7d7e_row4_col5" class="data row4 col5">0.222153</td>
+<td id="T_62f1b_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_62f1b_row4_col0" class="data row4 col0">KNN</td>
+<td id="T_62f1b_row4_col1" class="data row4 col1">0.203358</td>
+<td id="T_62f1b_row4_col2" class="data row4 col2">0.662278</td>
+<td id="T_62f1b_row4_col3" class="data row4 col3">0.201823</td>
+<td id="T_62f1b_row4_col4" class="data row4 col4">0.203358</td>
+<td id="T_62f1b_row4_col5" class="data row4 col5">0.191504</td>
 </tr>
 <tr class="even">
-<td id="T_e7d7e_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
-<td id="T_e7d7e_row5_col0" class="data row5 col0">Decision Tree</td>
-<td id="T_e7d7e_row5_col1" class="data row5 col1">0.272076</td>
-<td id="T_e7d7e_row5_col2" class="data row5 col2">0.739925</td>
-<td id="T_e7d7e_row5_col3" class="data row5 col3">0.271790</td>
-<td id="T_e7d7e_row5_col4" class="data row5 col4">0.272076</td>
-<td id="T_e7d7e_row5_col5" class="data row5 col5">0.250733</td>
+<td id="T_62f1b_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
+<td id="T_62f1b_row5_col0" class="data row5 col0">Decision Tree</td>
+<td id="T_62f1b_row5_col1" class="data row5 col1">0.238806</td>
+<td id="T_62f1b_row5_col2" class="data row5 col2">0.729930</td>
+<td id="T_62f1b_row5_col3" class="data row5 col3">0.262212</td>
+<td id="T_62f1b_row5_col4" class="data row5 col4">0.238806</td>
+<td id="T_62f1b_row5_col5" class="data row5 col5">0.223554</td>
 </tr>
 <tr class="odd">
-<td id="T_e7d7e_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
-<td id="T_e7d7e_row6_col0" class="data row6 col0">Gradient Boost</td>
-<td id="T_e7d7e_row6_col1" class="data row6 col1">0.315036</td>
-<td id="T_e7d7e_row6_col2" class="data row6 col2">0.814781</td>
-<td id="T_e7d7e_row6_col3" class="data row6 col3">0.328956</td>
-<td id="T_e7d7e_row6_col4" class="data row6 col4">0.315036</td>
-<td id="T_e7d7e_row6_col5" class="data row6 col5">0.313637</td>
+<td id="T_62f1b_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
+<td id="T_62f1b_row6_col0" class="data row6 col0">Gradient Boost</td>
+<td id="T_62f1b_row6_col1" class="data row6 col1">0.270522</td>
+<td id="T_62f1b_row6_col2" class="data row6 col2">0.808805</td>
+<td id="T_62f1b_row6_col3" class="data row6 col3">0.269965</td>
+<td id="T_62f1b_row6_col4" class="data row6 col4">0.270522</td>
+<td id="T_62f1b_row6_col5" class="data row6 col5">0.263241</td>
 </tr>
 <tr class="even">
-<td id="T_e7d7e_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">7</td>
-<td id="T_e7d7e_row7_col0" class="data row7 col0">XGB</td>
-<td id="T_e7d7e_row7_col1" class="data row7 col1">0.286396</td>
-<td id="T_e7d7e_row7_col2" class="data row7 col2">0.781179</td>
-<td id="T_e7d7e_row7_col3" class="data row7 col3">0.289853</td>
-<td id="T_e7d7e_row7_col4" class="data row7 col4">0.286396</td>
-<td id="T_e7d7e_row7_col5" class="data row7 col5">0.285033</td>
+<td id="T_62f1b_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">7</td>
+<td id="T_62f1b_row7_col0" class="data row7 col0">XGB</td>
+<td id="T_62f1b_row7_col1" class="data row7 col1">0.248134</td>
+<td id="T_62f1b_row7_col2" class="data row7 col2">0.778676</td>
+<td id="T_62f1b_row7_col3" class="data row7 col3">0.249968</td>
+<td id="T_62f1b_row7_col4" class="data row7 col4">0.248134</td>
+<td id="T_62f1b_row7_col5" class="data row7 col5">0.241814</td>
 </tr>
 </tbody>
 </table>
@@ -646,7 +646,7 @@ Considering these metrics, the **Gradient Boosting** model is the best performin
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy:"</span>, accuracy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Accuracy: 0.32935560859188545</code></pre>
+<pre><code>Accuracy: 0.2667910447761194</code></pre>
 </div>
 </div>
 <section id="applying-model-to-new-data" class="level4">
@@ -700,346 +700,353 @@ Considering these metrics, the **Gradient Boosting** model is the best performin
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>Espresso</td>
-<td>pop</td>
-<td>10</td>
-<td>[0.04832254153187096, 0.12619269101055017, 0.0...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>BIRDS OF A FEATHER</td>
-<td>indie</td>
-<td>8</td>
-<td>[0.062251132860993375, 0.1350221101568469, 0.1...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>I Had Some Help (Feat. Morgan Wallen)</td>
-<td>happy</td>
-<td>6</td>
-<td>[0.029337791261863377, 0.07129928471933508, 0....</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>Too Sweet</td>
-<td>happy</td>
-<td>6</td>
-<td>[0.03110784942385244, 0.07207603026340323, 0.1...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>MILLION DOLLAR BABY</td>
-<td>pop</td>
-<td>10</td>
-<td>[0.021188299219084113, 0.06175288340078473, 0....</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
-<td>we can't be friends (wait for your love)</td>
-<td>pop</td>
-<td>10</td>
-<td>[0.06131610996839342, 0.09285144407448995, 0.0...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
-<td>A Bar Song (Tipsy)</td>
-<td>pop</td>
-<td>10</td>
-<td>[0.06472761794832327, 0.1272680424393216, 0.02...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
-<td>LUNCH</td>
-<td>dance</td>
-<td>2</td>
-<td>[0.057410671030815943, 0.07659489738600524, 0....</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
-<td>Fortnight (feat. Post Malone)</td>
-<td>sad</td>
-<td>15</td>
-<td>[0.1634002656168661, 0.13524188930269576, 0.00...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
-<td>Beautiful Things</td>
-<td>romance</td>
-<td>14</td>
-<td>[0.06134736364973052, 0.08543240103706232, 0.0...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">10</td>
-<td>i like the way you kiss me</td>
-<td>rock</td>
-<td>13</td>
-<td>[0.007352859917424355, 0.0186163664804808, 0.1...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11</td>
 <td>Please Please Please</td>
 <td>pop</td>
 <td>10</td>
-<td>[0.05484400855863455, 0.09565418558487603, 0.0...</td>
+<td>[0.04088154652446443, 0.07714395919805248, 0.0...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Si Antes Te Hubiera Conocido</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.052278933050807844, 0.06228149646432559, 0....</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">12</td>
-<td>End of Beginning</td>
+<td data-quarto-table-cell-role="th">2</td>
+<td>BIRDS OF A FEATHER</td>
 <td>dance</td>
 <td>2</td>
-<td>[0.09961923753210948, 0.0904829832820782, 0.11...</td>
+<td>[0.07264102912485536, 0.10432647001182196, 0.1...</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">13</td>
-<td>Houdini</td>
-<td>happy</td>
-<td>6</td>
-<td>[0.010771952741578305, 0.07198130147963207, 0....</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">14</td>
-<td>Lose Control</td>
-<td>romance</td>
-<td>14</td>
-<td>[0.053126154256947646, 0.12564655171183095, 0....</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">15</td>
-<td>Not Like Us</td>
-<td>hip-hop</td>
-<td>7</td>
-<td>[0.031892615385277774, 0.07170660657451432, 0....</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">16</td>
+<td data-quarto-table-cell-role="th">3</td>
 <td>Good Luck, Babe!</td>
 <td>pop</td>
 <td>10</td>
-<td>[0.07813084208166093, 0.09704788505899932, 0.0...</td>
+<td>[0.05870991975676431, 0.09131179743471457, 0.0...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>A Bar Song (Tipsy)</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.04773552198684028, 0.0836338792955852, 0.04...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>Not Like Us</td>
+<td>hip-hop</td>
+<td>7</td>
+<td>[0.02365012599849557, 0.07161269506638383, 0.0...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>MILLION DOLLAR BABY</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.02922418578908816, 0.0647413931106139, 0.08...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>Too Sweet</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.025137350612849513, 0.07401057278171215, 0....</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Beautiful Things</td>
+<td>romance</td>
+<td>14</td>
+<td>[0.05636255764656002, 0.06888807365798695, 0.0...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>I Had Some Help (Feat. Morgan Wallen)</td>
+<td>happy</td>
+<td>6</td>
+<td>[0.0324812151873648, 0.07718756832982102, 0.09...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>Espresso</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.03976771088890484, 0.11091839764030585, 0.0...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>i like the way you kiss me</td>
+<td>rock</td>
+<td>13</td>
+<td>[0.00560173930301027, 0.027934558669221385, 0....</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>Stargazing</td>
+<td>romance</td>
+<td>14</td>
+<td>[0.07844059571018996, 0.08715430776260266, 0.0...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>LUNCH</td>
+<td>dance</td>
+<td>2</td>
+<td>[0.06268786025919988, 0.04074153271739373, 0.2...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>End of Beginning</td>
+<td>dance</td>
+<td>2</td>
+<td>[0.058459964608319995, 0.045299973823992, 0.14...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>we can't be friends (wait for your love)</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.04767297734830211, 0.09013230830759586, 0.0...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">16</td>
+<td>Lose Control</td>
+<td>romance</td>
+<td>14</td>
+<td>[0.06999320818385321, 0.09762855667926634, 0.0...</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">17</td>
-<td>I Can Do It With a Broken Heart</td>
-<td>pop</td>
-<td>10</td>
-<td>[0.04922753425420418, 0.08735245470843163, 0.0...</td>
+<td>Tough</td>
+<td>acoustic</td>
+<td>0</td>
+<td>[0.1487665952511997, 0.07956401979979427, 0.02...</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">18</td>
-<td>Belong Together</td>
-<td>pop</td>
-<td>10</td>
-<td>[0.11179875786263554, 0.12087464660186649, 0.0...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">19</td>
-<td>Saturn</td>
-<td>acoustic</td>
-<td>0</td>
-<td>[0.14686346634076933, 0.10380959997550107, 0.0...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">20</td>
-<td>Slow It Down</td>
-<td>happy</td>
-<td>6</td>
-<td>[0.05372462763732637, 0.07412152089580584, 0.0...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">21</td>
 <td>Austin</td>
 <td>pop</td>
 <td>10</td>
-<td>[0.0501664673717607, 0.0933994660596392, 0.052...</td>
+<td>[0.05794414166297137, 0.07773720145272671, 0.0...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19</td>
+<td>I Can Do It With a Broken Heart</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.04152820229550991, 0.07795210201071162, 0.0...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">20</td>
+<td>Houdini</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.012428955551854977, 0.04178841837693284, 0....</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">21</td>
+<td>Nasty</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.07229835155549594, 0.07798138478900962, 0.0...</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">22</td>
-<td>Stargazing</td>
+<td>Belong Together</td>
 <td>pop</td>
 <td>10</td>
-<td>[0.0700828327026069, 0.1180781676318351, 0.036...</td>
+<td>[0.1184642865957953, 0.08894661601186675, 0.04...</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">23</td>
-<td>Pink Skies</td>
-<td>chill</td>
-<td>1</td>
-<td>[0.09012108560090301, 0.15018375147564447, 0.0...</td>
+<td>Slow It Down</td>
+<td>romance</td>
+<td>14</td>
+<td>[0.04562594460281343, 0.06860379702332979, 0.0...</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">24</td>
-<td>Stick Season</td>
-<td>acoustic</td>
-<td>0</td>
-<td>[0.18591473045968132, 0.08382765471124884, 0.0...</td>
+<td>HOT TO GO!</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.018093243817939027, 0.07192985122486334, 0....</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">25</td>
-<td>greedy</td>
-<td>happy</td>
-<td>6</td>
-<td>[0.06177391429539499, 0.0887022100914361, 0.02...</td>
+<td>GIRLS</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.030047792403698946, 0.07162699583368382, 0....</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">26</td>
-<td>Scared To Start</td>
-<td>chill</td>
-<td>1</td>
-<td>[0.13107766291528747, 0.14041067548070166, 0.0...</td>
+<td>greedy</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.0391825562304293, 0.07982381429220817, 0.04...</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">27</td>
-<td>Nasty</td>
-<td>hip-hop</td>
-<td>7</td>
-<td>[0.05112198969699953, 0.09815715992186375, 0.0...</td>
+<td>Move</td>
+<td>dance</td>
+<td>2</td>
+<td>[0.03153192004354079, 0.0632106471284883, 0.27...</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">28</td>
-<td>Water</td>
-<td>pop</td>
-<td>10</td>
-<td>[0.036958899774743065, 0.09166638627468936, 0....</td>
+<td>Fortnight (feat. Post Malone)</td>
+<td>acoustic</td>
+<td>0</td>
+<td>[0.2133077064313661, 0.10533632362310526, 0.00...</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">29</td>
-<td>Gata Only</td>
-<td>hip-hop</td>
-<td>7</td>
-<td>[0.07944251331085496, 0.10507118676058398, 0.0...</td>
+<td>Saturn</td>
+<td>sad</td>
+<td>15</td>
+<td>[0.15633979786968363, 0.09415369169525718, 0.0...</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">30</td>
-<td>Miles On It</td>
-<td>happy</td>
-<td>6</td>
-<td>[0.030293084752480434, 0.060393964528687914, 0...</td>
+<td>28</td>
+<td>chill</td>
+<td>1</td>
+<td>[0.08481086165547902, 0.14493631982323849, 0.0...</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">31</td>
-<td>yes, and?</td>
+<td>Close To You</td>
 <td>pop</td>
 <td>10</td>
-<td>[0.03923640328030741, 0.10172945800400378, 0.0...</td>
+<td>[0.043913102280624665, 0.07931487946844533, 0....</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">32</td>
-<td>TEXAS HOLD 'EM</td>
+<td>the boy is mine</td>
 <td>pop</td>
 <td>10</td>
-<td>[0.06947162655502154, 0.09576348368506085, 0.0...</td>
+<td>[0.03326174503752976, 0.07819873548158905, 0.0...</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">33</td>
-<td>BAND4BAND (feat. Lil Baby)</td>
-<td>hip-hop</td>
-<td>7</td>
-<td>[0.010963028586862973, 0.07859730857102712, 0....</td>
+<td>Stick Season</td>
+<td>acoustic</td>
+<td>0</td>
+<td>[0.15164660763833773, 0.08639492608005701, 0.0...</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">34</td>
-<td>Feel It - From The Original Series “Invincible”</td>
-<td>pop</td>
-<td>10</td>
-<td>[0.04719639945364053, 0.07947306411719812, 0.0...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">35</td>
-<td>One Of The Girls (with JENNIE, Lily Rose Depp)</td>
-<td>romance</td>
-<td>14</td>
-<td>[0.04780153582857584, 0.08538916614307925, 0.0...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">36</td>
-<td>Tell Ur Girlfriend</td>
-<td>hip-hop</td>
-<td>7</td>
-<td>[0.005698984522066412, 0.04019258793156138, 0....</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">37</td>
-<td>Lovin On Me</td>
-<td>happy</td>
-<td>6</td>
-<td>[0.0239466418597217, 0.07187688521272997, 0.07...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">38</td>
-<td>Santa</td>
-<td>pop</td>
-<td>10</td>
-<td>[0.036950640543466605, 0.09902254261629856, 0....</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">39</td>
-<td>CHIHIRO</td>
-<td>piano</td>
-<td>9</td>
-<td>[0.06865514957748471, 0.08885887995987213, 0.1...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">40</td>
-<td>Whatever</td>
-<td>pop</td>
-<td>10</td>
-<td>[0.04481988407189988, 0.09728907499399733, 0.0...</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">41</td>
-<td>Illusion</td>
-<td>pop</td>
-<td>10</td>
-<td>[0.03406716211351513, 0.08771688922697399, 0.0...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">42</td>
 <td>I Don't Wanna Wait</td>
 <td>pop</td>
 <td>10</td>
-<td>[0.04502505120855936, 0.09875116742062903, 0.0...</td>
+<td>[0.04034787361025403, 0.07919812766986792, 0.0...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">35</td>
+<td>Smeraldo Garden Marching Band (feat. Loco)</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.012025901882804802, 0.0892535139898251, 0.0...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">36</td>
+<td>Stumblin' In</td>
+<td>dance</td>
+<td>2</td>
+<td>[0.03182662544837536, 0.06430270117639993, 0.1...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">37</td>
+<td>360</td>
+<td>dance</td>
+<td>2</td>
+<td>[0.08284826354380695, 0.06311558351697714, 0.2...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">38</td>
+<td>Rockstar</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.028486403608907106, 0.06298695375092218, 0....</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">39</td>
+<td>One Of The Girls (with JENNIE, Lily Rose Depp)</td>
+<td>romance</td>
+<td>14</td>
+<td>[0.0467947393194539, 0.06589514531102753, 0.03...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">40</td>
+<td>Scared To Start</td>
+<td>acoustic</td>
+<td>0</td>
+<td>[0.1788457069830126, 0.10889137568133479, 0.01...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">41</td>
+<td>Lies Lies Lies</td>
+<td>romance</td>
+<td>14</td>
+<td>[0.06906881049759486, 0.12520424564543942, 0.0...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">42</td>
+<td>feelslikeimfallinginlove</td>
+<td>dance</td>
+<td>2</td>
+<td>[0.06058770720420721, 0.10143051335809605, 0.1...</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">43</td>
-<td>Jump</td>
+<td>Parking Lot</td>
 <td>pop</td>
 <td>10</td>
-<td>[0.02580044873861146, 0.10764863778519679, 0.0...</td>
+<td>[0.04112327314489984, 0.08773701130340866, 0.0...</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">44</td>
-<td>I Remember Everything (feat. Kacey Musgraves)</td>
-<td>acoustic</td>
-<td>0</td>
-<td>[0.18922332829839963, 0.12607182575835746, 0.0...</td>
+<td>Gata Only</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.08002179081376724, 0.080812180724709, 0.048...</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">45</td>
-<td>one of wun</td>
+<td>BAND4BAND (feat. Lil Baby)</td>
 <td>hip-hop</td>
 <td>7</td>
-<td>[0.003697849395802203, 0.04443929940707556, 0....</td>
+<td>[0.009146801699282305, 0.04043458967408511, 0....</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">46</td>
-<td>obsessed</td>
+<td>Santa</td>
 <td>pop</td>
 <td>10</td>
-<td>[0.039187875030013225, 0.09090484970317311, 0....</td>
+<td>[0.02718144861517665, 0.08773498147207358, 0.0...</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">47</td>
 <td>Magnetic</td>
 <td>pop</td>
 <td>10</td>
-<td>[0.03485985300807636, 0.07644729855332005, 0.0...</td>
+<td>[0.030559852949859363, 0.061780658803238436, 0...</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">48</td>
-<td>redrum</td>
-<td>dance</td>
-<td>2</td>
-<td>[0.03290810189070711, 0.06273202050019706, 0.1...</td>
+<td>Water</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.025002878313200597, 0.06980209749484347, 0....</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">49</td>
+<td>Illusion</td>
+<td>pop</td>
+<td>10</td>
+<td>[0.022670167757488244, 0.06973317734184772, 0....</td>
 </tr>
 </tbody>
 </table>
@@ -1049,6 +1056,95 @@ Considering these metrics, the **Gradient Boosting** model is the best performin
 </div>
 </div>
 <hr>
+<div id="cell-34" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> spotipy</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> spotipy.oauth2 <span class="im">import</span> SpotifyClientCredentials</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>warnings.simplefilter(<span class="st">"ignore"</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># import track_data</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>genres_v2 <span class="op">=</span> pd.read_csv(<span class="st">"../assets/data/genre_seeds.csv"</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>client_id <span class="op">=</span> <span class="st">"bd1c5f1d16b94210bc1776e172cbd264"</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>client_secret <span class="op">=</span> <span class="st">"b152588a487b4f6e9429bdd1bfd92fb3"</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="kw">sp</span> <span class="op">=</span> spotipy.<span class="do">Spotify</span>(auth_manager<span class="op">=</span>SpotifyClientCredentials(client_id, client_secret))</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> track_features(<span class="bu">id</span>, artist_id, note):</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    meta <span class="op">=</span> <span class="kw">sp</span>.track(<span class="bu">id</span>)</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    audio_features <span class="op">=</span> <span class="kw">sp</span>.audio_features(<span class="bu">id</span>)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    artist_info <span class="op">=</span> <span class="kw">sp</span>.artist(artist_id)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> audio_features[<span class="dv">0</span>] <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> meta[<span class="st">'name'</span>]</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    track_id <span class="op">=</span> meta[<span class="st">'id'</span>]</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    album <span class="op">=</span> meta[<span class="st">'album'</span>][<span class="st">'name'</span>]</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>    artist <span class="op">=</span> meta[<span class="st">'album'</span>][<span class="st">'artists'</span>][<span class="dv">0</span>][<span class="st">'name'</span>]</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>    artist_id <span class="op">=</span> meta[<span class="st">'album'</span>][<span class="st">'artists'</span>][<span class="dv">0</span>][<span class="st">'id'</span>]</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>    release_date <span class="op">=</span> meta[<span class="st">'album'</span>][<span class="st">'release_date'</span>]</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>    length <span class="op">=</span> meta[<span class="st">'duration_ms'</span>]</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>    popularity <span class="op">=</span> meta[<span class="st">'popularity'</span>]</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>    artist_pop <span class="op">=</span> artist_info[<span class="st">"popularity"</span>]</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>    artist_genres <span class="op">=</span> artist_info[<span class="st">"genres"</span>]</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>    artist_followers <span class="op">=</span> artist_info[<span class="st">"followers"</span>][<span class="st">'total'</span>]</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>    acousticness <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'acousticness'</span>]</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>    danceability <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'danceability'</span>]</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>    energy <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'energy'</span>]</span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>    instrumentalness <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'instrumentalness'</span>]</span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>    liveness <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'liveness'</span>]</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>    loudness <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'loudness'</span>]</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>    speechiness <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'speechiness'</span>]</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>    tempo <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'tempo'</span>]</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>    valence <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'valence'</span>]</span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'key'</span>]</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>    mode <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'mode'</span>]</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>    time_signature <span class="op">=</span> audio_features[<span class="dv">0</span>][<span class="st">'time_signature'</span>]</span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [name, track_id, album, artist, artist_id, release_date, length, popularity,</span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>            artist_pop, artist_genres, artist_followers, acousticness, danceability,</span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>            energy, instrumentalness, liveness, loudness, speechiness,</span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>            tempo, valence, key, mode, time_signature, note]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-35" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sp.recommendation_genre_seeds() "trip-hop", "trance"</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>genre_seeds <span class="op">=</span> [<span class="st">"acoustic"</span>, <span class="st">"chill"</span>, <span class="st">"dance"</span>, <span class="st">"edm"</span>, <span class="st">"emo"</span>, <span class="st">"grunge"</span>, <span class="st">"happy"</span>, <span class="st">"hip-hop"</span>, <span class="st">"indie"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>               <span class="st">"piano"</span>, <span class="st">"pop"</span>, <span class="st">"punk"</span>, <span class="st">"rock"</span>, <span class="st">"romance"</span>, <span class="st">"sad"</span>, <span class="st">"techno"</span>, <span class="st">"r-n-b"</span>]</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>all_genre_seed_tracks <span class="op">=</span> []</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> genre <span class="kw">in</span> genre_seeds:</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    genre_rec <span class="op">=</span> <span class="kw">sp</span>.recommendations(seed_genres<span class="op">=</span>[genre])[<span class="st">'tracks'</span>]</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> song <span class="kw">in</span> genre_rec:</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        song_id <span class="op">=</span> song[<span class="st">'id'</span>]</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>        song_artist_id <span class="op">=</span> song[<span class="st">'artists'</span>][<span class="dv">0</span>][<span class="st">'id'</span>]</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>        song_audio <span class="op">=</span> track_features(</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>            <span class="bu">id</span><span class="op">=</span>song_id, artist_id<span class="op">=</span>song_artist_id, note<span class="op">=</span>genre)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        all_genre_seed_tracks.append(song_audio)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(all_genre_seed_tracks,</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>                  columns<span class="op">=</span>[<span class="st">'name'</span>, <span class="st">'track_id'</span>, <span class="st">'album'</span>, <span class="st">'artist'</span>, <span class="st">'artist_id'</span>, <span class="st">'release_date'</span>, <span class="st">'length'</span>, <span class="st">'popularity'</span>,</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>                           <span class="st">'artist_pop'</span>, <span class="st">'artist_genres'</span>, <span class="st">'artist_followers'</span>, <span class="st">'acousticness'</span>, <span class="st">'danceability'</span>,</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>                           <span class="st">'energy'</span>, <span class="st">'instrumentalness'</span>, <span class="st">'liveness'</span>, <span class="st">'loudness'</span>, <span class="st">'speechiness'</span>,</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>                           <span class="st">'tempo'</span>, <span class="st">'valence'</span>, <span class="st">'key'</span>, <span class="st">'mode'</span>, <span class="st">'time_signature'</span>, <span class="st">'genre'</span>])</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-36" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df_add <span class="op">=</span> df.append(genres_v2, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>df_add <span class="op">=</span> df_add.drop_duplicates(subset<span class="op">=</span>[<span class="st">'track_id'</span>, <span class="st">'genre'</span>])</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#df_add = df_add.drop(columns=['Unnamed: 0.1', 'Unnamed: 0'])</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>df_add.to_csv(<span class="st">"../assets/data/genre_seeds.csv"</span>, index<span class="op">=</span><span class="va">None</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>
